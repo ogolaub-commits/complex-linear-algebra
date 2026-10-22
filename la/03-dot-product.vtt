@@ -1,0 +1,419 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,670
+Welcome to this explainer on LA03. Today
+we're going to use some calm step -by -step
+
+2
+00:00:05,520 --> 00:00:10,630
+logic to demystify one of the absolute
+core calculations in all of linear algebra,
+
+3
+00:00:10,800 --> 00:00:14,650
+and that is the dot product. Whether
+you're coming to this for the very first time,
+
+4
+00:00:14,660 --> 00:00:17,670
+or maybe you're just brushing up on your
+foundations, we're going to break this
+
+5
+00:00:17,520 --> 00:00:21,310
+whole thing down so it's crystal clear
+and, honestly, incredibly practical.
+
+6
+00:00:22,280 --> 00:00:26,690
+All right, let's dive right into our aim.
+By the time we wrap up today, you're going
+
+7
+00:00:26,540 --> 00:00:31,290
+to be able to reliably compute the dot
+product, and you'll know exactly how to
+
+8
+00:00:31,140 --> 00:00:35,550
+interpret its sign. Just keep in mind that
+our sequence today, concept, example,
+
+9
+00:00:35,740 --> 00:00:39,970
+practice, and finally, application, is
+highly deliberate. I want you to stick with
+
+10
+00:00:39,820 --> 00:00:44,070
+me through this exact order because it's
+specifically designed to lock this concept
+
+11
+00:00:43,920 --> 00:00:48,410
+right into your memory. Okay, moving into
+section one, the dot product rule,
+
+12
+00:00:49,020 --> 00:00:53,150
+multiplying components to get a scalar.
+So, starting right at the absolute
+
+13
+00:00:53,000 --> 00:00:57,630
+foundation, here's our golden rule.
+Multiply your matching components, and then add
+
+14
+00:00:57,480 --> 00:01:01,110
+the results. I really want you to read
+this formula as an active set of
+
+15
+00:01:00,960 --> 00:01:05,050
+instructions, rather than just some static
+math label. You need to identify the
+
+16
+00:01:04,900 --> 00:01:09,690
+input, do the math, and observe the
+output. Notice something absolutely critical
+
+17
+00:01:09,540 --> 00:01:14,750
+here, too. Out output is a single scalar
+number. It's not another vector. It's like
+
+18
+00:01:14,600 --> 00:01:19,230
+distilling all that vector information
+down into one pure value. When you trace each
+
+19
+00:01:19,080 --> 00:01:23,810
+symbol in this rule, always ask yourself
+what stays fixed and what changes. That
+
+20
+00:01:23,660 --> 00:01:28,470
+contrast is the real secret to the concept
+here. On to section two. Step -by -step
+
+21
+00:01:28,320 --> 00:01:32,890
+worked example, putting the rule into
+practice. Let's actually see how cleanly this
+
+22
+00:01:32,740 --> 00:01:37,570
+definition applies to a simple 2D example.
+We need to calculate the dot product of
+
+23
+00:01:37,420 --> 00:01:42,670
+the vector 2, 3, and the vector 4,
+negative 1. Keep this exact setup in your mind's
+
+24
+00:01:42,520 --> 00:01:46,790
+eye as we go. In fact, see if you can
+predict the very next step before I even
+
+25
+00:01:46,640 --> 00:01:51,650
+reveal it. What's the rule telling us to
+do first? Well, following our instruction
+
+26
+00:01:51,500 --> 00:01:56,670
+manual, step one is we multiply those
+first components together. So, two times four
+
+27
+00:01:56,520 --> 00:02:02,330
+gives us eight. Step two, we multiply the
+second components, right? So, three times
+
+28
+00:02:02,180 --> 00:02:06,410
+a negative one gives us a negative three.
+And then, finally, step three, we
+
+29
+00:02:06,260 --> 00:02:10,190
+carefully add those results together. So,
+we're looking at eight plus negative
+
+30
+00:02:10,040 --> 00:02:15,690
+three. And there's our result. It's
+exactly five. Now, read that back against the
+
+31
+00:02:15,540 --> 00:02:21,210
+original question. The dot product of 2,
+3, and 4, negative 1 is simply five.
+
+32
+00:02:21,800 --> 00:02:26,210
+Remember, this final number is just the
+destination. It's not a step in itself. The
+
+33
+00:02:26,060 --> 00:02:29,890
+real test of your understanding is making
+sure you can independently reproduce the
+
+34
+00:02:29,740 --> 00:02:34,310
+exact steps that got us there. All right,
+section three, the common negative
+
+35
+00:02:34,160 --> 00:02:38,890
+mistake. Mind your minus signs. Before we
+hand the reins over to you for some
+
+36
+00:02:38,740 --> 00:02:42,730
+practice, we absolutely have to talk about
+a trap that catches, well, pretty much
+
+37
+00:02:42,580 --> 00:02:47,470
+everyone at some point. See, most errors
+in this topic sneak in through one single
+
+38
+00:02:47,320 --> 00:02:51,150
+dropped negative sign. And why does that
+happen? Because dropping a negative just
+
+39
+00:02:51,000 --> 00:02:55,910
+kind of sounds tidy in our heads. You
+might be tempted to just accept a tidier
+
+40
+00:02:55,760 --> 00:03:00,250
+calculation without really double
+-checking it against the definition. But checking
+
+41
+00:03:00,100 --> 00:03:04,750
+the sign of every single term is
+absolutely crucial. If you lose a minus sign
+
+42
+00:03:04,600 --> 00:03:09,250
+anywhere in those products, your final
+scaler is going to be entirely wrong. So
+
+43
+00:03:09,100 --> 00:03:13,830
+don't just decide it's correct because it
+looks neat. Pause, read it again, and test
+
+44
+00:03:13,680 --> 00:03:18,350
+it. Being careful here matters immensely,
+because literally every later step in your
+
+45
+00:03:18,200 --> 00:03:23,150
+larger math problems is going to depend on
+it. Which brings us to section four, your
+
+46
+00:03:23,000 --> 00:03:28,410
+turn to practice, testing your
+understanding in 3D. Okay, time to shift gears from
+
+47
+00:03:28,260 --> 00:03:33,910
+watching to doing. Here is your challenge.
+Find the dot product for a 3D vector this
+
+48
+00:03:33,760 --> 00:03:40,070
+time. 1, 2, 3 dotted with 2, 0, negative
+1. I literally want you to pause this
+
+49
+00:03:39,920 --> 00:03:44,390
+explainer right now. Grab a piece of
+scratch paper, write down a clear starting line
+
+50
+00:03:44,240 --> 00:03:48,450
+before you calculate anything to prevent
+those silly slips we just talked about, and
+
+51
+00:03:48,300 --> 00:03:52,190
+work this out starting directly from the
+definition. Go ahead, give it a try.
+
+52
+00:03:53,080 --> 00:03:57,350
+All right, let's see how you did.
+Following our definition, step one, we multiply
+
+53
+00:03:57,200 --> 00:04:02,990
+the first components. So one times two is
+two. Step two, we add two times zero,
+
+54
+00:04:03,120 --> 00:04:08,310
+which is just zero. Step three plus three
+times negative one, giving us a negative
+
+55
+00:04:08,160 --> 00:04:13,350
+three. And for step four, we add the whole
+shebang together. Two plus zero plus
+
+56
+00:04:13,200 --> 00:04:18,290
+negative three. And our dot product is
+negative one. Compare your working directly
+
+57
+00:04:18,140 --> 00:04:22,710
+with that result. If you missed it, no
+worries. But don't just copy this final
+
+58
+00:04:22,560 --> 00:04:26,730
+answer down. That completely defeats the
+purpose. Instead, you know, scan back
+
+59
+00:04:26,580 --> 00:04:30,070
+through your paper and find the exact line
+where your work diverged from ours.
+
+60
+00:04:30,560 --> 00:04:33,850
+Finding that divergence is exactly where
+the actual learning happens.
+
+61
+00:04:34,720 --> 00:04:40,570
+Moving on to section five, the zero dot
+product, transferring to geometry. So here's
+
+62
+00:04:40,420 --> 00:04:45,270
+a really crucial point. This pure number
+crunching calculation actually reveals
+
+63
+00:04:45,120 --> 00:04:50,210
+something profound when we map it over to
+physical geometric reality. A zero dot
+
+64
+00:04:50,060 --> 00:04:54,910
+product means the vectors are
+perpendicular. This brilliantly illustrates how the
+
+65
+00:04:54,760 --> 00:04:58,990
+math becomes portable to entirely new
+contexts. The surface details might change,
+
+66
+00:04:59,020 --> 00:05:03,550
+but the rule applies. If you crunch the
+numbers and your calculation results in
+
+67
+00:05:03,400 --> 00:05:08,590
+exactly zero, it means those two vectors
+meet at a perfect right angle. And the
+
+68
+00:05:08,440 --> 00:05:12,250
+coolest part, no matter how many
+dimensions you're working in, that mathematical
+
+69
+00:05:12,100 --> 00:05:13,890
+truth holds completely firm.
+
+70
+00:05:15,120 --> 00:05:20,730
+Finally, section six, summary and next
+steps, wrapping up LA03. Let's see how all
+
+71
+00:05:20,580 --> 00:05:24,610
+this builds our foundation as we prepare
+to find specific angles between vectors
+
+72
+00:05:24,460 --> 00:05:29,490
+next time. To summarize our core takeaways
+for today, you always multiply matching
+
+73
+00:05:29,340 --> 00:05:34,190
+components and add them. Remember that
+your output is always, always a scalar
+
+74
+00:05:34,040 --> 00:05:39,350
+number. Carefully track and please do not
+drop your negative signs. And finally, you
+
+75
+00:05:39,200 --> 00:05:43,290
+can use that resulting scalar sign to
+understand the physical geometry, like
+
+76
+00:05:43,140 --> 00:05:47,730
+classifying angles. Before you leave this
+explainer, I'd love for you to rate your
+
+77
+00:05:47,580 --> 00:05:52,090
+confidence on this topic from a one to a
+five. Actually, test yourself right now.
+
+78
+00:05:52,440 --> 00:05:57,050
+Can you name the two main ideas we covered
+without looking at the screen? If your
+
+79
+00:05:56,900 --> 00:06:01,270
+confidence is below a three, or if you
+can't quite name the ideas, don't sweat it at
+
+80
+00:06:01,120 --> 00:06:04,830
+all. Just replay the worked example to
+cement those deliberate steps into your mind.
+
+81
+00:06:05,580 --> 00:06:09,990
+As you head out, just think about this.
+Isn't it kind of incredible how a simple set
+
+82
+00:06:09,840 --> 00:06:14,430
+of multiplication rules on a flat piece of
+paper can perfectly map out the physical
+
+83
+00:06:14,280 --> 00:06:18,410
+geometry of the space around us? It's a
+real game changer. Thanks so much for
+
+84
+00:06:18,260 --> 00:06:18,970
+learning with me today.

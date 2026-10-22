@@ -1,0 +1,441 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,830
+Welcome to this explainer on LA -15
+Complex Arithmetic. Let's just jump right in. By
+
+2
+00:00:05,680 --> 00:00:09,010
+the end of our time together today, you're
+going to be able to do one very concrete
+
+3
+00:00:08,860 --> 00:00:13,970
+thing – successfully add, subtract, and
+multiply complex numbers. We're going to
+
+4
+00:00:13,820 --> 00:00:17,230
+calmly and deliberately break down these
+foundational steps. So, you'll see the
+
+5
+00:00:17,080 --> 00:00:21,350
+rules, watch a worked example, try one out
+yourself, and then apply what you've
+
+6
+00:00:21,200 --> 00:00:22,750
+learned in a totally new context.
+
+7
+00:00:23,660 --> 00:00:29,070
+Here is our roadmap for today. First, the
+core rules of complex arithmetic. Second,
+
+8
+00:00:28,920 --> 00:00:34,930
+a step -by -step worked example. Third,
+avoiding a very common mistake. Fourth, a
+
+9
+00:00:34,780 --> 00:00:38,590
+practice question where it's your turn.
+And finally, a summary and transfer.
+
+10
+00:00:39,520 --> 00:00:43,610
+Alright, let's kick things off with
+section 1 – core rules of complex arithmetic.
+
+11
+00:00:44,320 --> 00:00:49,010
+Now what's truly fascinating here is how
+this connects algebra straight to geometry.
+
+12
+00:00:49,780 --> 00:00:54,490
+Think about an argand diagram. Adding
+complex numbers actually works exactly like
+
+13
+00:00:54,340 --> 00:00:59,050
+adding vectors. You literally just put the
+arrows tip to tail. If you were looking
+
+14
+00:00:58,900 --> 00:01:02,630
+at an animation of this right now, you'd
+want to ask yourself, okay, what stays
+
+15
+00:01:02,480 --> 00:01:07,490
+fixed and what changes as things move
+around? That contrast is your core concept
+
+16
+00:01:07,340 --> 00:01:12,150
+here. So for addition, you absolutely must
+add the real parts together and then add
+
+17
+00:01:12,000 --> 00:01:16,150
+the imaginary parts completely separately.
+Subtraction works the exact same way.
+
+18
+00:01:16,540 --> 00:01:20,130
+When you look at the formula, don't just
+read it as a label, read it as a set of
+
+19
+00:01:19,980 --> 00:01:24,510
+instructions. Identify your input, figure
+out the operation, and boom, get your
+
+20
+00:01:24,360 --> 00:01:29,590
+output. And please, please check the sign
+of every single term. Honestly, most
+
+21
+00:01:29,440 --> 00:01:34,050
+errors in this topic happen because of
+just one single dropped negative sign. Now
+
+22
+00:01:33,900 --> 00:01:38,090
+for multiplication, the most crucial
+concept to lock into your mind is this
+
+23
+00:01:37,940 --> 00:01:42,690
+definition right here. Whenever you see i
+-squared, it is always equal to negative
+
+24
+00:01:42,540 --> 00:01:48,010
+1. You know, René Descartes famously
+coined the term imaginary as an insult, but
+
+25
+00:01:47,860 --> 00:01:52,010
+this little substitution right here is
+very real. It's literally the engine that
+
+26
+00:01:51,860 --> 00:01:56,430
+drives complex multiplication. So make
+sure you trace each symbol in this rule and
+
+27
+00:01:56,280 --> 00:02:01,330
+truly understand it before you just
+blindly memorize it. Worked example, step by
+
+28
+00:02:01,180 --> 00:02:06,850
+step. Okay, take a second to really look
+at this expression. We have 3 plus 2i
+
+29
+00:02:06,700 --> 00:02:12,270
+multiplied by 1 minus 4i. I want you to
+mentally prepare to expand this just like
+
+30
+00:02:12,120 --> 00:02:17,150
+you would with standard algebraic
+brackets. It's the exact same muscle memory. As we
+
+31
+00:02:17,000 --> 00:02:20,710
+work through this, a pro tip is to always
+keep the original question visible while
+
+32
+00:02:20,560 --> 00:02:25,130
+you read each step. That way, the purpose
+of each line stays crystal clear. Let's
+
+33
+00:02:24,980 --> 00:02:31,890
+actually expand it together. So 3 times 1,
+well, that's just 3. 3 times minus 4i
+
+34
+00:02:31,740 --> 00:02:39,670
+gives us minus 12i. Moving on, 2i times 1
+is positive 2i. And finally, 2i times
+
+35
+00:02:39,520 --> 00:02:46,750
+minus 4i is minus 8i -squared. That gives
+us our initial expanded result. 3 minus
+
+36
+00:02:46,600 --> 00:02:52,990
+12i plus 2i minus 8i -squared. Read that
+back against the original question to make
+
+37
+00:02:52,840 --> 00:02:57,830
+sure it tracks. Remember, your last line
+is the final answer, not just a step. So
+
+38
+00:02:57,680 --> 00:03:01,830
+you have to be able to reproduce the exact
+logic that got you there. All right,
+
+39
+00:03:01,980 --> 00:03:04,010
+section 3, avoiding the common mistake.
+
+40
+00:03:04,940 --> 00:03:08,850
+Listen, before you calculate anything else
+on your own, we really need to highlight
+
+41
+00:03:08,700 --> 00:03:13,670
+a specific dangerous trap that catches far
+too many students off guard. It is
+
+42
+00:03:13,520 --> 00:03:17,810
+incredibly common to hear this kind of
+logic. Hey, just drop the i -squared term
+
+43
+00:03:17,660 --> 00:03:22,330
+when multiplying because it just sounds
+tidy. And sadly, a lot of students accept
+
+44
+00:03:22,180 --> 00:03:25,910
+this false assumption without even
+checking it. They just prematurely decide that
+
+45
+00:03:25,760 --> 00:03:30,790
+the term vanishes into thin air. Don't
+fall for that. Do not decide yet. Read it
+
+46
+00:03:30,640 --> 00:03:35,030
+once more and test it against the actual
+definition. Because here's the reality.
+
+47
+00:03:35,420 --> 00:03:41,770
+Dropping that term is completely 100 %
+false. Because i -squared is minus 1. That
+
+48
+00:03:41,620 --> 00:03:46,150
+term doesn't vanish at all. It actually
+transforms into a real number. This
+
+49
+00:03:46,000 --> 00:03:50,210
+correction is absolutely crucial because
+every single later step in your calculation
+
+50
+00:03:50,060 --> 00:03:54,490
+depends on it. I highly recommend you
+actually say the corrected statement out loud
+
+51
+00:03:54,340 --> 00:03:57,810
+to yourself right now, and then compare it
+with the definition before we move on.
+
+52
+00:03:58,060 --> 00:03:58,790
+It's that important.
+
+53
+00:03:59,720 --> 00:04:05,330
+Practice question. It's your turn. All
+right, here is your challenge. Multiply 2
+
+54
+00:04:05,180 --> 00:04:10,830
+plus i by 3 minus 2 i. I want you to start
+from the definition we just talked about.
+
+55
+00:04:11,220 --> 00:04:16,350
+Don't just rely on hazy memory. Take a
+pause and physically or at least mentally
+
+56
+00:04:16,200 --> 00:04:20,930
+calculate this product before we keep
+going. If you're feeling a bit stuck, no
+
+57
+00:04:20,780 --> 00:04:25,710
+worries. Here's a quick safety net for
+you. Just expand the brackets fully first and
+
+58
+00:04:25,560 --> 00:04:30,850
+only then replace your i -squared with
+minus 1. Seriously, try writing it out on
+
+59
+00:04:30,700 --> 00:04:34,750
+paper. Make sure you write that entire
+first line out before you begin simplifying.
+
+60
+00:04:35,300 --> 00:04:39,190
+Establishing a clear starting line is
+exactly how you prevent most of those careless
+
+61
+00:04:39,040 --> 00:04:43,590
+slips that happen in complex arithmetic.
+Okay, the final product you should have
+
+62
+00:04:43,440 --> 00:04:48,590
+reached is 8 minus i. Compare your working
+with that result. Now, if you missed it,
+
+63
+00:04:48,740 --> 00:04:52,670
+please don't just copy this answer down
+and move on. Go back through your steps and
+
+64
+00:04:52,520 --> 00:04:56,910
+find the exact line where your work
+diverged from the correct path. Locating that
+
+65
+00:04:56,760 --> 00:05:01,770
+exact point of divergence, well, that is
+where the real learning happens. Let's
+
+66
+00:05:01,620 --> 00:05:06,690
+bring it all home with section 5, summary
+and transfer. Let's wrap up this explainer
+
+67
+00:05:06,540 --> 00:05:10,610
+by locking in these core concepts and
+seeing how beautifully they transfer over to
+
+68
+00:05:10,460 --> 00:05:15,010
+new situations. This brilliantly
+illustrates how portable these math ideas really
+
+69
+00:05:14,860 --> 00:05:21,610
+are. Look at this new context here. 2 plus
+i times 2 minus i equals 5. It is
+
+70
+00:05:21,460 --> 00:05:25,730
+incredibly satisfying how this messy
+looking complex expression just completely
+
+71
+00:05:25,580 --> 00:05:30,530
+collapses into a clean real integer. The
+surface details have changed, sure, but the
+
+72
+00:05:30,380 --> 00:05:34,610
+exact same rule applies. If you can name
+the rule before you calculate and then
+
+73
+00:05:34,460 --> 00:05:38,710
+substitute carefully, you realize the
+mechanics are totally identical. That
+
+74
+00:05:38,560 --> 00:05:43,550
+portability, that's the true power of
+mathematics. So let's quickly summarize our
+
+75
+00:05:43,400 --> 00:05:47,910
+core takeaways for today. Always add and
+subtract matching parts separately. Keep
+
+76
+00:05:47,760 --> 00:05:52,410
+real with real and imaginary with
+imaginary. When you multiply, expand those
+
+77
+00:05:52,260 --> 00:05:57,290
+brackets fully first and then replace i
+squared with negative 1. Mastering these
+
+78
+00:05:57,140 --> 00:06:00,950
+basics perfectly sets us up for our next
+major topic, which is going to be dividing
+
+79
+00:06:00,800 --> 00:06:02,770
+complex numbers using conjugates.
+
+80
+00:06:03,660 --> 00:06:07,430
+Before you leave this explainer, I want
+you to do a quick mental check. Rate your
+
+81
+00:06:07,280 --> 00:06:11,910
+confidence on this topic from a 1 to a 5.
+If you're sitting anywhere below a 3, I
+
+82
+00:06:11,760 --> 00:06:15,250
+highly encourage you to replay just the
+worked example to master these foundations.
+
+83
+00:06:15,640 --> 00:06:19,350
+You don't have to watch the whole thing
+again. Just focus in on what you need. Now,
+
+84
+00:06:19,360 --> 00:06:23,610
+one final provocative question for you.
+Can you name the two main ideas we covered
+
+85
+00:06:23,460 --> 00:06:27,530
+today without looking at the screen? If
+you can hold those two mechanics in your
+
+86
+00:06:27,380 --> 00:06:30,950
+mind, you aren't just ready for the next
+level of complex division. You are
+
+87
+00:06:30,800 --> 00:06:34,150
+literally taking the first step toward the
+mathematics that powers electrical
+
+88
+00:06:34,000 --> 00:06:38,130
+engineering in quantum physics. Think
+about that for a second. Thanks for joining,
+
+89
+00:06:38,420 --> 00:06:39,650
+and I'll see you in the next explainer.

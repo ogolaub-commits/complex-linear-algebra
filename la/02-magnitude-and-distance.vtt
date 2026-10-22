@@ -1,0 +1,389 @@
+WEBVTT
+
+1
+00:00:00,180 --> 00:00:04,090
+All right, welcome to this explainer on
+linear algebra, specifically focusing on
+
+2
+00:00:03,940 --> 00:00:08,130
+magnitude and distance. If you're studying
+university mathematics, you already know
+
+3
+00:00:07,980 --> 00:00:12,470
+that building a rock solid foundation is
+literally everything. By the end of our
+
+4
+00:00:12,320 --> 00:00:16,290
+time together today, you're gonna be able
+to do one concrete thing incredibly well,
+
+5
+00:00:16,580 --> 00:00:20,750
+find vector lengths and calculate
+distances between points. Let's jump right in.
+
+6
+00:00:21,520 --> 00:00:25,650
+Here's our roadmap for today. We're
+looking at the core formula, a step -by -step
+
+7
+00:00:25,500 --> 00:00:30,830
+example, the most common trap people fall
+into, a chance for you to practice, and
+
+8
+00:00:30,680 --> 00:00:35,890
+finally, a quick summary to wrap it all
+up. All right, part one, the core formula
+
+9
+00:00:35,740 --> 00:00:40,890
+and understanding that math foundation.
+Okay, think about a classic right triangle.
+
+10
+00:00:41,060 --> 00:00:44,610
+You know the one, the famous three, four,
+five. If you look at the vector three,
+
+11
+00:00:44,580 --> 00:00:48,830
+four, it's got a length of exactly five.
+Why? Well, it's just a simple right
+
+12
+00:00:48,680 --> 00:00:53,510
+triangle. But here is the really cool
+thing about linear algebra. This super simple
+
+13
+00:00:53,360 --> 00:00:59,090
+2D geometry rule, it scales up perfectly.
+Whether we're in 3D, 4D, or I don't know,
+
+14
+00:00:59,100 --> 00:01:03,090
+literally a hundred dimensional space, it
+works. Before we start memorizing
+
+15
+00:01:02,940 --> 00:01:08,250
+formulas, just picture this shape. See
+what stays fixed and what changes. That
+
+16
+00:01:08,100 --> 00:01:13,610
+contrast, that is the actual concept you
+need to grasp here. So here's the actual
+
+17
+00:01:13,460 --> 00:01:17,910
+magnitude formula. You square each
+component, you add them all up and you take the
+
+18
+00:01:17,760 --> 00:01:21,850
+square root. Pretty straightforward,
+right? But I want you to read this formula like
+
+19
+00:01:21,700 --> 00:01:26,570
+a set of direct instructions. Identify the
+input, execute the squaring and adding,
+
+20
+00:01:26,780 --> 00:01:32,330
+and boom, calculate your output. Oh, and
+here is a massive pro tip for you. Check
+
+21
+00:01:32,180 --> 00:01:37,030
+the sign of every single term. Honestly,
+most errors in this entire topic sneak in
+
+22
+00:01:36,880 --> 00:01:41,450
+through literally just one dropped
+negative sign. It happens all the time. A step
+
+23
+00:01:41,300 --> 00:01:46,310
+-by -step example where we calculate
+distance in 3D space. All right, here's the
+
+24
+00:01:46,160 --> 00:01:52,150
+challenge. What's the distance between
+point P at one, two, three and point Q at
+
+25
+00:01:52,000 --> 00:01:56,570
+four, six, three? We're gonna leave this
+exact question right up on the screen. So
+
+26
+00:01:56,420 --> 00:01:59,950
+the purpose of what we're doing stays
+crystal clear. If you happen to drift off
+
+27
+00:01:59,800 --> 00:02:03,170
+while we work through this, just glance
+back and see if you can predict the next
+
+28
+00:02:03,020 --> 00:02:07,910
+step before we even get there. Okay, the
+whole game is won or lost right here in
+
+29
+00:02:07,760 --> 00:02:12,670
+step one. The distance between P and Q is
+actually just the length of the vector Q
+
+30
+00:02:12,520 --> 00:02:17,850
+minus P. Subtract those components and we
+get three comma four comma zero. Then step
+
+31
+00:02:17,700 --> 00:02:22,290
+two, we just run our rule. Square each
+component, add them together and take the
+
+32
+00:02:22,140 --> 00:02:26,710
+square root. And that brings us to step
+three, our final result. The distance or the
+
+33
+00:02:26,560 --> 00:02:31,050
+magnitude of PQ is exactly five. Look back
+at the original question for a second.
+
+34
+00:02:31,500 --> 00:02:35,630
+That five is your answer, not just another
+line of math. You absolutely need to be
+
+35
+00:02:35,480 --> 00:02:40,710
+able to reproduce the exact logic that got
+us there. The common mistake and how to
+
+36
+00:02:40,560 --> 00:02:44,290
+avoid the trap. All right, we really need
+to pump the brakes here for a second
+
+37
+00:02:44,140 --> 00:02:48,590
+because this is where things go wrong. A
+lot of students just add the components
+
+38
+00:02:48,440 --> 00:02:53,490
+without squaring them. Look at the
+incorrect method on the left. Honestly, it sounds
+
+39
+00:02:53,340 --> 00:02:58,590
+so nice and tidy, right? But pause and
+really think about it. Is it actually true?
+
+40
+00:02:59,160 --> 00:03:03,430
+Spoiler alert, no way. It's completely
+false. If you drop a negative just because
+
+41
+00:03:03,280 --> 00:03:07,470
+you forgot to square it, it literally
+ruins every single step that comes after it.
+
+42
+00:03:07,900 --> 00:03:11,910
+The correct method on the right is
+absolutely non -negotiable. Square each
+
+43
+00:03:11,760 --> 00:03:16,330
+component, add them, then square root.
+Actually, say that rule out loud to yourself
+
+44
+00:03:16,180 --> 00:03:20,950
+right now to lock it in. Okay, part four,
+your turn to practice and test your
+
+45
+00:03:20,800 --> 00:03:21,330
+understanding.
+
+46
+00:03:22,260 --> 00:03:26,290
+All right, I'm handing the reins over to
+you. Find the length of the vector 6, 8.
+
+47
+00:03:26,800 --> 00:03:29,910
+Start from the definition we just talked
+about. Don't just blindly pull it from
+
+48
+00:03:29,760 --> 00:03:33,810
+memory. And please, write down your very
+first line before you calculate anything.
+
+49
+00:03:34,200 --> 00:03:38,210
+Having a clear, deliberate starting line
+is like an insurance policy against those
+
+50
+00:03:38,060 --> 00:03:42,930
+silly slips we just talked about. And hey,
+here's a little hint for you. 6 squared
+
+51
+00:03:42,780 --> 00:03:48,310
+plus 8 squared is exactly 100. So hit
+pause on this explainer right now, grab some
+
+52
+00:03:48,160 --> 00:03:52,210
+paper, scratch it out, and when you've got
+an answer, hit play and let's check it.
+
+53
+00:03:52,740 --> 00:03:57,650
+Okay, we're back. The length is exactly
+10. Compare what you have on your paper with
+
+54
+00:03:57,500 --> 00:04:02,210
+the result. Now, if you missed it, don't
+just erase it and write down 10. Be a
+
+55
+00:04:02,060 --> 00:04:06,570
+detective. Scan your paper and find the
+exact line where you went off track. That
+
+56
+00:04:06,420 --> 00:04:10,510
+moment of divergence, that's where the
+real learning actually happens. And again,
+
+57
+00:04:10,600 --> 00:04:15,210
+writing that first line down clearly is
+usually what saves the day. Finally, part
+
+58
+00:04:15,060 --> 00:04:18,470
+five, summary and transfer. Let's make
+this idea portable.
+
+59
+00:04:19,500 --> 00:04:26,570
+So look at this. The distance between 0
+.12 and 0 .46 is five. This brilliantly
+
+60
+00:04:26,420 --> 00:04:31,310
+illustrates the core concept, right? We
+just jumped into a totally new context, 2D
+
+61
+00:04:31,160 --> 00:04:36,130
+space instead of 3D space. But the surface
+details, they don't matter at all. It's
+
+62
+00:04:35,980 --> 00:04:41,270
+the exact same underlying rule. If you
+always mentally name the rule before you
+
+63
+00:04:41,120 --> 00:04:45,310
+crunch the numbers, the mathematical ideas
+become incredibly portable. You can
+
+64
+00:04:45,160 --> 00:04:46,210
+literally take them anywhere.
+
+65
+00:04:47,220 --> 00:04:51,430
+So let's do a really quick recap of the
+big takeaways. Number one, magnitude is
+
+66
+00:04:51,280 --> 00:04:55,550
+literally just the Pythagorean theorem
+doing its thing in three dimensions. And
+
+67
+00:04:55,400 --> 00:04:59,130
+number two, distance is just the magnitude
+of the difference between your points.
+
+68
+00:04:59,760 --> 00:05:03,830
+Getting these fundamentals totally locked
+down is absolutely crucial because it's
+
+69
+00:05:03,680 --> 00:05:08,650
+gonna perfectly set you up for our next
+big topic, which is the dot product. Before
+
+70
+00:05:08,500 --> 00:05:12,610
+you head out, do a quick gut check. Rate
+your confidence on all this from one to
+
+71
+00:05:12,460 --> 00:05:17,790
+five. Could you name those two core ideas,
+magnitude and distance, without looking
+
+72
+00:05:17,640 --> 00:05:22,330
+at your notes? Give it a shot. And if
+you're feeling a little shaky, maybe below a
+
+73
+00:05:22,180 --> 00:05:26,570
+three, just rewind and replay that worked
+example section. Make sure you've truly
+
+74
+00:05:26,420 --> 00:05:31,050
+mastered it. Because here's a thought to
+leave you with. If distance tells us how
+
+75
+00:05:30,900 --> 00:05:35,850
+far apart two things are, what
+mathematical tool tells us exactly what direction
+
+76
+00:05:35,700 --> 00:05:40,590
+they're pointing relative to each other?
+Well, that is the magic of the dot product.
+
+77
+00:05:40,440 --> 00:05:44,310
+And it's exactly what we're going to
+conquer next time. Thanks so much for joining
+
+78
+00:05:44,160 --> 00:05:46,890
+me to master linear algebra today. Catch
+you in the next one.

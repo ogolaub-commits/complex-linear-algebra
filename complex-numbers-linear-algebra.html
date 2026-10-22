@@ -1,0 +1,1604 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Complex Numbers &amp; Linear Algebra: one course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --paper:#FAFCFB; --panel:#FFFFFF; --shoal:#CFE6EE; --deep:#EBF4F7;
+  --land:#F1DFA6; --land-edge:#8A7836;
+  --ink:#14283A; --ink2:#4B6072; --line:#BCCDD6;
+  --mag:#A12A77; --good:#1C7A50; --goodbg:#DCF0E3; --bad:#B23420; --badbg:#F7E1DC;
+  --serif:'Libre Caslon Text',Georgia,'Times New Roman',serif;
+  --sans:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1722; --panel:#102331; --shoal:#17394A; --deep:#0F2230;
+    --land:#6F6236; --land-edge:#B7A662;
+    --ink:#D8E4EA; --ink2:#93A8B6; --line:#2B4455;
+    --mag:#E889C2; --good:#6FCF9F; --goodbg:#12382A; --bad:#F2917F; --badbg:#41211C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1722; --panel:#102331; --shoal:#17394A; --deep:#0F2230;
+  --land:#6F6236; --land-edge:#B7A662;
+  --ink:#D8E4EA; --ink2:#93A8B6; --line:#2B4455;
+  --mag:#E889C2; --good:#6FCF9F; --goodbg:#12382A; --bad:#F2917F; --badbg:#41211C;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.55;-webkit-text-size-adjust:100%}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--mag);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#app.pending{visibility:hidden}
+mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+
+/* ----- chart page ----- */
+.home{max-width:1040px;margin:0 auto;padding:2.5rem 1.25rem 3rem}
+.mast h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.7rem,9vw,5.25rem);line-height:.98;letter-spacing:-.015em;margin:0 0 1rem}
+.lede{max-width:38rem;margin:0 0 1.75rem;font-size:1.125rem;color:var(--ink2)}
+.chart{margin:0 0 .5rem}
+.chart svg{display:block;width:100%;height:auto;background:var(--deep);border:1.5px solid var(--ink);outline:1px solid var(--ink);outline-offset:3px}
+.chart figcaption{margin-top:.7rem;font-size:.875rem;color:var(--ink2)}
+.grat{stroke:var(--line);stroke-width:1;fill:none}
+.gratlab{font-family:var(--sans);font-size:12px;fill:var(--ink2)}
+.shoal{fill:none;stroke:var(--shoal);stroke-width:30;stroke-linejoin:round}
+.land{fill:var(--land);stroke:var(--land-edge);stroke-width:1.5;stroke-linejoin:round}
+.sound{font-family:var(--serif);font-style:italic;font-size:12px;fill:var(--ink2);opacity:.75}
+.town{font-family:var(--sans);font-size:13px;font-weight:600;fill:var(--ink)}
+.rose{stroke:var(--mag);fill:none;stroke-width:1;opacity:.7}
+.rose text{font-family:var(--serif);font-size:13px;fill:var(--mag);stroke:none}
+.course{fill:none;stroke:var(--mag);stroke-width:2}
+.course.todo{stroke-dasharray:7 6;opacity:.8}
+.wp{cursor:pointer}
+.wp circle.ring{fill:var(--deep);stroke:var(--mag);stroke-width:2}
+.wp circle.dot{fill:var(--mag)}
+.wp.done circle.ring{fill:var(--mag)}
+.wp.done circle.dot{fill:var(--deep)}
+.wp text{font-family:var(--sans);font-weight:700;font-size:14px;fill:var(--mag)}
+.wp:hover circle.ring{stroke-width:4}
+.ship{fill:var(--ink);stroke:var(--deep);stroke-width:1.5}
+.standing{margin:1.75rem 0 0;font-size:1.0625rem}
+.standing b{font-weight:700}
+.leg{margin-top:2.5rem}
+.leg h2{font-family:var(--serif);font-weight:400;font-size:1.6rem;line-height:1.2;margin:0}
+.legsub{margin:.2rem 0 .9rem;color:var(--ink2);font-size:.95rem}
+.plan{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+.plan li{border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:2.4rem 1fr auto;gap:.25rem 1rem;align-items:center;width:100%;text-align:left;background:none;border:0;padding:.95rem .5rem}
+.row:hover{background:var(--deep)}
+.wpn{font-family:var(--serif);font-size:1.5rem;line-height:1;color:var(--mag)}
+.rmain{display:grid;gap:.1rem;min-width:0}
+.sname{font-weight:600}
+.place{font-family:var(--serif);font-style:italic;color:var(--ink2)}
+.topic{color:var(--ink2);font-size:.925rem}
+.stars{color:var(--mag);font-size:1.15rem;letter-spacing:.08em;white-space:nowrap}
+.stars .dim{opacity:.22}
+.foot{margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;color:var(--ink2);font-size:.9rem}
+.link{background:none;border:0;padding:.35rem 0;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.link:hover{color:var(--mag)}
+@media (max-width:700px){
+  .sound,.town,.rose{display:none}
+  .wp text{font-size:26px}
+  .gratlab{display:none}
+  .wp circle.ring{r:16px}
+  .wp circle.dot{r:6px}
+  .course{stroke-width:4}
+  .ship{transform:scale(1.9);transform-box:fill-box;transform-origin:center}
+}
+
+
+/* ----- toolkit reminders ----- */
+.toolkit{max-width:720px;margin:1.1rem auto 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:.7rem;padding:.7rem .95rem .75rem}
+.tkhead{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;padding:.05rem 0 .45rem;border-bottom:1px solid var(--line);margin-bottom:.55rem}
+.tklab{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--mag)}
+.tkbody{font-size:.965rem;color:var(--ink2)}
+.tkbody p{margin:.3rem 0}
+.tkbody b{color:var(--ink)}
+.mini{display:block;width:100%;max-width:330px;height:auto;margin:.55rem auto 0;background:var(--deep);border:1px solid var(--line);border-radius:.5rem}
+.mini .ax{stroke:var(--ink2);stroke-width:1.2}
+.mini .gr{stroke:var(--line);stroke-width:1}
+.mini text{font-family:var(--sans);font-size:11px;fill:var(--ink2)}
+.mini .pt{fill:var(--mag)}
+.mini .cir{fill:none;stroke:var(--mag);stroke-width:1.8;stroke-dasharray:5 4}
+
+/* ----- station page ----- */
+.station{max-width:720px;margin:0 auto;padding:1.25rem 1.25rem 3rem}
+.bar{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-bottom:1.5px solid var(--ink);padding-bottom:.6rem}
+.tally{font-size:.95rem;color:var(--ink2);white-space:nowrap}
+.tally b{color:var(--ink);font-size:1.1rem}
+.where{margin:1.4rem 0 0}
+.where .place{font-size:1rem}
+.where h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,5vw,2.1rem);line-height:1.15;margin:.1rem 0 0}
+.pips{display:flex;gap:.45rem;margin:1rem 0 1.5rem;align-items:center}
+.pip{width:1.6rem;height:.4rem;border-radius:2px;background:var(--line)}
+.pip.now{background:var(--ink)}
+.pip.ok{background:var(--good)}
+.pip.no{background:var(--bad)}
+.count{margin:0 0 0 .5rem;font-size:.9rem;color:var(--ink2)}
+.prompt{font-size:1.125rem;margin:0 0 1rem;max-width:40rem}
+.eq{font-size:1.25rem;margin:.25rem 0 1.25rem;padding:1rem;background:var(--deep);border-left:3px solid var(--mag);overflow-x:auto}
+.eq mjx-container{margin:0 !important}
+.note{margin:-.5rem 0 1.25rem;color:var(--ink2)}
+.opts{display:grid;gap:.6rem}
+@media (min-width:600px){.opts.two{grid-template-columns:1fr 1fr}}
+.opt{display:grid;grid-template-columns:1.9rem 1fr;gap:.6rem;align-items:center;text-align:left;background:var(--panel);border:1.5px solid var(--line);border-radius:6px;padding:.8rem .9rem;min-height:3.25rem}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt:disabled{cursor:default}
+.key{display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;border:1.5px solid var(--line);font-size:.85rem;font-weight:600;color:var(--ink2)}
+.otx{min-width:0;overflow-x:auto;overflow-y:hidden}
+.opt.right{border-color:var(--good);background:var(--goodbg)}
+.opt.right .key{border-color:var(--good);color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt.wrong .key{border-color:var(--bad);color:var(--bad)}
+.opt.fade{opacity:.55}
+.prow{display:grid;grid-template-columns:11rem 1fr;gap:.5rem 1rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+@media (max-width:560px){.prow{grid-template-columns:1fr}}
+.plabel{font-weight:600}
+.seg{display:flex;flex-wrap:wrap;gap:.4rem}
+.segb{background:var(--panel);border:1.5px solid var(--line);border-radius:999px;padding:.4rem .95rem;min-width:3rem;min-height:2.6rem}
+.segb:hover:not(:disabled){border-color:var(--ink)}
+.segb[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.segb:disabled{cursor:default}
+.segb.right{background:var(--goodbg);border-color:var(--good);color:var(--ink)}
+.segb.wrong{background:var(--badbg);border-color:var(--bad);color:var(--ink)}
+.primary{background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.75rem 1.3rem;font-weight:600;min-height:2.9rem}
+.primary:hover:not(:disabled){background:var(--mag)}
+.primary:disabled{opacity:.4;cursor:default}
+.secondary{background:none;border:1.5px solid var(--ink);border-radius:6px;padding:.7rem 1.2rem;font-weight:600;min-height:2.9rem}
+.secondary:hover{border-color:var(--mag);color:var(--mag)}
+.after{margin-top:1.1rem}
+.numrow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.numrow input{width:11rem;max-width:100%;padding:.7rem .8rem;border:1.5px solid var(--ink2);border-radius:6px;background:var(--panel);font-size:1.15rem}
+.unit{font-weight:600;margin-right:.5rem}
+.hint{color:var(--ink2);font-size:.925rem;margin:.6rem 0 0}
+.err{color:var(--bad);font-size:.95rem;margin:.5rem 0 0}
+.plot{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px;margin:0 0 1rem}
+.plot .ax{stroke:var(--ink2);stroke-width:1}
+.plot .gr{stroke:var(--line);stroke-width:1}
+.plot text{font-family:var(--sans);font-size:12px;fill:var(--ink2)}
+.plot .data{fill:var(--ink)}
+.plot .trace{fill:none;stroke:var(--ink);stroke-width:2.25}
+.plot .mine{fill:none;stroke:var(--mag);stroke-width:2.5}
+.plot .truth{fill:none;stroke:var(--good);stroke-width:2.5;stroke-dasharray:6 4}
+.sliders{display:grid;gap:.9rem;margin-bottom:1rem}
+.sl{display:grid;grid-template-columns:8.5rem 1fr 3rem;gap:.75rem;align-items:center}
+@media (max-width:480px){.sl{grid-template-columns:1fr 3rem}.sl label{grid-column:1 / -1}}
+.sl label{font-weight:600}
+.sl output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.sl input[type=range]{width:100%;accent-color:var(--mag);height:2rem}
+.readout{background:var(--deep);padding:.8rem 1rem;margin:0 0 1rem;font-variant-numeric:tabular-nums}
+.readout p{margin:0}
+.readout .eqt{font-family:var(--serif);font-size:1.2rem}
+.readout .gapline{color:var(--ink2);font-size:.95rem;margin-top:.3rem}
+.fb{margin-top:1.4rem;padding:1rem 1.1rem 1.15rem;border-left:4px solid var(--good);background:var(--goodbg)}
+.fb.bad{border-color:var(--bad);background:var(--badbg)}
+.fb h2{margin:0 0 .4rem;font-size:1.15rem}
+.fb .gain{font-weight:400;font-size:.95rem;margin-left:.5rem}
+.fb .why{margin:0 0 1rem;max-width:40rem}
+.fb .why p{margin:0 0 .5rem}
+@media (prefers-reduced-motion:no-preference){.fb{animation:rise .22s ease-out}}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ----- result page ----- */
+.result{max-width:720px;margin:0 auto;padding:3rem 1.25rem}
+.result .place{font-size:1.05rem}
+.result h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.2rem,7vw,3.4rem);line-height:1.05;margin:.2rem 0 1rem}
+.result .stars{font-size:2.4rem}
+.result .sum{font-size:1.125rem;margin:1rem 0 .4rem}
+.result .pips{margin:.8rem 0 2rem}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.mathnote{max-width:720px;margin:0 auto;padding:.6rem 1.25rem;background:var(--badbg);color:var(--ink);font-size:.925rem}
+
+/* ----- enhancements: audio, celebration, hints, prove ----- */
+#lamute{background:none;border:1.5px solid var(--line);color:var(--ink);border-radius:999px;padding:.2rem .7rem;font-size:.95rem;min-height:2.2rem}
+.praise{position:fixed;left:50%;top:18%;transform:translateX(-50%);font-family:var(--serif);font-weight:700;font-size:clamp(1.3rem,5vw,2rem);color:var(--good);text-shadow:0 2px 14px #0002;pointer-events:none;z-index:60;display:none;text-align:center;width:92%}
+@keyframes drpop{0%{opacity:0;transform:translate(-50%,12px) scale(.85)}18%{opacity:1;transform:translate(-50%,0) scale(1.05)}78%{opacity:1}100%{opacity:0;transform:translate(-50%,-24px) scale(1)}}
+.congrats{position:fixed;inset:0;background:#0b1722cc;display:none;place-items:center;z-index:70;padding:1.2rem}
+.congrats.show{display:grid}
+.congrats .box{background:var(--panel);border:2px solid var(--mag);border-radius:18px;padding:1.6rem 1.4rem;max-width:26rem;width:100%;text-align:center;box-shadow:0 24px 60px #0006}
+.congrats h2{font-family:var(--serif);font-size:1.7rem;margin:.3rem 0 .5rem;color:var(--mag)}
+.congrats .big{font-size:3rem;line-height:1}
+.cf{position:fixed;top:-14px;width:9px;height:14px;border-radius:2px;z-index:65;pointer-events:none;animation:drfall linear forwards}
+@keyframes drfall{to{transform:translateY(106vh) rotate(720deg);opacity:.85}}
+.logbook{margin:.6rem 0 1rem;padding:.7rem .9rem;background:var(--deep);border-left:3px solid var(--mag);border-radius:.4rem;font-size:.98rem}
+.logbook b{color:var(--mag)}
+.speed{font-size:.95rem;color:var(--ink2);white-space:nowrap}
+.prove{max-width:720px;margin:0 auto;padding:1.5rem 1.25rem}
+.prove .padwrap{position:relative}
+.prove canvas{width:100%;height:320px;touch-action:none;background:#fff;border:1.5px solid var(--line);border-radius:.6rem;display:block;margin-top:.6rem;cursor:crosshair}
+.prove .padtag{position:absolute;top:.9rem;left:.9rem;color:#9FB0BC;font-family:var(--serif);font-style:italic;font-size:.9rem;pointer-events:none}
+.prove .actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.prove .actions .primary{margin-left:auto}
+@media (prefers-reduced-motion:reduce){.praise,.cf,.congrats .box{animation:none!important}}
+.lesson{max-width:640px;margin:0 auto 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:.7rem;padding:.7rem .7rem .5rem}
+.lessonhead{display:flex;align-items:baseline;justify-content:space-between;padding:.1rem .25rem .55rem}
+.lessonlab{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--mag)}
+.lessonhint{font-size:.8rem;color:var(--ink2)}
+.lessonvid{width:100%;display:block;border-radius:.5rem;background:#000;aspect-ratio:4/3}
+.wlist{display:flex;flex-wrap:wrap;gap:.4rem;padding:.6rem .1rem 0}
+.wtab{background:var(--panel);border:1.5px solid var(--line);color:var(--ink);font-size:.85rem;padding:.32rem .7rem;border-radius:999px;cursor:pointer}
+.wtab.on{background:var(--mag);border-color:var(--mag);color:#fff}
+.lessoncap{margin:.55rem .2rem .1rem;color:var(--ink2);font-size:.9rem;text-align:center}
+.lessonai{margin:.15rem .2rem .1rem;color:var(--ink2);opacity:.7;font-size:.72rem;text-align:center}
+.deeper{max-width:640px;margin:0 auto 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:.7rem;overflow:hidden}
+.deeper>summary{cursor:pointer;padding:.7rem .9rem;font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--ink);list-style:none;display:flex;align-items:center;gap:.5rem}
+.deeper>summary::-webkit-details-marker{display:none}
+.deeper>summary::before{content:'\25B8';transition:transform .15s;color:var(--mag)}
+.deeper[open]>summary::before{transform:rotate(90deg)}
+.ytcount{margin-left:auto;background:var(--mag);color:#fff;font-size:.72rem;font-style:normal;border-radius:999px;padding:.05rem .5rem}
+.ytlist{display:grid;gap:.6rem;padding:.1rem .7rem .8rem}
+.ytcard{display:flex;align-items:center;gap:.7rem;text-align:left;background:rgba(0,0,0,.02);border:1px solid var(--line);border-radius:.5rem;padding:.45rem;cursor:pointer;width:100%;font:inherit;color:var(--ink)}
+.ytcard:hover{border-color:#c7cdf0;background:rgba(161,42,119,.05)}
+.ytthumb{flex:0 0 120px;width:120px;aspect-ratio:16/9;border-radius:.35rem;overflow:hidden;background:#000;position:relative}
+.ytthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.ytthumb::after{content:'\25B6';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.ytcard.playing{display:block;padding:0;background:#000;border-color:#000}
+.ytcard.playing iframe{width:100%;aspect-ratio:16/9;border:0;display:block;border-radius:.5rem}
+.yttitle{font-size:.94rem;line-height:1.3}
+</style>
+<script>
+window.MathJax={
+  tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},
+  svg:{fontCache:'local'},
+  options:{enableMenu:false},
+  startup:{typeset:false,ready(){MathJax.startup.defaultReady();MathJax.startup.promise.then(function(){document.dispatchEvent(new Event('mathready'));});}}
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body>
+<div id="mathnote" class="mathnote" hidden>Equation typesetting did not load, so equations appear as LaTeX source. Reload the page with a connection to fix this.</div>
+<div id="app"></div>
+<div class="praise" id="praise" aria-live="polite"></div>
+<div class="congrats" id="congrats"><div class="box"><div class="big" id="cbig">🎉</div><h2 id="ctitle">Node cleared</h2><p id="csub"></p><button class="primary" id="cbtn">Continue →</button></div></div>
+
+<script id="content">
+
+/* =====================================================================
+   Content: question generators. No DOM access in this block.
+   ===================================================================== */
+const R=String.raw;
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const sample=(a,n)=>shuffle(a).slice(0,n);
+const m=t=>'\\('+t+'\\)';
+const num=x=>String(Math.round(x*1e6)/1e6);
+const sgn2=n=>(n<0?'-':'+');
+
+function mcq(prompt,correct,distractors,explain,extra){
+  const seen=new Set([correct]),ds=[];
+  for(const d of distractors){ if(d==null||seen.has(d)) continue; seen.add(d); ds.push(d); if(ds.length===3) break; }
+  const spills=['None of these','Cannot be determined','Not enough information'];
+  for(let i=0;ds.length<3;i++){ const s=spills[i%spills.length]; if(!seen.has(s)){ seen.add(s); ds.push(s); } }
+  const options=shuffle([correct,...ds]);
+  return Object.assign({type:'mcq',prompt,options,accept:[options.indexOf(correct)],explain},extra||{});
+}
+function quad(s,p){
+  let t='x^{2}';
+  if(s) t+=(s<0?'-':'+')+(Math.abs(s)===1?'':Math.abs(s))+'x';
+  if(p) t+=(p<0?'-':'+')+Math.abs(p);
+  return t;
+}
+function quadFull(A,B,C){
+  let t=(A===1?'':A)+'x^{2}';
+  if(B) t+=(B<0?'-':'+')+(Math.abs(B)===1?'':Math.abs(B))+'x';
+  if(C) t+=(C<0?'-':'+')+Math.abs(C);
+  return t;
+}
+function cn(a,b){
+  if(b===0) return String(a);
+  const ab=Math.abs(b), bp=(ab===1?'':ab)+'i';
+  if(a===0) return (b<0?'-':'')+bp;
+  return String(a)+(b<0?'-':'+')+bp;
+}
+const fac=(a,b)=>`(x${sgn2(a)}${Math.abs(a)})(x${sgn2(b)}${Math.abs(b)})`;
+
+/* ---------------- Leg 1: the algebra workshop ---------------- */
+const A1=[
+ ()=>{ const a=pick([-4,-3,-2,2,3,4]),b=pick([-5,-4,-2,2,3,5]);
+   const s=a+b,p=a*b;
+   const T=R`(x${sgn2(a)}${Math.abs(a)})(x${sgn2(b)}${Math.abs(b)})`;
+   return mcq(R`Expand and simplify ${m(T)}.`,
+     m(quad(s,p)),
+     [m(quad(s,-p)),m(quad(-s,p)),m(quad(p,s)),m(quad(-s,-p))],
+     R`Use FOIL. The middle terms give \(${b}x${sgn2(a)}${Math.abs(a)}x\), which combine to \(${s}x\). The constant is \(${a}\times${b}=${p}\).`); },
+ ()=>{ const a=pick([2,3,4,5,6,7]);
+   return mcq(R`Expand ${m(`(x+${a})(x-${a})`)}.`,
+     m(R`x^{2}-${a*a}`),
+     [m(R`x^{2}+${a*a}`),m(R`x^{2}-${2*a}x+${a*a}`),m(R`x^{2}+${2*a}x-${a*a}`)],
+     R`This is a difference of two squares: \((x+a)(x-a)=x^{2}-a^{2}\). Here \(a^{2}=${a*a}\).`); },
+ ()=>{ const a=pick([2,3,4,5,6]);
+   return mcq(R`Expand ${m(`(x+${a})^{2}`)}.`,
+     m(R`x^{2}+${2*a}x+${a*a}`),
+     [m(R`x^{2}+${a*a}`),m(R`x^{2}+${2*a}x-${a*a}`),m(R`x^{2}+${a}x+${a*a}`)],
+     R`\((x+a)^{2}=x^{2}+2ax+a^{2}\). The middle term is twice the product, \(2\times${a}x=${2*a}x\).`); },
+ ()=>{ const a=pick([-5,-4,-3,-2,2,3,4,5]); let b=pick([-6,-5,-4,-2,2,3,5,6]); if(b===a||b===-a) b=a+1;
+   const s=a+b,p=a*b;
+   return mcq(R`Factorise ${m(quad(s,p))}.`,
+     m(fac(a,b)),
+     [m(fac(-a,-b)),m(fac(a,-b)),m(fac(-a,b)),m(R`(x+${p})(x+1)`)],
+     R`We need two numbers with product \(${p}\) and sum \(${s}\): they are ${a} and ${b}. So the factors are \(${fac(a,b)}\).`); },
+ ()=>{ const [p,q]=sample([2,3,4,5],2);
+   return mcq(R`Factorise ${m(`${p*p}x^{2}-${q*q}`)}.`,
+     m(`(${p}x-${q})(${p}x+${q})`),
+     [m(`(${p}x-${q})^{2}`),m(`(${p}x-${q})(${q}x+${p})`),m(`(${p}x+${q})^{2}`)],
+     R`Both terms are squares: \((px)^{2}-q^{2}\). A difference of squares factors as $(px-q)(px+q)$.`); },
+ ()=>{ const k=pick([2,3,4,5,6]),mm=pick([1,2,3,4,5]);
+   return mcq(R`Factorise completely: ${m(`${k}x^{2}+${k*mm}x`)}.`,
+     m(`${k}x(x+${mm})`),
+     [m(`x(${k}x+${mm})`),m(`${k}(x^{2}+${mm}x)`),m(`${k}x(x+${k*mm})`)],
+     R`Take out the highest common factor \(${k}x\): \(${k}x^{2}+${k*mm}x=${k}x(x+${mm})\).`); },
+ ()=>{ const p=pick([2,3]),q=pick([2,3]),a=pick([-5,-4,-3,2,3,4]),b=pick([-5,-4,2,3,4,5]);
+   return mcq(R`Expand and simplify ${m(`(${p}x${sgn2(a)}${Math.abs(a)})(${q}x${sgn2(b)}${Math.abs(b)})`)}.`,
+     m(quadFull(p*q,p*b+q*a,a*b)),
+     [m(quadFull(p*q,p*b+q*a,-a*b)),m(quadFull(p*q,-(p*b+q*a),a*b)),m(quadFull(p*q,a*b,p*b+q*a)),m(quadFull(p*q,p*a+q*b,-a*b))],
+     R`Multiply term by term: \(${p*q}x^{2}+${p*b}x${sgn2(q*a)}${Math.abs(q*a)}x${sgn2(a*b)}${Math.abs(a*b)}\). Collect the middle terms to get \(${p*b+q*a}x\).`); },
+ ()=>{ const a=pick([-6,-5,-4,-3,-2,2,3,4,5,6]);
+   return mcq(R`Factorise ${m(`x^{2}${sgn2(-(a+a))}${Math.abs(a+a)}x+${a*a}`)}.`,
+     m(`(x${sgn2(-a)}${Math.abs(a)})^{2}`),
+     [m(`(x${sgn2(a)}${Math.abs(a)})^{2}`),m(`(x-${a*a})(x-1)`),m(`(x${sgn2(-a)}${Math.abs(a)})(x${sgn2(a)}${Math.abs(a)})`)],
+     R`The constant is a perfect square and the middle coefficient is twice it: \((x${sgn2(-a)}${Math.abs(a)})^{2}\).`); }
+];
+
+const A2=[
+ ()=>{ const a=rnd(2,6),b=rnd(2,6);
+   const T=R`x^{${a}}\cdot x^{${b}}`;
+   return mcq(R`Simplify ${m(T)}.`,
+     m(R`x^{${a+b}}`),[m(R`x^{${a*b}}`),m(R`x^{${Math.abs(a-b)}}`),m(R`2x^{${a+b}}`)],
+     R`When multiplying powers of the same base, add the indices: \(x^{a}x^{b}=x^{a+b}\).`); },
+ ()=>{ const a=rnd(5,9),b=rnd(1,4);
+   const T=R`\frac{x^{${a}}}{x^{${b}}}`;
+   return mcq(R`Simplify ${m(T)}.`,
+     m(R`x^{${a-b}}`),[m(R`x^{${a+b}}`),m(R`x^{${a*b}}`),m(R`x^{${b-a}}`)],
+     R`When dividing powers of the same base, subtract the indices: \(x^{a}\div x^{b}=x^{a-b}\).`); },
+ ()=>{ const [a,b]=sample([2,3,4],2);
+   const T=R`\left(x^{${a}}\right)^{${b}}`;
+   return mcq(R`Simplify ${m(T)}.`,
+     m(R`x^{${a*b}}`),[m(R`x^{${a+b}}`),m(R`x^{${a*b+1}}`),m(R`${b}x^{${a}}`),m(R`x^{${a}}`)],
+     R`A power raised to a power multiplies the indices: \((x^{a})^{b}=x^{ab}\).`); },
+ ()=>{ const n=pick([2,3,4]); const v=Math.pow(2,n);
+   return mcq(R`Evaluate ${m(R`2^{-${n}}`)}.`,
+     m(R`\frac{1}{${v}}`),[m(`-${v}`),m(`-${n}`),m(R`\frac{1}{${n}}`)],
+     R`A negative index means a reciprocal: \(2^{-n}=\frac{1}{2^{n}}=\frac{1}{${v}}\).`); },
+ ()=>{ return mcq(R`Evaluate ${m(R`27^{2/3}`)}.`,
+     m('9'),[m('18'),m('6'),m(R`\frac{2}{3}\times27`)],
+     R`The denominator of the index is a root and the numerator is a power: \(27^{1/3}=3\), then \(3^{2}=9\).`); },
+ ()=>{ const k=pick([2,3,4,5]),s=pick([2,3,5,6,7]); const n=k*k*s;
+   return mcq(R`Simplify ${m(R`\sqrt{${n}}`)}.`,
+     m(`${k}\\sqrt{${s}}`),[m(`${k*s}\\sqrt{${s}}`),m(`${s}\\sqrt{${k}}`),m(`${k}\\sqrt{${k*s}}`),m(`${k+1}\\sqrt{${s}}`)],
+     R`Write ${n} as a square times a square-free number: \(${n}=${k*k}\times${s}\), so \(\sqrt{${n}}=${k}\sqrt{${s}}\).`); },
+ ()=>{ const a=pick([2,3,5]),c=pick([2,3,4]);
+   return mcq(R`Rationalise the denominator: ${m(R`\frac{${a*c}}{\sqrt{${a}}}`)}.`,
+     m(`${c}\\sqrt{${a}}`),[m(R`\frac{${c}}{\sqrt{${a}}}`),m(`${a*c}\\sqrt{${a}}`),m(`${c}`)],
+     R`Multiply top and bottom by \(\sqrt{${a}}\): \(\frac{${a*c}\sqrt{${a}}}{${a}}=${c}\sqrt{${a}}\).`); },
+ ()=>{ const a=pick([2,3,5,6]),b=pick([2,3,5,7]);
+   return mcq(R`Simplify ${m(R`\sqrt{${a}}\times\sqrt{${b}}`)}.`,
+     m(R`\sqrt{${a*b}}`),[m(R`\sqrt{${a+b}}`),m(`${a*b}`),m(R`\sqrt{${Math.abs(a-b)}}`)],
+     R`The product of square roots is the square root of the product: \(\sqrt{a}\sqrt{b}=\sqrt{ab}\).`); },
+ ()=>{ return mcq(R`Rewrite ${m(R`x^{1/2}`)} in radical form.`,
+     m(R`\sqrt{x}`),[m(R`\frac{x}{2}`),m(R`x^{2}`),m(R`\sqrt[3]{x}`)],
+     R`A power of \(\frac{1}{2}\) is a square root: \(x^{1/2}=\sqrt{x}\).`); },
+ ()=>{ return mcq(R`Evaluate ${m(R`\left(\frac{1}{4}\right)^{-1/2}`)}.`,
+     m('2'),[m(R`\frac{1}{2}`),m('-2'),m('4')],
+     R`First take the negative index: \(\left(\frac14\right)^{-1/2}=4^{1/2}\). The square root of 4 is 2.`); }
+];
+
+const A3=[
+ ()=>{ const x=pick([-4,-3,-2,2,3,4,5]),a=pick([2,3,4,5]),b=pick([-6,-5,-3,3,4,6]); const c=a*x+b;
+   return mcq(R`Solve ${m(`${a}x${sgn2(b)}${Math.abs(b)}=${c}`)}.`,
+     m(String(x)),[m(String(-x)),m(String(x+1)),m(String(x-1))],
+     R`Subtract ${b} from both sides: \(${a}x=${c-b}\). Divide by ${a}: \(x=${x}\).`); },
+ ()=>{ const x=pick([-3,-2,2,3,4]),a=pick([3,4,5]),b=pick([-5,-3,2,4]),c=pick([1,2]),d=b+(a-c)*x;
+   return mcq(R`Solve ${m(`${a}x${sgn2(b)}${Math.abs(b)}=${c}x${sgn2(d)}${Math.abs(d)}`)}.`,
+     m(String(x)),[m(String(-x)),m(String(x+2)),m(String(x-2))],
+     R`Collect \(x\) terms on one side: \(${a-c}x=${d-b}\), so \(x=${x}\).`); },
+ ()=>{ const r1=pick([-5,-4,-3,-2,2,3,4,5]); let r2=pick([-5,-4,-3,-2,2,3,4,5]); if(r2===r1) r2=r1+1;
+   const s=r1+r2,p=r1*r2;
+   return mcq(R`Solve ${m(quad(-s,p)+'=0')}.`,
+     m(`x=${Math.min(r1,r2)}\\text{ or }x=${Math.max(r1,r2)}`),
+     [m(`x=${-Math.min(r1,r2)}\\text{ or }x=${-Math.max(r1,r2)}`),m(`x=${Math.min(r1,r2)}\\text{ or }x=${-Math.max(r1,r2)}`),m(`x=${s}\\text{ or }x=${p}`)],
+     R`Factorise: \((x${sgn2(-r1)}${Math.abs(r1)})(x${sgn2(-r2)}${Math.abs(r2)})=0\). A product is zero when a factor is zero, giving \(x=${r1}\) or \(x=${r2}\).`); },
+ ()=>{ const a=pick([1,2,3]),b=pick([-5,-4,-3,3,4,5]),c=pick([2,3,5,6]);
+   const D=b*b-4*a*c;
+   return mcq(R`How many distinct real roots does ${m(`${quadFull(a,b,c)}=0`)} have?`,
+     m(String(D>0?2:0)),[m(String(D>0?0:2)),m('1'),m('4')],
+     R`The discriminant is \(b^{2}-4ac=${b*b}-${4*a*c}=${D}\). ${D>0?'It is positive, so there are two distinct real roots.':'It is negative, so there are no real roots (the roots are a complex conjugate pair).'}`); },
+ ()=>{ const b=pick([2,4,6,-2,-4,-6]),c=pick([1,2,3,5,6]);
+   return mcq(R`Write ${m(`x^{2}${sgn2(b)}${Math.abs(b)}x+${c}`)} in completed-square form.`,
+     m(`(x${sgn2(b/2)}${Math.abs(b/2)})^{2}${sgn2(c-b*b/4)}${Math.abs(c-b*b/4)}`),
+     [m(`(x${sgn2(b)}${Math.abs(b)})^{2}${sgn2(c-b*b)}${Math.abs(c-b*b)}`),m(`(x${sgn2(b/2)}${Math.abs(b/2)})^{2}+${c}`),m(`(x${sgn2(b/2+1)}${Math.abs(b/2+1)})^{2}${sgn2(c-b*b/4)}${Math.abs(c-b*b/4)}`)],
+     R`Halve the coefficient of \(x\): \(\frac{${b}}{2}=${b/2}\). Then \((x${sgn2(b/2)}${Math.abs(b/2)})^{2}=x^{2}${sgn2(b)}${Math.abs(b)}x+${(b/2)**2}\), so adjust the constant to \(${c-b*b/4}\).`); },
+ ()=>{ const k=pick([2,3,5,6,7,8]);
+   return mcq(R`Solve ${m(`x^{2}=${k}`)}.`,
+     m(R`x=\pm\sqrt{${k}}`),[m(R`x=\sqrt{${k}}`),m(R`x=\pm${k}`),m(R`x=\pm i\sqrt{${k}}`)],
+     R`Take square roots of both sides: \(x=\pm\sqrt{${k}}\). Both signs are needed.`); },
+ ()=>{ const a=pick([1,2]),b=pick([2,3,4,5]),c=pick([5,6,7,8]);
+   const D=b*b-4*a*c; const root=`i\\sqrt{${4*a*c-b*b}}`;
+   return mcq(R`Solve ${m(`${quadFull(a,b,c)}=0`)}.`,
+     m(R`x=\frac{${-b}\pm ${root}}{${2*a}}`),[m(R`x=\frac{${b}\pm ${root}}{${2*a}}`),m(R`x=\frac{${-b}\pm ${root}}{${a}}`),m(R`x=${-b}\pm ${root}`)],
+     R`The discriminant is negative: \(b^{2}-4ac=${D}\). Use the quadratic formula with \(\sqrt{${D}}=${root}\).`); },
+ ()=>{ const a=pick([2,3,4]),b=pick([3,4,5]); const k=pick([-3,-2,-1,1,2,3]); const x=a*k; const c=k+b;
+   const T=R`\frac{x}{${a}}+${b}=${c}`;
+   return mcq(R`Solve ${m(T)}.`,
+     m(String(x)),[m(String(-x)),m(String(x+a)),m(String(x-a))],
+     R`Subtract ${b}: \(\frac{x}{${a}}=${k}\). Multiply by ${a}: \(x=${x}\).`); },
+ ()=>{ const b=pick([2,4,6]),c=pick([1,3,5]);
+   const p=b/2,q=c-p*p;
+   return mcq(R`Solve ${m(`(x${sgn2(-p)}${Math.abs(p)})^{2}=${-q}`)}.`,
+     m(`x=${p}\\pm i\\sqrt{${-q}}`),[m(`x=${-p}\\pm i\\sqrt{${-q}}`),m(`x=${p}\\pm\\sqrt{${-q}}`),m(`x=\\pm i\\sqrt{${-q}}`)],
+     R`Take square roots: \(x${sgn2(-p)}${Math.abs(p)}=\pm i\sqrt{${-q}}\), so \(x=${p}\pm i\sqrt{${-q}}\).`); }
+];
+
+/* ---------------- Leg 2: enter i ---------------- */
+const B1=[
+ ()=>{ const n=pick([5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
+   const vals=['1','i','-1','-i']; const v=vals[n%4];
+   return mcq(R`Simplify ${m(`i^{${n}}`)}.`,
+     m(v),[m(vals[(n+1)%4]),m(vals[(n+2)%4]),m(vals[(n+3)%4])],
+     R`The powers of \(i\) repeat every four: \(i, -1, -i, 1\). Since \(${n}\bmod 4=${n%4}\), \(i^{${n}}=${v}\).`); },
+ ()=>{ const k=pick([1,2,3,4]),s=pick([2,3,5,6,7]); const n=k*k*s;
+   const ans=(k===1?'':String(k))+(s===1?'':'\\sqrt{'+s+'}')+'i';
+   const simpler=(k===1?'':String(k))+'i';
+   return mcq(R`Write ${m(R`\sqrt{-${n}}`)} in the form \(a+bi\).`,
+     m(ans),[m(simpler),m(`-${ans}`),m(`${k*s}i`)],
+     R`\(\sqrt{-${n}}=i\sqrt{${n}}\). Since \(${n}=${k*k}\times${s}\), \(\sqrt{${n}}=${k===1?'':k}\sqrt{${s}}\), so the answer is \(${ans}\).`); },
+ ()=>{ const a=pick([3,4,5,6,7]),b=pick([3,4,5,6,7]); const vals=['1','i','-1','-i'];
+   return mcq(R`Simplify ${m(`i^{${a}}\cdot i^{${b}}`)}.`,
+     m(vals[(a+b)%4]),[m(vals[(a*b)%4]),m(vals[Math.abs(a-b)%4]),m(vals[(a+b+1)%4])],
+     R`Add the indices: \(i^{${a}}i^{${b}}=i^{${a+b}}\). Since \(${a+b}\bmod 4=${(a+b)%4}\), the value is \(${vals[(a+b)%4]}\).`); },
+ ()=>{ const a=pick([2,3,5,6,7]),b=pick([2,3,5,6,7]); const vals=[[1,0],[0,1],[-1,0],[0,-1]];
+   const A=vals[a%4],B=vals[b%4]; const re=A[0]+B[0],im=A[1]+B[1];
+   return mcq(R`Simplify ${m(`i^{${a}}+i^{${b}}`)}.`,
+     m(cn(re,im)),[m(cn(re+2,im)),m(cn(re,im+2)),m(cn(re+1,im+1))],
+     R`\(i^{${a}}=${['1','i','-1','-i'][a%4]}\) and \(i^{${b}}=${['1','i','-1','-i'][b%4]}\). Adding real and imaginary parts gives \(${cn(re,im)}\).`); },
+ ()=>{ const k=pick([2,3,4,5,6]);
+   return mcq(R`Solve ${m(`x^{2}=-${k}`)}.`,
+     m(`x=\\pm i\\sqrt{${k}}`),[m(`x=\\pm\\sqrt{${k}}`),m(`x=\\pm ${k}i`),m(`x=i\\sqrt{${k}}`)],
+     R`Taking square roots gives \(x=\pm\sqrt{-${k}}=\pm i\sqrt{${k}}\).`); },
+ ()=>{ const k=pick([2,3,4,5]);
+   return mcq(R`Evaluate ${m(`(${k}i)^{2}`)}.`,
+     m(String(-k*k)),[m(String(k*k)),m(`${-k}i`),m(`${k*k}i`)],
+     R`\((ki)^{2}=k^{2}i^{2}=${k*k}\times(-1)=${-k*k}\).`); },
+ ()=>{ const n=pick([2,3,5,6,7,8,9,10]);
+   const inv=['1','-i','-1','i'];
+   return mcq(R`Simplify ${m(`i^{-${n}}`)}.`,
+     m(inv[n%4]),[m(inv[(n+1)%4]),m(inv[(n+2)%4]),m(inv[(n+3)%4])],
+     R`\(i^{-${n}}=\frac{1}{i^{${n}}}\). Since \(i^{${n}}=${['1','i','-1','-i'][n%4]}\), the reciprocal is \(${inv[n%4]}\).`); },
+ ()=>{ return mcq(R`Which of these numbers is purely imaginary?`,
+     m('3i'),[m('3'),m('3+0i'),m('0')],
+     R`A purely imaginary number has real part zero and non-zero imaginary part, such as \(3i=0+3i\).`); }
+];
+
+const B2=[
+ ()=>{ const a=rnd(-5,5),b=pick([-4,-3,-2,-1,1,2,3,4]),c=rnd(-5,5),d=pick([-4,-3,-2,-1,1,2,3,4]);
+   return mcq(R`Simplify ${m(`(${cn(a,b)})+(${cn(c,d)})`)}.`,
+     m(cn(a+c,b+d)),[m(cn(a-c,b-d)),m(cn(a*c,b*d)),m(cn(a+c,b-d))],
+     R`Add real parts and imaginary parts separately: \((${a}+${c})+(${b}+${d})i=${cn(a+c,b+d)}\).`); },
+ ()=>{ const a=rnd(-5,5),b=pick([-4,-3,-2,-1,1,2,3,4]),c=rnd(-5,5),d=pick([-4,-3,-2,-1,1,2,3,4]);
+   return mcq(R`Simplify ${m(`(${cn(a,b)})-(${cn(c,d)})`)}.`,
+     m(cn(a-c,b-d)),[m(cn(a+c,b+d)),m(cn(a-c,b+d)),m(cn(a*c,b*d))],
+     R`Subtract real parts and imaginary parts separately: \((${a}-${c})+(${b}-${d})i=${cn(a-c,b-d)}\).`); },
+ ()=>{ const a=rnd(-4,4),b=rnd(1,4),c=rnd(-4,4),d=rnd(1,4);
+   const re=a*c-b*d,im=a*d+b*c;
+   return mcq(R`Expand ${m(`(${cn(a,b)})(${cn(c,d)})`)}.`,
+     m(cn(re,im)),[m(cn(a*c+b*d, a*d-b*c)),m(cn(a*c-b*d, a*d-b*c)),m(cn(a+c,b+d)),m(cn(a*c+b*d+1,a*d-b*c))],
+     R`Use FOIL and \(i^{2}=-1\): real part \(ac-bd=${re}\), imaginary part \(ad+bc=${im}\).`); },
+ ()=>{ const a=rnd(1,5),b=rnd(1,4);
+   const re=a*a-b*b,im=2*a*b;
+   return mcq(R`Expand ${m(`(${cn(a,b)})^{2}`)}.`,
+     m(cn(re,im)),[m(cn(a*a+b*b,2*a*b)),m(cn(re,-im)),m(cn(2*a,2*b)),m(cn(a*a+b*b,-2*a*b))],
+     R`\((a+bi)^{2}=a^{2}-b^{2}+2abi\). Here \(${a}^{2}-${b}^{2}=${re}\) and \(2\times${a}\times${b}=${im}\).`); },
+ ()=>{ const a=rnd(2,7),b=rnd(1,6);
+   return mcq(R`Multiply ${m(`(${cn(a,b)})(${cn(a,-b)})`)}.`,
+     m(String(a*a+b*b)),[m(String(a*a-b*b)),m(cn(a*a-b*b,2*a*b)),m(String(b*b-a*a))],
+     R`These are conjugates, so the product is the squared modulus: \(a^{2}+b^{2}=${a*a}+${b*b}=${a*a+b*b}\).`); },
+ ()=>{ const a=rnd(-4,4)||2,b=rnd(1,4);
+   return mcq(R`Simplify ${m(`i(${cn(a,b)})`)}.`,
+     m(cn(-b,a)),[m(cn(b,a)),m(cn(-b,-a)),m(cn(a,-b))],
+     R`Multiply by \(i\): \(ai+bi^{2}=ai-b=${cn(-b,a)}\).`); }
+];
+
+const B3=[
+ ()=>{ let a=rnd(-5,5); if(a===0) a=2; const b=rnd(1,5);
+   return mcq(R`Write down the complex conjugate of ${m(cn(a,b))}.`,
+     m(cn(a,-b)),[m(cn(-a,b)),m(cn(-a,-b)),m(cn(b,a))],
+     R`Conjugation changes the sign of the imaginary part: \(\overline{a+bi}=a-bi\).`); },
+ ()=>{ const p=rnd(-4,4),q=rnd(1,4),c=rnd(1,4),d=rnd(1,4);
+   const Nre=p*c-q*d,Nim=p*d+q*c;
+   const T=R`\frac{${cn(Nre,Nim)}}{${cn(c,d)}}`;
+   return mcq(R`Express ${m(T)} in the form \(a+bi\).`,
+     m(cn(p,q)),[m(cn(-p,q)),m(cn(p,-q)),m(cn(q,p)),m(cn(p+1,q+1))],
+     R`Multiply top and bottom by the conjugate \(${cn(c,-d)}\). The denominator becomes \(${c}^{2}+${d}^{2}=${c*c+d*d}\), and the result simplifies to \(${cn(p,q)}\).`); },
+ ()=>{ const a=rnd(2,6),b=rnd(1,5),c=rnd(1,5);
+   return mcq(R`Simplify ${m(R`\frac{${cn(a,b)}}{${c}i}`)}.`,
+     m(cn(b/c,-a/c)),[m(cn(a/c,b/c)),m(cn(-b/c,a/c)),m(cn(b/c,a/c)),m(cn(-b/c,-a/c))],
+     R`Since \(\frac{1}{i}=-i\), divide by \(i\) by multiplying by \(-i\): \(\frac{${cn(a,b)}}{${c}i}=\frac{${cn(a,b)}(-i)}{${c}}=${cn(b/c,-a/c)}\).`); },
+ ()=>{ return mcq(R`Simplify ${m(R`\frac{1}{i}`)}.`,
+     m('-i'),[m('i'),m('1'),m('-1')],
+     R`Multiply top and bottom by \(i\): \(\frac{1}{i}=\frac{i}{i^{2}}=\frac{i}{-1}=-i\).`); },
+ ()=>{ const a=rnd(2,6),b=rnd(1,5);
+   return mcq(R`Find ${m(`z\\overline{z}`)} when ${m(`z=${cn(a,b)}`)}.`,
+     m(String(a*a+b*b)),[m(String(a*a+b*b+2*a*b)),m(String(a*a+b*b-2*a*b)),m(String(a*a-b*b+1))],
+     R`\(z\overline{z}=a^{2}+b^{2}\), a real number. Here \(${a*a}+${b*b}=${a*a+b*b}\).`); },
+ ()=>{ const k=pick([-4,-3,1,3,4]);
+   return mcq(R`If ${m(`z+\\overline{z}=${2*k}`)}, what is the real part of \(z\)?`,
+     m(String(k)),[m(String(2*k)),m(String(-k)),m(String(k+2))],
+     R`Write \(z=x+yi\). Then \(z+\overline{z}=2x=${2*k}\), so \(x=${k}\). The imaginary part is not determined.`); }
+];
+function complexTex(a,b){
+  if(b==='0') return a;
+  if(a==='0') return b+'i';
+  return a+(b.startsWith('-')?'':'+')+b+'i';
+}
+function rectTex(re,im){
+  if(im==='0') return re;
+  if(re==='0') return im+'i';
+  return re+(im.startsWith('-')?'':'+')+im+'i';
+}
+const B4=[
+ ()=>{ const TRI=[[3,4,5],[6,8,10],[5,12,13],[8,15,17],[7,24,25]]; const [a,b,h]=pick(TRI);
+   const sa=pick([1,-1]),sb=pick([1,-1]);
+   return mcq(R`Find ${m(`|${cn(sa*a,sb*b)}|`)}.`,
+     m(String(h)),[m(String(a+b)),m(String(a*b+1)),m(String(2*h+1))],
+     R`The modulus is \(\sqrt{a^{2}+b^{2}}\). Here \(\sqrt{${a*a}+${b*b}}=\sqrt{${h*h}}=${h}\).`); },
+ ()=>{ const EX=[['1','1',45],['1','-1',-45],['-1','1',135],['-1','-1',-135],['1','\\sqrt{3}',60],['\\sqrt{3}','1',30],['-1','\\sqrt{3}',120],['0','2',90],['-2','0',180],['\\sqrt{3}','-1',-30]];
+   const e=pick(EX); const zt=complexTex(e[0],e[1]);
+   return mcq(R`Find the principal argument of ${m(zt)}.`,
+     m(`${e[2]}^{\\circ}`),[m(`${-e[2]}^{\\circ}`),m(`${e[2]+90}^{\\circ}`),m(`${e[2]+180}^{\\circ}`)],
+     R`Plot ${zt}. Its angle measured anticlockwise from the positive real axis is ${e[2]}°.`); },
+ ()=>{ const deg=pick([30,45,60,90,120,135,150,180]),r=pick([2,3,4,5]);
+   return mcq(R`Write ${m(`${r}(\\cos ${deg}^{\\circ}+i\\sin ${deg}^{\\circ})`)} in polar form with the stated modulus and argument. Which statement is correct?`,
+     `modulus ${m(String(r))}, argument ${m(deg+'^{\\circ}')}`,
+     [`modulus ${m(String(deg))}, argument ${m(r+'^{\\circ}')}`,`modulus ${m(String(r))}, argument ${m((-deg)+'^{\\circ}')}`,`modulus ${m(String(r*r))}, argument ${m(deg+'^{\\circ}')}`],
+     R`In \(r(\cos\theta+i\sin\theta)\), the number out front is the modulus and the angle is the argument: modulus ${r}, argument ${deg}°.`); },
+ ()=>{ const P=[{deg:30,r:4,re:'2\\sqrt{3}',im:'2'},{deg:45,r:4,re:'2\\sqrt{2}',im:'2\\sqrt{2}'},{deg:60,r:4,re:'2',im:'2\\sqrt{3}'},{deg:90,r:3,re:'0',im:'3'},{deg:120,r:4,re:'-2',im:'2\\sqrt{3}'},{deg:135,r:4,re:'-2\\sqrt{2}',im:'2\\sqrt{2}'},{deg:180,r:5,re:'-5',im:'0'},{deg:270,r:2,re:'0',im:'-2'}];
+   const e=pick(P),zt=rectTex(e.re,e.im);
+   return mcq(R`Express ${m(`${e.r}(\\cos ${e.deg}^{\\circ}+i\\sin ${e.deg}^{\\circ})`)} in the form \(a+bi\).`,
+     m(zt),[m(rectTex(e.im,e.re)),m(rectTex(e.re,('-'+e.im).replace('--',''))),m(rectTex(('-'+e.re).replace('--',''),('-'+e.im).replace('--',''))),m(rectTex(String(e.r),String(e.r)))],
+     R`Use the exact values of cosine and sine at ${e.deg}°. With modulus ${e.r}, the real part is ${e.re} and the imaginary part is ${e.im}.`); },
+ ()=>{ const a=pick([20,30,40,50]),b=pick([20,30,40,50]);
+   return mcq(R`If ${m(`\\arg z_1=${a}^{\\circ}`)} and ${m(`\\arg z_2=${b}^{\\circ}`)}, what is ${m('\\arg(z_1z_2)')}?`,
+     m(`${a+b}^{\\circ}`),[m(`${Math.abs(a-b)}^{\\circ}`),m(`${a*b}^{\\circ}`),m(`${a+b+30}^{\\circ}`)],
+     R`Arguments add under multiplication: \(\arg(z_1z_2)=\arg z_1+\arg z_2=${a}+${b}=${a+b}\)°.`); },
+ ()=>{ const r=pick([2,3]),n=pick([2,3]);
+   return mcq(R`If ${m(`|z|=${r}`)}, what is ${m(`|z^{${n}}|`)}?`,
+     m(String(Math.pow(r,n))),[m(String(r*n+3)),m(String(r+n+1)),m(String(Math.pow(r,n+1)))],
+     R`Moduli multiply under powers: \(|z^{n}|=|z|^{n}=${r}^{${n}}=${Math.pow(r,n)}\).`); },
+ ()=>{ const deg=pick([30,40,45,60]),n=pick([2,3]);
+   return mcq(R`If ${m(`\\arg z=${deg}^{\\circ}`)}, what is ${m(`\\arg(z^{${n}})`)}?`,
+     m(`${n*deg}^{\\circ}`),[m(`${deg}^{\\circ}`),m(`${deg/n}^{\\circ}`),m(`${180-n*deg}^{\\circ}`)],
+     R`Arguments multiply by the power: \(\arg(z^{n})=n\arg z=${n}\times${deg}=${n*deg}\)°.`); },
+ ()=>{ return mcq(R`The principal argument of a non-zero complex number lies in which range?`,
+     m(R`-180^{\circ}<\theta\le 180^{\circ}`),[m(R`0^{\circ}\le\theta<360^{\circ}`),m(R`0^{\circ}<\theta\le 180^{\circ}`),m(R`-90^{\circ}<\theta\le 90^{\circ}`)],
+     R`The principal argument is measured anticlockwise from the positive real axis, taking values in \((-180^{\circ},180^{\circ}]\).`); },
+ ()=>{ const r=pick([2,3,4,5]);
+   return mcq(R`The equation ${m(`|z|=${r}`)} describes which set of points in the Argand diagram?`,
+     `a circle centre the origin, radius ${m(String(r))}`,[`a circle centre ${m(String(r))}, radius 1`,'a straight line through the origin',`a circle centre the origin, radius ${m(String(r*r))}`],
+     R`\(|z|\) is the distance from the origin. A fixed distance ${r} from the origin is a circle of radius ${r} centred at 0.`); }
+];
+
+/* ---------------- Leg 3: the complex plane ---------------- */
+const C1=[
+ ()=>{ const p=pick([-4,-3,-2,-1,1,2,3,4]),q=rnd(1,4); const s=-2*p,c=p*p+q*q;
+   return mcq(R`Solve ${m(quad(s,c)+'=0')}.`,
+     m(`${p}\\pm ${q}i`),[m(`${-p}\\pm ${q}i`),m(`${p}\\pm ${q}`),m(`${-p}\\pm ${q}`)],
+     R`The discriminant is \(${s*s}-4(${c})=${s*s-4*c}<0\). The roots are \(\frac{${-s}\pm i\sqrt{${4*c-s*s}}}{2}=${p}\pm ${q}i\).`); },
+ ()=>{ const a=pick([1,2]),b=pick([1,2,3,4]),c=pick([3,4,5,6]);
+   const D=b*b-4*a*c;
+   return mcq(R`Describe the roots of ${m(`${quadFull(a,b,c)}=0`)}.`,
+     'two complex conjugate roots',['two distinct real roots','one repeated real root','three real roots'],
+     R`The discriminant is \(b^{2}-4ac=${b*b}-${4*a*c}=${D}\). It is negative, so the roots form a complex conjugate pair.`); },
+ ()=>{ const a=pick([1,2]),b=pick([2,4,6]),c=pick([1,3,5]);
+   return mcq(R`The roots of ${m(`${quadFull(a,b,c)}=0`)} are \(\alpha\) and \(\beta\). Find \(\alpha+\beta\).`,
+     m(String(-b/a)),[m(String(b/a)),m(String(c/a)),m(String(-c/a))],
+     R`By Vieta's formulas, the sum of the roots is \(-\frac{b}{a}=-\frac{${b}}{${a}}=${-b/a}\).`); },
+ ()=>{ const p=pick([-3,-2,-1,1,2,3]),q=rnd(1,4);
+   return mcq(R`Form the quadratic equation with roots ${m(`${p}\\pm ${q}i`)}.`,
+     m(quad(-2*p,p*p+q*q)+'=0'),[m(quad(2*p,p*p+q*q)+'=0'),m(quad(-2*p,p*p-q*q)+'=0'),m(quad(-2*p,q*q-p*p)+'=0')],
+     R`Complex roots occur in conjugate pairs. Their sum is \(2p=${2*p}\) and their product is \(p^{2}+q^{2}=${p*p+q*q}\), so the equation is \(x^{2}-(${2*p})x+${p*p+q*q}=0\).`); },
+ ()=>{ const k=pick([2,3,4,5,6,7]);
+   return mcq(R`Solve ${m(`x^{2}+${k}=0`)}.`,
+     m(`x=\\pm i\\sqrt{${k}}`),[m(`x=\\pm\\sqrt{${k}}`),m(`x=\\pm i${k}`),m(`x=i\\sqrt{${k}}`)],
+     R`\(x^{2}=-${k}\), so \(x=\pm\sqrt{-${k}}=\pm i\sqrt{${k}}\).`); },
+ ()=>{ const a=rnd(-3,3),k=pick([2,3,4,5]);
+   return mcq(R`Solve ${m(`(x${sgn2(-a)}${Math.abs(a)})^{2}=-${k}`)}.`,
+     m(`x=${a}\\pm i\\sqrt{${k}}`),[m(`x=${-a}\\pm i\\sqrt{${k}}`),m(`x=${a}\\pm\\sqrt{${k}}`),m(`x=\\pm i\\sqrt{${k}}`)],
+     R`Take square roots: \(x${sgn2(-a)}${Math.abs(a)}=\pm i\sqrt{${k}}\), so \(x=${a}\pm i\sqrt{${k}}\).`); },
+ ()=>{ const n=pick([3,4,5,6]);
+   return mcq(R`How many complex roots does a polynomial of degree ${n} have, counting multiplicity?`,
+     m(String(n)),[m(String(n-1)),m(String(2*n)),m(R`\text{at most }${n}`)],
+     R`The fundamental theorem of algebra: every polynomial of degree \(n\ge1\) has exactly \(n\) complex roots, counted with multiplicity.`); },
+ ()=>{ const a=pick([1,2,3]),b=pick([1,2,3,4]);
+   return mcq(R`A real quadratic has ${m(`${a}+${b}i`)} as one root. What is the other root?`,
+     m(`${a}-${b}i`),[m(`${-a}+${b}i`),m(`${-a}-${b}i`),m(`${b}+${a}i`)],
+     R`A polynomial with real coefficients has roots in conjugate pairs, so the other root is ${a}-${b}i.`); }
+];
+
+const C2=[
+ ()=>{ const a=pick([1,2,3,4]),b=pick([1,2,3,4]);
+   return mcq(R`A polynomial has real coefficients and ${m(`${a}+${b}i`)} is a root. Which number must also be a root?`,
+     m(`${a}-${b}i`),[m(`${-a}+${b}i`),m(`${b}+${a}i`),m(`${-a}-${b}i`)],
+     R`The conjugate root theorem: non-real roots of a real polynomial occur in conjugate pairs. The partner of ${a}+${b}i is ${a}-${b}i.`); },
+ ()=>{ const a=pick([-3,-2,2,3]),b=pick([1,2,3,4]);
+   return mcq(R`A real polynomial of degree 4 has roots ${m('1')}, ${m('-2')} and ${m(`${a}+${b}i`)}. What is the fourth root?`,
+     m(`${a}-${b}i`),[m(`${b}+${a}i`),m(`${a}+${b}i`),m(`-${a}-${b}i`)],
+     R`The four roots are 1, -2 and a conjugate pair. The missing root is the conjugate ${a}-${b}i.`); },
+ ()=>{ const A=pick([-2,-1,1,2]),B=pick([-3,-2,2,3]),Cv=pick([-3,-1,1,3]),r=pick([1,2,3]);
+   const v=r*r*r+A*r*r+B*r+Cv;
+   return mcq(R`Find the remainder when ${m(`x^{3}${sgn2(A)}${Math.abs(A)}x^{2}${sgn2(B)}${Math.abs(B)}x${sgn2(Cv)}${Math.abs(Cv)}`)} is divided by ${m(`x-${r}`)}.`,
+     m(String(v)),[m(String(v+1)),m(String(v-1)),m(String(v+2))],
+     R`By the remainder theorem, the remainder is \(p(${r})=${r}^{3}${sgn2(A)}${Math.abs(A)}(${r}^{2})${sgn2(B)}${Math.abs(B)}(${r})${sgn2(Cv)}${Math.abs(Cv)}=${v}\).`); },
+ ()=>{ const r=pick([1,2,3]),A=pick([-2,-1,1,2]),B=pick([-2,-1,1,2]);
+   const k=-(r*r*r+A*r*r+B*r);
+   return mcq(R`Given that ${m(`x-${r}`)} is a factor of ${m(`x^{3}${sgn2(A)}${Math.abs(A)}x^{2}${sgn2(B)}${Math.abs(B)}x+k`)}. Find \(k\).`,
+     m(String(k)),[m(String(k+1)),m(String(k-1)),m(String(k+2))],
+     R`By the factor theorem, \(p(${r})=0\): ${r}^{3}${sgn2(A)}${Math.abs(A)}(${r}^{2})${sgn2(B)}${Math.abs(B)}(${r})+k=0\), so \(k=${k}\).`); },
+ ()=>{ const p=pick([-3,-2,-1,1,2,3]),q=rnd(1,4),d=p*p+q*q;
+   return mcq(R`Write down a quadratic with real coefficients whose roots are ${m(`${p}\\pm ${q}i`)}.`,
+     m(`x^{2}${sgn2(-2*p)}${Math.abs(2*p)}x+${d}=0`),[m(`x^{2}${sgn2(2*p)}${Math.abs(2*p)}x+${d}=0`),m(`x^{2}${sgn2(-2*p)}${Math.abs(2*p)}x-${d}=0`),m(`x^{2}+${d}=0`)],
+     R`The sum of the roots is ${2*p} and the product is ${d}. A quadratic is \(x^{2}-(\text{sum})x+(\text{product})=0\).`); },
+ ()=>{ const r=pick([-3,-2,2,3]),p=rnd(-3,3),q=rnd(1,3);
+   const coeff=-(r+2*p);
+   return mcq(R`A cubic has roots ${m(String(r))} and ${m(`${p}\\pm ${q}i`)}. Find the coefficient of \(x^{2}\).`,
+     m(String(coeff)),[m(String(coeff+1)),m(String(coeff-1)),m(String(coeff+2))],
+     R`The sum of the roots is \(${r}+${p}+${q}i+${p}-${q}i=${r+2*p}\). For a monic cubic, the coefficient of \(x^{2}\) is minus the sum: ${coeff}.`); },
+ ()=>{ return mcq(R`A real polynomial satisfies ${m('p(2-i)=0')}. Which must also be true?`,
+     m('p(2+i)=0'),[m('p(-2+i)=0'),m('p(2-i)\\ne0'),m('p(i-2)=0')],
+     R`Real coefficients force conjugate roots. Since \(2-i\) is a root, \(2+i\) is also a root.`); },
+ ()=>{ return mcq(R`A real polynomial of degree 5 has exactly one real root. How are the other roots arranged?`,
+     'two conjugate pairs',['four real roots','one conjugate pair and two real roots','three conjugate pairs'],
+     R`Non-real roots come in conjugate pairs, so the remaining four roots form two conjugate pairs.`); }
+];
+
+const C3=[
+ ()=>{ return mcq(R`What does de Moivre's theorem state?`,
+     m(R`(\cos\theta+i\sin\theta)^{n}=\cos n\theta+i\sin n\theta`),
+     [m(R`(\cos\theta+i\sin\theta)^{n}=\cos\theta^{n}+i\sin\theta^{n}`),m(R`(\cos\theta+i\sin\theta)^{n}=n\cos n\theta+in\sin n\theta`),m(R`(\cos\theta+i\sin\theta)^{n}=\cos n\theta-i\sin n\theta`)],
+     R`De Moivre: to raise a complex number in polar form to a power, raise the modulus to that power and multiply the argument by it. For modulus 1 this is \((\cos\theta+i\sin\theta)^{n}=\cos n\theta+i\sin n\theta\).`); },
+ ()=>{ const TAB={2:'2i',4:'-4',6:'-8i',8:'16'};
+   const POOL={2:['2i','-2i','2','-2','4i'],4:['-4','4','4i','-4i','2'],6:['-8i','8i','-8','8','16'],8:['16','-16','16i','-16i','8']};
+   const n=pick([2,4,6,8]);
+   const wrong=shuffle(POOL[n].filter(x=>x!==TAB[n])).slice(0,3);
+   return mcq(R`Use de Moivre's theorem to evaluate ${m(`(1+i)^{${n}}`)}.`,
+     m(TAB[n]),wrong.map(m),
+     R`Write \(1+i=\sqrt{2}(\cos45^{\circ}+i\sin45^{\circ})\). Then \((1+i)^{${n}}=(\sqrt{2})^{${n}}(\cos ${n*45}^{\circ}+i\sin ${n*45}^{\circ})=${TAB[n]}\).`); },
+ ()=>{ const n=pick([3,6]); const ans=n===3?'8i':'-64';
+   return mcq(R`Evaluate ${m(`(\\sqrt{3}+i)^{${n}}`)}.`,
+     m(ans),[m(n===3?'-8i':'-8'),m(n===3?'8':'-64i'),m(n===3?'4i':'64')],
+     R`\(\sqrt{3}+i\) has modulus 2 and argument \(30^{\circ}\). So the power has modulus \(2^{${n}}=${n===3?'8':'64'}\) and argument \(${n*30}^{\circ}\), giving ${ans}.`); },
+ ()=>{ const deg=pick([20,30,45,60]);
+   return mcq(R`Simplify ${m(`(\\cos ${deg}^{\\circ}+i\\sin ${deg}^{\\circ})^{6}`)}.`,
+     m(`\\cos ${6*deg}^{\\circ}+i\\sin ${6*deg}^{\\circ}`),[m(`\\cos ${deg}^{\\circ}+i\\sin ${deg}^{\\circ}`),m(`6\\cos ${6*deg}^{\\circ}+6i\\sin ${6*deg}^{\\circ}`),m(`\\cos ${6*deg}^{\\circ}-i\\sin ${6*deg}^{\\circ}`)],
+     R`By de Moivre, the power multiplies the angle by 6: \(\cos(${6}\times${deg}^{\circ})+i\sin(${6}\times${deg}^{\circ})\).`); },
+ ()=>{ const r=pick([2,3]),n=pick([3,4]);
+   return mcq(R`If ${m(`|z|=${r}`)}, find ${m(`|z^{${n}}|`)}.`,
+     m(String(Math.pow(r,n))),[m(String(r*n+3)),m(String(r+n+1)),m(String(Math.pow(r,n+1)))],
+     R`\(|z^{n}|=|z|^{n}\). Here \(${r}^{${n}}=${Math.pow(r,n)}\).`); },
+ ()=>{ const deg=pick([15,20,30]),n=pick([3,4]);
+   return mcq(R`If ${m(`\\arg z=${deg}^{\\circ}`)}, find ${m(`\\arg(z^{${n}})`)}.`,
+     m(`${n*deg}^{\\circ}`),[m(`${deg}^{\\circ}`),m(`${Math.round(deg/n)}^{\\circ}`),m(`${n*deg+180}^{\\circ}`)],
+     R`Arguments multiply by the power: \(\arg(z^{n})=n\arg z=${n}\times${deg}=${n*deg}\)°.`); },
+ ()=>{ return mcq(R`What are the three cube roots of 1?`,
+     m(R`1,\ -\frac{1}{2}+\frac{\sqrt{3}}{2}i,\ -\frac{1}{2}-\frac{\sqrt{3}}{2}i`),
+     [m(R`1,\ \frac{1}{2}+\frac{\sqrt{3}}{2}i,\ \frac{1}{2}-\frac{\sqrt{3}}{2}i`),m(R`1,\ i,\ -i`),m(R`1,\ -1,\ i`)],
+     R`Write \(1=\cos0^{\circ}+i\sin0^{\circ}\). The cube roots have modulus 1 and arguments \(\frac{0+360k}{3}\) for \(k=0,1,2\), giving \(1\) and \(-\frac12\pm\frac{\sqrt3}{2}i\).`); },
+ ()=>{ return mcq(R`The four fourth roots of 16 are:`,
+     m(R`2,\ -2,\ 2i,\ -2i`),[m(R`4,\ -4,\ 4i,\ -4i`),m(R`2,\ 2i,\ -2,\ -2i`),m(R`16,\ -16,\ 16i,\ -16i`)],
+     R`\(16=16(\cos0^{\circ}+i\sin0^{\circ})\). Fourth roots have modulus \(16^{1/4}=2\) and arguments \(0^{\circ},90^{\circ},180^{\circ},270^{\circ}\).`); }
+];
+
+const C4=[
+ ()=>{ const a=rnd(-3,3),b=rnd(-3,3),r=pick([2,3,4,5]);
+   return mcq(R`Describe the locus ${m(`|z-(${cn(a,b)})|=${r}`)}.`,
+     `circle centre ${m(cn(a,b))}, radius ${m(String(r))}`,[`circle centre ${m(cn(-a,-b))}, radius ${m(String(r))}`,`circle centre ${m(cn(a,b))}, radius ${m(String(r*r))}`,`line through ${m(cn(a,b))}`],
+     R`\(|z-(a+bi)|=r\) is the set of points at distance \(r\) from the point \(a+bi\). It is a circle centred at ${cn(a,b)} with radius ${r}.`); },
+ ()=>{ const a=pick([-3,-2,2,3]),b=pick([-3,-2,2,3]),c=pick([-3,-2,2,3]),d=pick([-3,-2,2,3]);
+   if(a===c&&b===d) return C4[0]();
+   return mcq(R`Describe the locus ${m(`|z-(${cn(a,b)})|=|z-(${cn(c,d)})|`)}.`,
+     `the perpendicular bisector of the segment joining ${m(cn(a,b))} and ${m(cn(c,d))}`,
+     [`the circle with centre ${m(cn(a,b))}`,`the line through ${m(cn(a,b))} and ${m(cn(c,d))}`,`the midpoint of ${m(cn(a,b))} and ${m(cn(c,d))}`],
+     R`Both sides are distances. Points equidistant from two fixed points lie on the perpendicular bisector of the segment joining them.`); },
+ ()=>{ const a=rnd(-4,2),b=rnd(-4,2),u=pick([3,-3]),v=pick([4,-4]);
+   const z1=cn(a,b),z2=cn(a+u,b+v);
+   return mcq(R`Find ${m(`|z_1-z_2|`)} when ${m(`z_1=${z1}`)} and ${m(`z_2=${z2}`)}.`,
+     m(String(Math.hypot(u,v))),[m(String(Math.abs(u)+Math.abs(v))),m(String(u*u+v*v)),m(String(Math.hypot(u,v)*2))],
+     R`\(|z_1-z_2|=\sqrt{(${u})^{2}+(${v})^{2}}=\sqrt{${u*u+v*v}}=${Math.hypot(u,v)}\).`); },
+ ()=>{ const a=rnd(-3,3),b=rnd(-3,3),u=pick([1,2,3,-1,-2]),v=pick([1,2,3,-1,-2]);
+   const z1=cn(a,b),z2=cn(a+2*u,b+2*v);
+   return mcq(R`Find the midpoint of ${m(`z_1=${z1}`)} and ${m(`z_2=${z2}`)} in the Argand diagram.`,
+     m(cn(a+u,b+v)),[m(cn(a+2*u,b+2*v)),m(cn(a-u,b-v)),m(cn(u,v))],
+     R`The midpoint is the average: \(\frac{z_1+z_2}{2}=${cn(a+u,b+v)}\).`); },
+ ()=>{ const a=rnd(-2,2),b=rnd(-2,2),th=pick([30,45,60,120]);
+   return mcq(R`Describe ${m(`\\arg(z-(${cn(a,b)}))=${th}^{\\circ}`)}.`,
+     `a ray from ${m(cn(a,b))} at angle ${m(th+'^{\\circ}')}`,[`a full line through ${m(cn(a,b))}`,`a circle centred at ${m(cn(a,b))}`,`a ray from the origin at ${m(th+'^{\\circ}')}`],
+     R`The condition fixes the direction from the point ${cn(a,b)}, giving a half-line (ray) starting there at ${th}°. The base point is not the origin.`); },
+ ()=>{ const a=rnd(-3,3),b=rnd(-3,3),c=rnd(-3,3),d=rnd(-3,3);
+   const e=rnd(-3,3),f=rnd(-3,3);
+   const A=cn(a,b),B=cn(c,d),Cv=cn(e,f),D=cn(a+e-c,b+f-d);
+   return mcq(R`Three consecutive vertices of a parallelogram are ${m(A)}, ${m(B)} and ${m(Cv)}. Find the fourth vertex.`,
+     m(D),[m(cn(c+e-a,d+f-b)),m(cn(a+c+e,b+d+f)),m(cn(a+e-c,b+f-d-1))],
+     R`In a parallelogram with consecutive vertices \(A,B,C\), the diagonals bisect, so \(A+C=B+D\). Hence \(D=A+C-B=${D}\).`); },
+ ()=>{ return mcq(R`The equation ${m('|z|=5')} describes:`,
+     'a circle of radius 5 centred at the origin',['a circle of radius 25 centred at the origin','the point 5','a vertical line through 5'],
+     R`\(|z|\) is the distance from the origin, so \(|z|=5\) is the circle of radius 5 centred at 0.`); },
+ ()=>{ return mcq(R`The locus ${m('|z-1|=|z+i|')} is:`,
+     'the perpendicular bisector of the segment joining 1 and -i',['a circle centred at 1','a circle centred at -i','the line through 1 and -i'],
+     R`Points equidistant from \(1\) and \(-i\) lie on the perpendicular bisector of the segment joining them.`); }
+];
+
+
+/* ---- vector / matrix helpers ---- */
+const vr=n=>Array.from({length:n},()=>rnd(-6,6));
+const nz=n=>{let a;do{a=vr(n);}while(a.every(x=>!x));return a;};
+const add=(a,b)=>a.map((x,i)=>x+b[i]);
+const sub=(a,b)=>a.map((x,i)=>x-b[i]);
+const scl=(k,a)=>a.map(x=>k*x);
+const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const vmag=a=>Math.sqrt(dot(a,a));
+const pmat=a=>R`\begin{pmatrix}`+a.map(String).join(R`\\`)+R`\end{pmatrix}`;
+const vstr=a=>R`\left(`+a.map(String).join(R`,\ `)+R`\right)`;
+const mp=M=>R`\begin{pmatrix}`+M.map(r=>r.map(String).join('&')).join(R`\\`)+R`\end{pmatrix}`;
+const flat=(M)=>M.map(r=>r.map(x=>num(x)));
+
+function mcq(prompt,correct,distractors,explain,extra){
+  const seen=new Set([correct]),ds=[];
+  for(const d of distractors){ if(d==null||seen.has(d)) continue; seen.add(d); ds.push(d); if(ds.length===3) break; }
+  const spills=['None of these','Cannot be determined','Not enough information'];
+  for(let i=0;ds.length<3;i++){ const sp=spills[i%spills.length]; if(!seen.has(sp)){ seen.add(sp); ds.push(sp); } }
+  const options=shuffle([correct,...ds]);
+  return Object.assign({type:'mcq',prompt,options,accept:[options.indexOf(correct)],explain},extra||{});
+}
+
+/* ---------------- Unit 1: Vector algebra ---------------- */
+function qVecAdd(){
+  const a=vr(3),b=vr(3),k=pick([-3,-2,2,3]);
+  return mcq(R`Given `+m(pmat(a))+R` and `+m(pmat(b))+R`, find `+m(R`\mathbf{a}+\mathbf{b}`)+R`.`,
+    pmat(add(a,b)),[pmat(sub(a,b)),pmat(sub(b,a)),pmat(scl(k,a))],
+    R`Add components: `+m(pmat(add(a,b)))+R`.`);
+}
+function qVecScalar(){
+  const a=vr(3),k=pick([-3,-2,2,3,4]);
+  return mcq(R`Given `+m(pmat(a))+R`, find `+m(num(k)+R`\mathbf{a}`)+R`.`,
+    pmat(scl(k,a)),[pmat(a),pmat(scl(-k,a)),pmat(scl(k+1,a))],
+    R`Multiply every component by `+m(num(k))+R`.`);
+}
+function qVecSub(){
+  const a=vr(3),b=vr(3);
+  return mcq(R`Given `+m(pmat(a))+R` and `+m(pmat(b))+R`, find `+m(R`\mathbf{a}-\mathbf{b}`)+R`.`,
+    pmat(sub(a,b)),[pmat(add(a,b)),pmat(sub(b,a)),pmat(scl(-1,a))],
+    R`Subtract component by component: `+m(pmat(sub(a,b)))+R`.`);
+}
+function qMag(){
+  const a=nz(3);
+  const ans=Math.sqrt(dot(a,a));
+  return {type:'num',prompt:R`Find `+m(R`|\mathbf{a}|`)+R` for `+m(pmat(a))+R`. Two decimal places.`,unit:'',answer:ans,
+    explain:R``+m(R`|\mathbf{a}|=\sqrt{`+a[0]+R`^{2}+`+a[1]+R`^{2}+`+a[2]+R`^{2}}`)+R`.`};
+}
+function qDist(){
+  const P=vr(3),Q=vr(3),d=sub(Q,P),ans=Math.sqrt(dot(d,d));
+  return {type:'num',prompt:R`Find the distance between `+m('P'+vstr(P))+R` and `+m('Q'+vstr(Q))+R`. Two decimal places.`,unit:'',answer:ans,
+    explain:R`Distance `+m(R`=|\overrightarrow{PQ}|=`+num(ans))+R`.`};
+}
+function qDot(){
+  const a=vr(3),b=vr(3),s=dot(a,b);
+  return {type:'num',prompt:R`Find `+m(R`\mathbf{a}\cdot\mathbf{b}`)+R` for `+m(pmat(a))+R` and `+m(pmat(b))+R`.`,
+    unit:'',answer:s,explain:R`Multiply matching components and add: `+m(R`\mathbf{a}\cdot\mathbf{b}=`+s)+R`.`};
+}
+function qPerp(){
+  const a=vr(2),b=vr(2),s=dot(a,b);
+  const kind=s>0?'Acute':s<0?'Obtuse':'A right angle';
+  const labels=['Acute','Obtuse','A right angle','A straight angle'];
+  return mcq(R`For `+m(pmat(a))+R` and `+m(pmat(b))+R`, what is the angle between them?`,
+    kind,labels.filter(l=>l!==kind),
+    R`The dot product is `+m(num(s))+R`. Positive means acute, negative obtuse, and zero a right angle.`);
+}
+function qCosAngle(){
+  const a=nz(2),b=nz(2);
+  const c=Math.max(-1,Math.min(1,dot(a,b)/(vmag(a)*vmag(b))));
+  const ans=Math.acos(c)*180/Math.PI;
+  return {type:'num',prompt:R`Find the angle between `+m(pmat(a))+R` and `+m(pmat(b))+R`, in degrees. One decimal place.`,unit:'°',answer:ans,
+    explain:R``+m(R`\cos\theta=\frac{\mathbf{a}\cdot\mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\Rightarrow\theta=`+num(ans)+R`^{\circ}`)+R`.`};
+}
+
+/* ---------------- Unit 2: Vector products ---------------- */
+function qUnit(){
+  const a=pick([[3,4],[5,12],[6,8],[8,15],[1,1],[3,-4],[7,24],[0,-5]]);
+  const L=Math.sqrt(dot(a,a));
+  const u=a.map(x=>+(x/L).toFixed(4));
+  return mcq(R`Find the unit vector in the direction of `+m(pmat(a))+R`.`,
+    m(vstr(u)),[m(vstr(a)),m(vstr(a.map(x=>-x))),m(vstr(a.map(x=>x*L)))],
+    R`Divide each component by `+m(R`|\mathbf{a}|=`+num(L)+R`. `)+R`The unit vector is `+m(vstr(u))+R`.`);
+}
+function qCross(){
+  let a,b,c; do{ a=vr(3); b=vr(3); c=cross(a,b); }while(c.every(x=>!x));
+  return mcq(R`Find `+m(R`\mathbf{a}\times\mathbf{b}`)+R` for `+m(pmat(a))+R` and `+m(pmat(b))+R`.`,
+    pmat(c),[pmat(cross(b,a)),pmat([dot(a,b),dot(a,b),dot(a,b)]),pmat(add(a,b))],
+    R``+m(R`\mathbf{a}\times\mathbf{b}=`+pmat(c))+R`.`);
+}
+function qArea(){
+  let a,b,c; do{ a=vr(3); b=vr(3); c=cross(a,b); }while(c.every(x=>!x));
+  const ans=Math.sqrt(dot(c,c));
+  return {type:'num',prompt:R`Find the area of the parallelogram spanned by `+m(pmat(a))+R` and `+m(pmat(b))+R`. Two decimal places.`,unit:'',answer:ans,
+    explain:R`Area `+m(R`=|\mathbf{a}\times\mathbf{b}|=`+num(ans))+R`.`};
+}
+function qTriple(){
+  const a=vr(3),b=vr(3),c=vr(3),v=dot(a,cross(b,c));
+  return {type:'num',prompt:R`Find the scalar triple product `+m(R`\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})`)+R` for `+m(R`\mathbf{a}=`+pmat(a))+R`, `+m(R`\mathbf{b}=`+pmat(b))+R`, `+m(R`\mathbf{c}=`+pmat(c))+R`.`,unit:'',answer:v,
+    explain:R`It is the signed volume of the parallelepiped: `+m(num(v))+R`.`};
+}
+function qCoplanar(){
+  const a=vr(3),b=vr(3),c=pick([add(a,b),vr(3)]);
+  const v=dot(a,cross(b,c));
+  const kind=Math.abs(v)<1e-9?'Coplanar':'Not coplanar';
+  return mcq(R`Are `+m(R`\mathbf{a}=`+pmat(a))+R`, `+m(R`\mathbf{b}=`+pmat(b))+R` and `+m(R`\mathbf{c}=`+pmat(c))+R` coplanar?`,
+    kind,['Coplanar','Not coplanar','Perpendicular','Parallel'].filter(x=>x!==kind),
+    R`The triple product is `+m(num(v))+R`. It is zero exactly when the vectors are coplanar.`);
+}
+
+/* ---------------- Unit 3: Lines and planes ---------------- */
+function qLineVec(){
+  const a=vr(3),d=nz(3);
+  return mcq(R`A line passes through `+m(pmat(a))+R` with direction `+m(pmat(d))+R`. Which is its vector equation?`,
+    m(R`\mathbf{r}=`+pmat(a)+R`+t`+pmat(d)),
+    [m(R`\mathbf{r}=`+pmat(d)+R`+t`+pmat(a)),m(R`\mathbf{r}=`+pmat(a)+R`\\cdot t`+pmat(d)),m(R`\mathbf{r}=t`+pmat(a)+R`+`+pmat(d))],
+    R`The form is `+m(R`\mathbf{r}=\mathbf{a}+t\mathbf{d}`)+R`: a point plus a parameter times the direction.`);
+}
+function qDir(){
+  const P=vr(3),Q=vr(3),d=sub(Q,P);
+  return mcq(R`Find the direction vector of the line through `+m(vstr(P))+R` and `+m(vstr(Q))+R`.`,
+    pmat(d),[pmat(add(P,Q)),pmat(sub(P,Q)),pmat(Q)],
+    R`The direction is `+m(R`\overrightarrow{PQ}=\mathbf{q}-\mathbf{p}=`+pmat(d))+R`.`);
+}
+function qSym(){
+  let P,Q,d; do{ P=vr(3); Q=vr(3); d=sub(Q,P); }while(d.every(x=>!x)||d.some(x=>x===0));
+  const f=(v,name,p)=>R`\frac{`+name+R`-(`+p+R`)}{`+v+R`}`;
+  const cor=R`\frac{x-(`+P[0]+R`)}{`+d[0]+R`}=\frac{y-(`+P[1]+R`)}{`+d[1]+R`}=\frac{z-(`+P[2]+R`)}{`+d[2]+R`}`;
+  return mcq(R`Find the symmetric equations of the line through `+m(vstr(P))+R` and `+m(vstr(Q))+R`.`,
+    m(cor),
+    [m(R`\frac{x-(`+Q[0]+R`)}{`+P[0]+R`}=\frac{y-(`+Q[1]+R`)}{`+P[1]+R`}=\frac{z-(`+Q[2]+R`)}{`+P[2]+R`}`),
+     m(R`\frac{x+`+P[0]+R`}{`+d[0]+R`}=\frac{y+`+P[1]+R`}{`+d[1]+R`}=\frac{z+`+P[2]+R`}{`+d[2]+R`}`),
+     m(R`\frac{x-(`+P[0]+R`)}{`+Q[0]+R`}=\frac{y-(`+P[1]+R`)}{`+Q[1]+R`}=\frac{z-(`+P[2]+R`)}{`+Q[2]+R`}`)],
+    R`The direction is `+m(R`\mathbf{d}=\mathbf{q}-\mathbf{p}=`+pmat(d))+R`, giving `+m(cor)+R`.`);
+}
+function qPlane(){
+  const n=nz(3),a=vr(3),K=n[0]*a[0]+n[1]*a[1]+n[2]*a[2];
+  const e=k=>num(k)+'x'+(n[1]<0?'-':'+')+Math.abs(n[1])+'y'+(n[2]<0?'-':'+')+Math.abs(n[2])+'z='+num(k===1?K:-K);
+  const lhs=num(n[0])+'x'+(n[1]<0?'-':'+')+Math.abs(n[1])+'y'+(n[2]<0?'-':'+')+Math.abs(n[2])+'z';
+  return mcq(R`Find the equation of the plane through `+m(vstr(a))+R` with normal `+m(pmat(n))+R`.`,
+    m(lhs+'='+num(K)),
+    [m(lhs+'='+num(K+1)),m(lhs+'='+num(K-1)),m(lhs+'='+num(K+2))],
+    R`Use `+m(R`\mathbf{n}\cdot(\mathbf{r}-\mathbf{a})=0`)+R`, giving `+m(lhs+'='+num(K))+R`.`);
+}
+
+/* ---------------- Unit 4: Matrix algebra ---------------- */
+function qMatMul(){
+  const A=[0,1].map(()=>[rnd(-4,4),rnd(-4,4)]),B=[0,1].map(()=>[rnd(-4,4),rnd(-4,4)]);
+  const C=[0,1].map(i=>[0,1].map(j=>A[i][0]*B[0][j]+A[i][1]*B[1][j]));
+  const bump=(i,j)=>{ const D=C.map(r=>r.slice()); D[i][j]+=1; return m(mp(flat(D))); };
+  return mcq(R`Compute `+m(mp(A)+mp(B))+R`.`,
+    m(mp(flat(C))),[bump(0,0),bump(0,1),bump(1,1)],
+    R`Multiply rows of the first by columns of the second: `+m(mp(flat(C)))+R`.`);
+}
+function qDet2(){
+  const a=rnd(-6,6),b=rnd(-6,6),c=rnd(-6,6),d=rnd(-6,6),det=a*d-b*c;
+  if(det===0) return qDet2();
+  return mcq(R`Find the determinant of `+m(R`\begin{pmatrix}`+a+'&'+b+R`\\`+c+'&'+d+R`\end{pmatrix}`)+R`.`,
+    m(num(det)),[m(num(det+1)),m(num(det-1)),m(num(-det))],
+    R``+m(R`\det=ad-bc=`+a+'\\cdot'+d+'-'+b+'\\cdot'+c+'='+det)+R`.`);
+}
+function qDet3(){
+  const M=[0,1,2].map(()=>[rnd(-4,4),rnd(-4,4),rnd(-4,4)]);
+  const det=M[0][0]*(M[1][1]*M[2][2]-M[1][2]*M[2][1])-M[0][1]*(M[1][0]*M[2][2]-M[1][2]*M[2][0])+M[0][2]*(M[1][0]*M[2][1]-M[1][1]*M[2][0]);
+  return {type:'num',prompt:R`Find the determinant of `+m(mp(M))+R`.`,
+    unit:'',answer:det,explain:R`Expand along the first row: `+m(R`\det=`+det)+R`.`};
+}
+function qInv2(){
+  const a=rnd(-4,4)||1,b=rnd(-4,4),c=rnd(-4,4),d=rnd(-4,4)||1,det=a*d-b*c;
+  if(!det) return qInv2();
+  const inv=[[d/det,-b/det],[-c/det,a/det]];
+  const correct=m(mp(flat(inv))), seen=new Set([correct]), ds=[];
+  const add=M=>{ const s=m(mp(flat(M))); if(!seen.has(s)){ seen.add(s); ds.push(s); } };
+  add([[d,-b],[-c,a]]);
+  add([[inv[0][0],inv[1][0]],[inv[0][1],inv[1][1]]]);
+  add(inv.map(r=>r.map(x=>-x)));
+  let k=1; while(ds.length<3){ const D=inv.map(r=>r.slice()); D[0][0]+=k; add(D); k++; }
+  return mcq(R`Find the inverse of `+m(mp([[a,b],[c,d]]))+R`.`,
+    correct,ds,
+    R``+m(R`A^{-1}=\frac{1}{ad-bc}`+R`\begin{pmatrix}`+d+'&'+(-b)+R`\\`+(-c)+'&'+a+R`\end{pmatrix}`)+R`, with `+m('ad-bc='+det)+R`.`);
+}
+function qSingular(){
+  const sing=()=>{const a=rnd(-3,3)||1,b=rnd(-3,3)||1,k=pick([-2,-1,2,3]);return [[a,b],[k*a,k*b]];};
+  const reg=()=>{const a=rnd(1,4),b=rnd(1,4),c=rnd(1,4),d=rnd(1,4);return (a*d-b*c===0)?reg():[[a,b],[c,d]];};
+  const S=sing(),N1=reg(),N2=reg();
+  return mcq(R`Which matrix is singular (has no inverse)?`,
+    m(mp(S)),[m(mp(N1)),m(mp(N2)),m(mp(N1.map(r=>r.map(x=>-x))))],
+    R`Singular means `+m(R`\det=0`)+R`. Here `+m(mp(S))+R` has `+m(R`\det=0`)+R`.`);
+}
+
+
+/* ---------------- Extra: Cartesian forms and row reduction ---------------- */
+function linN(coefs,vars){
+  let out='';
+  coefs.forEach((c,i)=>{ if(!c) return; out+=(c<0?'-':'+')+(Math.abs(c)===1?'':Math.abs(c))+vars[i]; });
+  return out.replace(/^\+/,'')||'0';
+}
+function det3(M){
+  return M[0][0]*(M[1][1]*M[2][2]-M[1][2]*M[2][1])-M[0][1]*(M[1][0]*M[2][2]-M[1][2]*M[2][0])+M[0][2]*(M[1][0]*M[2][1]-M[1][1]*M[2][0]);
+}
+function rank3(M){
+  const A=M.map(r=>r.slice()); let r=0;
+  for(let c=0;c<3&&r<3;c++){
+    let piv=r; for(let i=r;i<3;i++) if(Math.abs(A[i][c])>Math.abs(A[piv][c])) piv=i;
+    if(Math.abs(A[piv][c])<1e-9) continue;
+    [A[r],A[piv]]=[A[piv],A[r]];
+    const pv=A[r][c]; for(let j=c;j<3;j++) A[r][j]/=pv;
+    for(let i=0;i<3;i++) if(i!==r){ const f=A[i][c]; for(let j=c;j<3;j++) A[i][j]-=f*A[r][j]; }
+    r++;
+  }
+  return r;
+}
+function qCartLine(){
+  const P=[rnd(-4,4),rnd(-4,4)];
+  const p=pick([-4,-3,-2,-1,1,2,3,4]); let q; do{ q=pick([-4,-3,-2,-1,1,2,3,4]); }while(q===p);
+  const c=q*P[0]-p*P[1];
+  const cor=linN([q,-p],['x','y'])+'='+c;
+  return mcq(R`A line in the plane passes through `+m(vstr(P))+R` with direction `+m(pmat([p,q]))+R`. Find its Cartesian equation.`,
+    m(cor),
+    [m(linN([q,p],['x','y'])+'='+c),m(linN([p,-q],['x','y'])+'='+c),m(linN([q,-p],['x','y'])+'='+(c+1))],
+    R`The parametric form is `+m(R`x=${P[0]}+${p}t,\quad y=${P[1]}+${q}t`)+R`. Eliminating `+m('t')+R` gives `+m(R`q(x-${P[0]})=p(y-${P[1]})`)+R`, that is `+m(cor)+R`.`);
+}
+function qPlane3(){
+  let P,Q,Rr,n;
+  do{ P=vr(3); Q=vr(3); Rr=vr(3); n=cross(sub(Q,P),sub(Rr,P)); }while(n.every(x=>!x));
+  const d=dot(n,P), lhs=linN(n,['x','y','z']);
+  return mcq(R`Find the Cartesian equation of the plane through `+m(vstr(P))+R`, `+m(vstr(Q))+R` and `+m(vstr(Rr))+R`.`,
+    m(lhs+'='+d),
+    [m(lhs+'='+(d+1)),m(lhs+'='+(d-1)),m(lhs+'='+(d+2))],
+    R`Two directions are `+m(R`\overrightarrow{PQ}=`+pmat(sub(Q,P)))+R` and `+m(R`\overrightarrow{PR}=`+pmat(sub(Rr,P)))+R`. Their cross product is the normal `+m(pmat(n))+R`, and `+m(R`\mathbf{n}\cdot\mathbf{r}=\mathbf{n}\cdot\mathbf{p}`)+R` gives `+m(lhs+'='+d)+R`.`);
+}
+function qRowOp(){
+  const A=[0,1,2].map(()=>[rnd(-4,4),rnd(-4,4),rnd(-4,4)]);
+  const k=pick([-3,-2,-1,1,2,3]);
+  const mode=pick(['r2','r3','swap']);
+  const B=A.map(r=>r.slice());
+  let lab;
+  if(mode==='r2'){ for(let j=0;j<3;j++) B[1][j]=A[1][j]+k*A[0][j]; lab=R`R_2\to R_2`+(k===1?'+':k===-1?'-':(k<0?'-':'+')+Math.abs(k))+R`R_1`; }
+  else if(mode==='r3'){ for(let j=0;j<3;j++) B[2][j]=A[2][j]+k*A[0][j]; lab=R`R_3\to R_3`+(k===1?'+':k===-1?'-':(k<0?'-':'+')+Math.abs(k))+R`R_1`; }
+  else { B[1]=A[2].slice(); B[2]=A[1].slice(); lab=R`R_2\leftrightarrow R_3`; }
+  const bump=(i,j)=>{ const D=B.map(r=>r.slice()); D[i][j]+=1; return m(mp(D)); };
+  return mcq(R`Apply the elementary row operation `+m(lab)+R` to `+m(mp(A))+R`. Which matrix results?`,
+    m(mp(B)),
+    [m(mp(A)),bump(1,0),bump(2,1)],
+    R`Perform the operation exactly on the stated row, leaving the other rows unchanged. This gives `+m(mp(B))+R`.`);
+}
+function qRank(){
+  let M,rk;
+  const mode=pick(['one','two','three']);
+  if(mode==='one'){ const r=nz(3); M=[r,scl(pick([2,-2,3]),r),scl(pick([-3,2,1]),r)]; }
+  else if(mode==='two'){ let a,b; do{ a=nz(3); b=nz(3); }while(cross(a,b).every(x=>!x)); M=[a,b,add(a,b)]; }
+  else { do{ M=[nz(3),nz(3),nz(3)]; }while(rank3(M)<3); }
+  rk=rank3(M);
+  return mcq(R`Find the rank of `+m(mp(M))+R`.`,
+    m(String(rk)),[m('0'),m('1'),m('2'),m('3')].filter(x=>x!==m(String(rk))),
+    R`Row-reduce the matrix. The rank is the number of non-zero rows in echelon form (the number of independent rows), here `+m(String(rk))+R`.`);
+}
+function qSolve2(){
+  let x,y,a,b,c,d;
+  do{ x=rnd(-4,4); y=rnd(-4,4); a=pick([1,2,3]); b=pick([1,2,3,-1]); c=pick([1,2,3]); d=pick([1,2,3,-1]); }
+  while(a*d-b*c===0||x===0||y===0||x===y||x===-y);
+  const e=a*x+b*y,f=c*x+d*y;
+  return mcq(R`Solve the system `+m(R`\begin{cases}${linN([a,b],['x','y'])}=${e}\\ ${linN([c,d],['x','y'])}=${f}\end{cases}`)+R`.`,
+    m(R`x=${x},\ y=${y}`),
+    [m(R`x=${y},\ y=${x}`),m(R`x=${-x},\ y=${y}`),m(R`x=${x},\ y=${-y}`)],
+    R`Eliminate one variable. Substituting `+m(R`x=${x},\ y=${y}`)+R` satisfies both equations.`);
+}
+function qSolve3(){
+  let A,x,y,z,rhs;
+  do{
+    x=rnd(-3,3); y=rnd(-3,3); z=rnd(-3,3);
+    A=[0,1,2].map(()=>[rnd(-2,2),rnd(-2,2),rnd(-2,2)]);
+    rhs=[dot(A[0],[x,y,z]),dot(A[1],[x,y,z]),dot(A[2],[x,y,z])];
+  }while(det3(A)===0||x===0||y===0||z===0||new Set([x,y,z]).size<3);
+  const sys=R`\begin{cases}${linN(A[0],['x','y','z'])}=${rhs[0]}\\ ${linN(A[1],['x','y','z'])}=${rhs[1]}\\ ${linN(A[2],['x','y','z'])}=${rhs[2]}\end{cases}`;
+  return mcq(R`Solve the system `+m(sys)+R`.`,
+    m(R`x=${x},\ y=${y},\ z=${z}`),
+    [m(R`x=${y},\ y=${z},\ z=${x}`),m(R`x=${-x},\ y=${y},\ z=${z}`),m(R`x=${x},\ y=${-y},\ z=${-z}`)],
+    R`Row-reduce the augmented matrix. The solution is `+m(R`x=${x},\ y=${y},\ z=${z}`)+R`.`);
+}
+function qInv3(){
+  const a=pick([-3,-2,-1,1,2,3]),b=pick([-3,-2,-1,1,2,3]),c=pick([-3,-2,-1,1,2,3]);
+  const L=[[1,0,0],[a,1,0],[b,c,1]];
+  const Inv=[[1,0,0],[-a,1,0],[a*c-b,-c,1]];
+  const bump=(i,j)=>{ const D=Inv.map(r=>r.slice()); D[i][j]+=1; return m(mp(D)); };
+  return mcq(R`Use Gauss-Jordan elimination to find the inverse of `+m(mp(L))+R`.`,
+    m(mp(Inv)),
+    [m(mp(L)),m(mp(Inv.map(r=>r.map(v=>-v)))),bump(2,0)],
+    R`Form `+m(R`[A\mid I]`)+R` and row-reduce until the left block is `+m('I')+R`. The right block is `+m(mp(Inv))+R`.`);
+}
+
+
+const LEGS={
+ 1:{title:'Algebra foundations',route:'Expanding, factorising, indices and equations'},
+ 2:{title:'Enter i',route:'Arithmetic, conjugates, modulus and argument'},
+ 3:{title:'The complex plane',route:'Quadratic roots, polynomials, de Moivre and loci'},
+ 4:{title:'Vector algebra',route:'Components, addition, the dot product and angles'},
+ 5:{title:'Vector products',route:'Unit vectors, the cross product and volumes'},
+ 6:{title:'Lines and planes',route:'Vector, Cartesian and symmetric forms in space'},
+ 7:{title:'Matrix algebra',route:'Multiplication, determinants, inverses and row reduction'}
+};
+const CSTATIONS=[
+  {id:'1.1',leg:1,name:'Expand and factorise',topic:'Brackets, common factors and difference of squares',
+   toolkit:R`<p><b>FOIL:</b> \((x+a)(x+b)=x^{2}+(a+b)x+ab\).</p><p><b>Difference of squares:</b> \(a^{2}-b^{2}=(a-b)(a+b)\).</p><p>Always take out the highest common factor first.</p>`,
+   round:()=>sample(A1,5).map(f=>f())},
+  {id:'1.2',leg:1,name:'Indices and surds',topic:'Index laws, negative and fractional powers, radicals',
+   toolkit:R`<p>\(x^{a}x^{b}=x^{a+b}\), \(\frac{x^{a}}{x^{b}}=x^{a-b}\), \((x^{a})^{b}=x^{ab}\).</p><p>\(x^{-n}=\frac{1}{x^{n}}\) and \(x^{m/n}=\sqrt[n]{x^{m}}\).</p><p>Simplify surds by pulling out square factors: \(\sqrt{72}=6\sqrt{2}\).</p>`,
+   round:()=>sample(A2,5).map(f=>f())},
+  {id:'1.3',leg:1,name:'Linear and quadratic equations',topic:'Rearranging, factorising, discriminant and the formula',
+   toolkit:R`<p>For \(ax^{2}+bx+c=0\), the roots are \(x=\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}\).</p><p>The discriminant \(b^{2}-4ac\) tells you how many real roots there are: positive two, zero one, negative none.</p>`,
+   round:()=>sample(A3,5).map(f=>f())},
+  {id:'1.4',leg:1,name:'Simultaneous equations',topic:'Elimination and substitution for 2x2 and 3x3 systems',
+   toolkit:R`<p>Eliminate one variable at a time: scale a row, then add or subtract rows to cancel it.</p><p>For three unknowns, reduce the \(3\times3\) system to a \(2\times2\) system first.</p><p>Check the solution in every original equation.</p>`,
+   round:()=>[qSolve2(),qSolve3(),qSolve2(),qSolve3(),qSolve2()]},
+  {id:'2.1',leg:2,name:'The imaginary unit',topic:'Powers of i, square roots of negatives',
+   toolkit:R`<p>\(i^{2}=-1\). The powers repeat with period 4: \(i,\,-1,\,-i,\,1\).</p><p>\(\sqrt{-n}=i\sqrt{n}\) for \(n>0\). For a power \(i^{n}\), just look at \(n\bmod 4\).</p><p><b>Common mistake:</b> writing \(i^{2}=1\). It is \(-1\).</p>`,
+   round:()=>sample(B1,5).map(f=>f())},
+  {id:'2.2',leg:2,name:'Add, subtract, multiply',topic:'Complex arithmetic in the form a + bi',
+   toolkit:R`<p>Add real parts and imaginary parts separately.</p><p>Multiply like brackets, then replace \(i^{2}\) with \(-1\).</p><p>\((a+bi)(a-bi)=a^{2}+b^{2}\), a real number.</p><p><b>Common mistake:</b> dropping the \(i^{2}\) term; it becomes a real number.</p>`,
+   round:()=>sample(B2,5).map(f=>f())},
+  {id:'2.3',leg:2,name:'Conjugates and division',topic:'Rationalising complex denominators',
+   toolkit:R`<p>The conjugate of \(a+bi\) is \(a-bi\).</p><p>To divide, multiply top and bottom by the conjugate of the denominator.</p><p>\(z\overline{z}=|z|^{2}=a^{2}+b^{2}\).</p><p><b>Common mistake:</b> multiplying by the numerator's conjugate instead of the denominator's.</p>`,
+   round:()=>sample(B3,5).map(f=>f())},
+  {id:'2.4',leg:2,name:'Modulus, argument and polar form',topic:'Distances, angles and exact polar values',
+   toolkit:R`<p>\(|a+bi|=\sqrt{a^{2}+b^{2}}\); the argument is the angle from the positive real axis.</p><p>Polar form: \(z=r(\cos\theta+i\sin\theta)\).</p><p>Exact values: \(30^{\circ},45^{\circ},60^{\circ},90^{\circ}\) and their multiples.</p><p><b>Common mistake:</b> ignoring the quadrant; sketch the point before naming the argument.</p>`,
+   round:()=>sample(B4,5).map(f=>f())},
+  {id:'3.1',leg:3,name:'Complex quadratic roots',topic:'Negative discriminants and Vieta',
+   toolkit:R`<p>If \(b^{2}-4ac&lt;0\), the roots are a conjugate pair \(\frac{-b\pm i\sqrt{4ac-b^{2}}}{2a}\).</p><p>Sum of roots \(=-\frac{b}{a}\), product \(=\frac{c}{a}\).</p><p><b>Common mistake:</b> dropping the \(\pm\), so only one of the conjugate roots is found.</p>`,
+   round:()=>sample(C1,5).map(f=>f())},
+  {id:'3.2',leg:3,name:'Polynomials and conjugate roots',topic:'Factor and remainder theorems with complex roots',
+   toolkit:R`<p>A real polynomial has non-real roots in conjugate pairs.</p><p>Remainder theorem: dividing by \((x-a)\) leaves \(p(a)\).</p><p>Factor theorem: \((x-a)\) is a factor exactly when \(p(a)=0\).</p><p><b>Common mistake:</b> assuming one complex root can occur alone; its conjugate must also be a root.</p>`,
+   round:()=>sample(C2,5).map(f=>f())},
+  {id:'3.3',leg:3,name:'De Moivre and roots',topic:'Powers and roots in polar form',
+   toolkit:R`<p>De Moivre: \((\cos\theta+i\sin\theta)^{n}=\cos n\theta+i\sin n\theta\).</p><p>For \(z=r(\cos\theta+i\sin\theta)\), \(z^{n}=r^{n}(\cos n\theta+i\sin n\theta)\).</p><p>The \(n\)th roots are equally spaced around a circle.</p><p><b>Common mistake:</b> multiplying the modulus by \(n\) instead of raising it to the power \(n\).</p>`,
+   round:()=>sample(C3,5).map(f=>f())},
+  {id:'3.4',leg:3,name:'Loci and geometry',topic:'Circles, rays and perpendicular bisectors in the Argand diagram',
+   toolkit:R`<p>\(|z-a|=r\) is a circle centred at \(a\) with radius \(r\).</p><p>\(|z-a|=|z-b|\) is the perpendicular bisector of the segment \(ab\).</p><p>\(\arg(z-a)=\theta\) is a ray from \(a\) at angle \(\theta\).</p><p><b>Common mistake:</b> treating it as a full line; it is only a ray.</p><div id="miniholder"></div>`,
+   round:()=>sample(C4,5).map(f=>f())}
+];
+const LSTATIONS=[
+ {id:'1.1',leg:1,place:'The Origin',name:'Vector basics',topic:'Components, addition, subtraction, scalar multiples',
+  round:()=>[qVecAdd(),qVecScalar(),qVecSub(),qVecAdd(),qVecScalar()]},
+ {id:'1.2',leg:1,place:'Length Street',name:'Magnitude & distance',topic:'Length of a vector; distance between points',
+  round:()=>[qMag(),qDist(),qMag(),qDist(),qMag()]},
+ {id:'1.3',leg:1,place:'The Right Angle',name:'The dot product',topic:'\\(Compute a·b; acute, right or obtuse\\)',
+  round:()=>[qDot(),qPerp(),qDot(),qPerp(),qDot()]},
+ {id:'1.4',leg:1,place:'Compass Point',name:'Angle between vectors',topic:'\\(cos θ = a·b / (|a||b|)\\)',
+  round:()=>[qCosAngle(),qPerp(),qCosAngle(),qDot(),qCosAngle()]},
+ {id:'2.1',leg:2,place:'Normalise',name:'Unit vectors',topic:'Normalisation and direction',
+  round:()=>[qUnit(),qUnit(),qMag(),qUnit(),qUnit()]},
+ {id:'2.2',leg:2,place:'Parallelogram',name:'The cross product',topic:'\\(Compute a×b and the area it spans\\)',
+  round:()=>[qCross(),qArea(),qCross(),qArea(),qCross()]},
+ {id:'2.3',leg:2,place:'Volume City',name:'Triple product',topic:'Scalar triple product and coplanarity',
+  round:()=>[qTriple(),qCoplanar(),qTriple(),qCoplanar(),qTriple()]},
+ {id:'3.1',leg:3,place:'The Path',name:'Vector equation of a line',topic:'\\(r = a + t d\\)',
+  round:()=>[qLineVec(),qDir(),qLineVec(),qDir(),qLineVec()]},
+ {id:'3.2',leg:3,place:'Symmetry',name:'Symmetric equations of a line',topic:'From two points to symmetric form',
+  round:()=>[qSym(),qDir(),qSym(),qSym(),qDir()]},
+ {id:'3.3',leg:3,place:'The Surface',name:'Equation of a plane',topic:'\\(n·(r − a) = 0\\)',
+  round:()=>[qPlane(),qPlane(),qPlane(),qPlane(),qPlane()]},
+ {id:'3.4',leg:3,place:'The Cartesian',name:'Cartesian equations',topic:'Lines in the plane and planes in space',
+  round:()=>[qCartLine(),qPlane3(),qCartLine(),qPlane(),qPlane3()]},
+ {id:'4.1',leg:4,place:'The Grid',name:'Matrix multiplication',topic:'Products of matrices',
+  round:()=>[qMatMul(),qMatMul(),qMatMul(),qMatMul(),qMatMul()]},
+ {id:'4.2',leg:4,place:'Scale Factor',name:'Determinants',topic:'\\(2×2 and 3×3 determinants\\)',
+  round:()=>[qDet2(),qDet3(),qDet2(),qDet3(),qDet2()]},
+ {id:'4.3',leg:4,place:'The Undo',name:'Inverse & singular matrices',topic:'Inverses, and when none exists',
+  round:()=>[qInv2(),qSingular(),qInv2(),qSingular(),qInv2()]},
+ {id:'4.4',leg:4,place:'The Pivot',name:'Row reduction & rank',topic:'Elementary operations, echelon form and rank',
+  round:()=>[qRowOp(),qRank(),qSolve2(),qSolve3(),qRowOp()]},
+ {id:'4.5',leg:4,place:'Gauss-Jordan',name:'Inverse by row reduction',topic:'Extended Gauss algorithm for 3x3 inverses',
+  round:()=>[qInv3(),qRowOp(),qInv3(),qInv2(),qSingular()]}
+];
+const LVIDEOS={
+ '1.1':[['01-vector-basics.mp4','Vector basics']],
+ '1.2':[['02-magnitude-and-distance.mp4','Magnitude & distance']],
+ '1.3':[['03-dot-product.mp4','The dot product']],
+ '1.4':[['04-angle-between-vectors.mp4','Angle between vectors']],
+ '2.1':[['05-unit-vectors.mp4','Unit vectors']],
+ '2.2':[['06-cross-product.mp4','The cross product']],
+ '2.3':[['07-triple-product.mp4','The triple product']],
+ '3.1':[['08-line-vector-equation.mp4','Vector equation of a line']],
+ '3.2':[['09-symmetric-lines.mp4','Symmetric equations of a line']],
+ '3.3':[['10-plane-equation.mp4','Equation of a plane']],
+ '4.1':[['11-matrix-multiplication.mp4','Matrix multiplication']],
+ '4.2':[['12-determinants.mp4','Determinants']],
+ '4.3':[['13-inverse-and-singular.mp4','Inverse & singular matrices']]
+};
+const LYT={
+ '1.1':[['fNk_zzaMoSs','3Blue1Brown — Vectors (Essence of linear algebra)']],
+ '1.2':[['fNk_zzaMoSs','3Blue1Brown — Vectors (magnitude and direction)']],
+ '1.3':[['LyGKycYT2v0','3Blue1Brown — Dot products and duality']],
+ '1.4':[['LyGKycYT2v0','3Blue1Brown — Dot products and duality']],
+ '2.1':[['9ylUcCOTH8Y','Khan Academy — Unit vector notation']],
+ '2.2':[['eu6i7WJeinw','3Blue1Brown — Cross products'],['pJzmiywagfY','Khan Academy — Cross product introduction']],
+ '2.3':[['eu6i7WJeinw','3Blue1Brown — Cross products and volume']],
+ '3.1':[['hWhs2cIj7Cw','Khan Academy — Parametric representations of lines']],
+ '3.2':[['hWhs2cIj7Cw','Khan Academy — Parametric representations of lines']],
+ '3.3':[['UJxgcVaNTqY','Khan Academy — Defining a plane in R3']],
+ '4.1':[['XkY2DOUCWMU','3Blue1Brown — Matrix multiplication as composition'],['kYB8IZa5AuE','3Blue1Brown — Linear transformations and matrices']],
+ '4.2':[['Ip3X9LOh2dk','3Blue1Brown — The determinant']],
+ '4.3':[['uQhTuRlWMxw','3Blue1Brown — Inverse matrices, column space and null space']]
+};
+
+const STATIONS=[
+ ...CSTATIONS,
+ ...LSTATIONS.map(s=>({...s,leg:s.leg+3,id:`${s.leg+3}.${s.id.split('.')[1]}`}))
+];
+const VIDEOS={
+ '2.1':[['14-imaginary-unit.mp4','The imaginary unit']],
+ '2.2':[['15-complex-arithmetic.mp4','Adding and multiplying']],
+ '2.3':[['16-conjugates-division.mp4','Conjugates and division']],
+ '2.4':[['17-modulus-argument.mp4','Modulus and argument']],
+ '3.1':[['18-complex-quadratic.mp4','Quadratic roots']],
+ '3.2':[['19-conjugate-roots.mp4','Conjugate roots']],
+ '3.3':[['20-de-moivre.mp4','De Moivre\'s theorem']],
+ '3.4':[['21-loci-geometry.mp4','Loci and geometry']],
+ '6.4':[['22-cartesian-equations.mp4','Cartesian equations']],
+ '7.4':[['23-row-reduction.mp4','Row reduction and rank']],
+ '7.5':[['24-inverse-row-reduction.mp4','Inverse by row reduction']]
+};
+Object.keys(LVIDEOS).forEach(k=>{ const p=k.split('.'); VIDEOS[`${+p[0]+3}.${p[1]}`]=LVIDEOS[k]; });
+const YT={
+ '1.1':[['813YPh2SSnw','Cognito — How to expand single brackets'],['3kE_Q-JdlO4','Cognito — Factorising quadratics (x² coefficient 1)']],
+ '1.2':[['e1J3MJtM2UM','Corbettmaths — Laws of indices'],['ndU_cCbPAm4','Corbettmaths — Surds']],
+ '1.3':[['9FuR91H8EVU','Cognito — How to solve algebraic equations'],['i7idZfS8t8w','Khan Academy — How to use the quadratic formula']],
+ '1.4':[['68hMhae269k','Cognito — Simultaneous equations by elimination'],['vA-55wZtLeE','Khan Academy — Solving systems by elimination']],
+ '2.1':[['SP-YJe7Vldo','Khan Academy — Introduction to complex numbers'],['5PcpBw5Hbwo','3Blue1Brown — Complex number fundamentals']],
+ '2.2':[['kpywdu1afas','Khan Academy — Complex numbers, part 1']],
+ '2.3':[['Z8j5RDOibV4','Khan Academy — Dividing complex numbers'],['BZxZ_eEuJBM','Khan Academy — Complex conjugates']],
+ '2.4':[['FwuPXchH2rA','Khan Academy — Modulus and angle of a complex number']],
+ '3.1':[['oSRRXm-N0Jg','Math with Sophie — Quadratic equations with complex roots']],
+ '3.2':[['N_3upZZTIk0','Eddie Woo — Complex conjugate root theorem']],
+ '3.3':[['k2gO530rwmU','Existsforall Academy — De Moivre\'s formula']],
+ '3.4':[['vdIKqeF7_rs','Eddie Woo — Perpendicular bisector locus'],['kmdIgrFgV1Q','ExamSolutions — Loci: half-lines']],
+ '6.4':[['hWhs2cIj7Cw','Khan Academy — Parametric representations of lines'],['UJxgcVaNTqY','Khan Academy — Defining a plane in R3']],
+ '7.4':[['f1e2Zij6W3s','Houston Math Prep — The row reduction algorithm']],
+ '7.5':[['uQhTuRlWMxw','3Blue1Brown — Inverse matrices and null space']]
+};
+Object.keys(LYT).forEach(k=>{ const p=k.split('.'); YT[`${+p[0]+3}.${p[1]}`]=LYT[k]; });
+if(typeof module!=='undefined'&&module.exports){ module.exports={STATIONS,LEGS,VIDEOS,YT}; }
+
+</script>
+
+<script>
+/* =====================================================================
+   Interface
+   ===================================================================== */
+const app=document.getElementById('app');
+const KEY='complex-linear-algebra-v1';
+let progress={stars:{},best:{},level:{}};
+try{ const s=localStorage.getItem(KEY); if(s){ const p=JSON.parse(s); if(p&&p.stars) progress={stars:p.stars||{},best:p.best||{},level:p.level||{}}; } }catch(e){}
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(progress)); }catch(e){} };
+/* Adaptive difficulty: each node has a level 1..3 (Foundation / Core / Challenge). */
+const LVNAME=['Foundation','Core','Challenge'];
+const lvl=id=>progress.level[id]||2;
+const reachFor=l=>l===1?2:l===2?3:4;
+let S=null, mathReady=false;
+
+/* ===== enhancements: audio, praise, celebration ===== */
+let AC=null, MUTED=false; try{ MUTED=localStorage.getItem('la-mute')==='1'; }catch(e){}
+function actx(){ try{ if(!AC) AC=new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume(); }catch(e){ AC=null; } return AC; }
+function tone(f,d,type,w,v){ const c=actx(); if(!c||MUTED) return; const t=c.currentTime+(w||0), o=c.createOscillator(), g=c.createGain(); o.type=type||'sine'; o.frequency.setValueAtTime(f,t); g.gain.setValueAtTime(.0001,t); g.gain.linearRampToValueAtTime(v||.16,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+d); o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+d+.03); }
+const SFX={
+  correct(){ tone(660,.12,'sine',0,.16); tone(990,.2,'sine',.1,.16); },
+  wrong(){ tone(150,.26,'sine',0,.12); tone(120,.34,'sine',.1,.10); },
+  tick(){ tone(1040,.04,'square',0,.05); },
+  win(){ [523,659,784,1047,1319].forEach((f,i)=>tone(f,.28,'sine',i*.11,.18)); tone(1568,.6,'sine',.62,.14); }
+};
+const PRAISE=['Exactly right!','Nice one!','Spot on!','Perfect!','On target!','Well done!','Sharp work!'];
+const OOPS=['Check your working.','Not quite — try again.','Watch the signs.','Recompute carefully.'];
+const streakLabel=n=> (n<=0?'—':n+'\u00d7 streak');
+function praise(t){ const p=document.getElementById('praise'); if(!p) return; p.textContent=t; p.style.display='block'; p.style.animation='none'; void p.offsetWidth; p.style.animation='drpop 1.3s ease forwards'; clearTimeout(p._t); p._t=setTimeout(()=>p.style.display='none',1350); }
+function confetti(n){ n=n||120; const c=['#A12A77','#1C7A50','#F1DFA6','#4B6072','#CFE6EE']; for(let i=0;i<n;i++){ const d=document.createElement('div'); d.className='cf'; d.style.left=(Math.random()*100)+'vw'; d.style.background=c[i%c.length]; d.style.animationDuration=(2+Math.random()*2)+'s'; d.style.animationDelay=(Math.random()*.5)+'s'; document.body.appendChild(d); setTimeout(()=>d.remove(),5000);} }
+function celebrate(icon,title,sub){ SFX.win(); confetti(130); document.getElementById('cbig').textContent=icon; document.getElementById('ctitle').textContent=title; document.getElementById('csub').textContent=sub; document.getElementById('congrats').classList.add('show'); }
+document.getElementById('cbtn').addEventListener('click',()=>document.getElementById('congrats').classList.remove('show'));
+
+/* ===== Prove it: typed working marked by AI ===== */
+const esc=x=>String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const texOpt=o=>{ const s=String(o==null?'':o); return esc(/\\\(|\\\[|\$/.test(s)?s:/\\[a-zA-Z]|\\begin\{/.test(s)?'\\('+s+'\\)':s); };
+const PROVE=[
+ {q:'Find the magnitude of the vector $(3,4,12)$.', ans:'13'},
+ {q:'Compute the dot product $(1,2,3)\\cdot(4,-5,6)$.', ans:'12'},
+ {q:'Compute the cross product $(1,2,3)\\times(4,5,6)$.', ans:'(-3, 6, -3)'},
+ {q:'Find the determinant of $\\begin{pmatrix}2&1\\\\3&4\\end{pmatrix}$.', ans:'5'},
+ {q:'Find the inverse of $\\begin{pmatrix}2&1\\\\5&3\\end{pmatrix}$.', ans:'[[3,-1],[-5,2]]'},
+ {q:'Find the unit vector in the direction of $(3,4)$.', ans:'(0.6, 0.8)'},
+ {q:'Reduce $\\begin{pmatrix}1&2&3\\\\2&5&7\\end{pmatrix}$ to reduced row-echelon form.', ans:'[[1,0,1],[0,1,1]]'},
+ {q:'Find the rank of $\\begin{pmatrix}1&2&3\\\\2&4&6\\\\0&1&0\\end{pmatrix}$.', ans:'rank 2'},
+ {q:'Find the inverse of $\\begin{pmatrix}1&0&0\\\\2&1&0\\\\3&4&1\\end{pmatrix}$.', ans:'[[1,0,0],[-2,1,0],[5,-4,1]]'}
+,
+
+ {q:'Expand and simplify $(2x-3)(x+5)$.', ans:'2x^2 + 7x - 15'},
+ {q:'Factorise $x^2-7x+12$.', ans:'(x-3)(x-4)'},
+ {q:'Solve $3x-7=2x+5$.', ans:'x = 12'},
+ {q:'Solve $x^2+6x+13=0$.', ans:'x = -3 \\pm 2i'},
+ {q:'Simplify $(3+2i)(4-i)$ and give the answer in the form $a+bi$.', ans:'14 + 5i'},
+ {q:'Express $\\dfrac{5+i}{2-i}$ in the form $a+bi$.', ans:'\\frac{9}{5}+\\frac{7}{5}i'},
+ {q:'Find the modulus and the principal argument of $-1+\\sqrt{3}i$.', ans:'modulus 2, argument 120 degrees'},
+ {q:'Solve the simultaneous equations $2x+3y=12$ and $x-y=1$.', ans:'x = 3, y = 2'},
+ {q:'Find the real and imaginary parts of $(1+i)^4$.', ans:'real part -4, imaginary part 0'},
+ {q:'State the three cube roots of unity.', ans:'1, -1/2 + sqrt(3)/2 i, -1/2 - sqrt(3)/2 i'},
+ {q:'A polynomial has real coefficients and $2-5i$ is a root. Name another root.', ans:'2 + 5i'}
+
+];
+let CUR_PROVE=0, PAD=null, PCTX=null, PHIST=[], PDRAWING=false, PINKD=false;
+function renderProve(){
+  S=null; CUR_PROVE=Math.floor(Math.random()*PROVE.length); const p=PROVE[CUR_PROVE];
+  app.innerHTML=`<main class="prove">
+    <div class="bar"><button class="link" data-act="chart">Back to chart</button><span class="tally">Prove it \u00b7 write your working by hand</span></div>
+    <h1 style="font-family:var(--serif);font-style:italic;font-weight:400">Prove it</h1>
+    <p class="lede">Write each step of your solution on the pad, then tap Get feedback. The marker reads your handwriting and tells you how it went. Three significant figures where numbers are needed.</p>
+    <p class="prompt">${esc(p.q)}</p>
+    <div class="padwrap"><canvas id="pad" width="800" height="320" aria-label="Handwriting pad"></canvas><span class="padtag">write here</span></div>
+    <div class="actions" style="margin-top:.7rem"><button class="secondary" id="pundo" type="button">\u21b6 Undo</button><button class="secondary" id="pclear" type="button">Clear</button><button class="primary" id="pcheck" data-act="pcheck">Get feedback</button></div>
+    <div id="pfb"></div>
+  </main>`;
+  initPad();
+  settle();
+}
+function initPad(){
+  PAD=document.getElementById('pad'); if(!PAD) return;
+  PCTX=PAD.getContext('2d'); PCTX.lineWidth=3; PCTX.lineCap='round'; PCTX.lineJoin='round'; PCTX.strokeStyle='#101a3a';
+  PHIST=[]; PDRAWING=false; PINKD=false;
+  const pos=e=>{ const r=PAD.getBoundingClientRect(); return {x:(e.clientX-r.left)*(PAD.width/r.width), y:(e.clientY-r.top)*(PAD.height/r.height)}; };
+  PAD.addEventListener('pointerdown',e=>{ PDRAWING=true; PINKD=true; try{ PHIST.push(PCTX.getImageData(0,0,PAD.width,PAD.height)); if(PHIST.length>25) PHIST.shift(); }catch(_){} const p=pos(e); PCTX.beginPath(); PCTX.moveTo(p.x,p.y); try{PAD.setPointerCapture(e.pointerId);}catch(_){} });
+  PAD.addEventListener('pointermove',e=>{ if(!PDRAWING) return; const p=pos(e); PCTX.lineTo(p.x,p.y); PCTX.stroke(); });
+  PAD.addEventListener('pointerup',()=>PDRAWING=false);
+  PAD.addEventListener('pointercancel',()=>PDRAWING=false);
+  document.getElementById('pclear').onclick=()=>{ PCTX.clearRect(0,0,PAD.width,PAD.height); PHIST=[]; PINKD=false; SFX.click(); };
+  document.getElementById('pundo').onclick=()=>{ if(PHIST.length){ PCTX.putImageData(PHIST.pop(),0,0); PINKD=PHIST.length>0; SFX.click(); } };
+}
+async function proveCheck(){
+  const btn=document.getElementById('pcheck');
+  if(!PAD || !PINKD){ praise('Write your working first.'); return; }
+  let img=null; try{ img=PAD.toDataURL('image/png'); }catch(_){}
+  if(!img){ praise('Could not read the pad.'); return; }
+  btn.disabled=true; btn.textContent='Marking\u2026';
+  const p=PROVE[CUR_PROVE];
+  try{
+    const res=await fetch('/practice/check',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({image:img,question:p.q.replace(/\\/g,''),expected:p.ans})});
+    const d=await res.json();
+    const fb=document.getElementById('pfb');
+    if(!d.ok){ fb.innerHTML='<div class="fb bad"><h2>Could not mark</h2><p>'+esc(d.error||'')+'</p></div>'; }
+    else{
+      const ok=d.verdict==='correct';
+      fb.innerHTML='<div class="fb '+(ok?'good':'bad')+'"><h2>'+(ok?'Correct':(d.verdict==='partial'?'Nearly there':'Not quite'))+'</h2><div class="why"><div class="logbook"><b>What the marker read:</b> '+esc(d.transcription||'')+'</div><p>'+esc(d.feedback||'')+'</p></div></div>';
+      if(ok){ SFX.correct(); confetti(90); praise(pick(PRAISE)); } else SFX.wrong();
+      fb.scrollIntoView&&fb.scrollIntoView({block:'nearest',behavior:'smooth'});
+    }
+  }catch(e){ document.getElementById('pfb').innerHTML='<div class="fb bad"><h2>Offline</h2><p>AI marking works on the StudyBuddy site, not offline.</p></div>'; }
+  btn.disabled=false; btn.textContent='Get feedback';
+}
+
+function saveProgress(){ if(S){ progress.current={st:S.st.id,i:S.i,marks:S.marks.slice(),score:S.score,streak:S.streak}; save(); } }
+
+
+function settle(){
+  if(!mathReady) return;
+  app.classList.add('pending');
+  try{ MathJax.typesetClear(); }catch(e){}
+  MathJax.typesetPromise([app]).catch(()=>{}).then(()=>app.classList.remove('pending'));
+}
+document.addEventListener('mathready',()=>{ mathReady=true; settle(); });
+setTimeout(()=>{ if(!mathReady) document.getElementById('mathnote').hidden=false; },9000);
+document.addEventListener('mathready',()=>{ document.getElementById('mathnote').hidden=true; });
+
+const starsHTML=n=>`<span class="stars" role="img" aria-label="${n} of 3 stars">${'★'.repeat(n)}<span class="dim">${'★'.repeat(3-n)}</span></span>`;
+const totalStars=()=>STATIONS.reduce((s,st)=>s+(progress.stars[st.id]||0),0);
+function rankFor(n){ return n>=80?'Eigenmaster':n>=58?'Tensor':n>=36?'Matrix':n>=18?'Vector':'Scalar'; }
+
+/* ---------- course map: seven rows, one per unit ---------- */
+const GW=1000, GH=580;
+const POS=[];
+(function(){
+  const counts={};
+  STATIONS.forEach(s=>{ counts[s.leg]=(counts[s.leg]||0)+1; });
+  const seen={};
+  STATIONS.forEach(s=>{
+    seen[s.leg]=(seen[s.leg]||0)+1;
+    const k=seen[s.leg]-1, n=counts[s.leg];
+    let xs = n===5?[220,390,560,730,900] : n===3?[330,560,790] : [260,460,660,860];
+    if(s.leg%2===0) xs=xs.slice().reverse();
+    POS.push({x:xs[k], y:64+(s.leg-1)*72});
+  });
+})();
+function chartSVG(){
+  let grid='';
+  for(let leg=1;leg<=7;leg++){
+    const y=64+(leg-1)*72;
+    grid+=`<line class="grat" x1="196" y1="${y}" x2="952" y2="${y}"/>`;
+    grid+=`<text class="gratlab" x="10" y="${y+4}" style="font-weight:700">Unit ${leg} \u00b7 ${LEGS[leg].title}</text>`;
+  }
+  let course='';
+  STATIONS.forEach((s,i)=>{ if(i>0){ const done=(progress.stars[s.id]||0)>0;
+    course+=`<path class="course ${done?'':'todo'}" d="M${POS[i-1].x},${POS[i-1].y}L${POS[i].x},${POS[i].y}"/>`; } });
+  const wps=STATIONS.map((s,i)=>{ const p=POS[i],done=(progress.stars[s.id]||0)>0;
+    return `<g class="wp ${done?'done':''}" data-st="${s.id}" transform="translate(${p.x},${p.y})" role="button" tabindex="0" aria-label="Node ${i+1}: ${s.name}"><title>${s.name}</title><circle class="ring" r="13"/><circle class="dot" r="4"/><text y="-19" text-anchor="middle">${i+1}</text></g>`; }).join('');
+  return `<svg viewBox="0 0 ${GW} ${GH}" aria-hidden="true">${grid}${course}${wps}</svg>`;
+}
+function toolkitHTML(st){
+  if(!st.toolkit) return '';
+  return `<section class="toolkit"><div class="tkhead"><span class="tklab">Toolkit</span><span class="hint">${st.topic}</span></div><div class="tkbody">${st.toolkit}</div></section>`;
+}
+function miniArgand(){
+  return `<svg class="mini" viewBox="0 0 260 190" role="img" aria-label="Argand diagram showing a circle centred at 2 plus i">
+    <line class="gr" x1="20" y1="110" x2="240" y2="110"/><line class="gr" x1="110" y1="16" x2="110" y2="176"/>
+    <line class="ax" x1="20" y1="110" x2="240" y2="110"/><line class="ax" x1="110" y1="176" x2="110" y2="16"/>
+    <circle class="cir" cx="146" cy="96" r="33"/><circle class="pt" cx="146" cy="96" r="3.5"/>
+    <text x="236" y="104" text-anchor="end">Re</text><text x="118" y="24">Im</text>
+    <text x="152" y="88">2+i</text><text x="180" y="66">circle</text>
+  </svg>`;
+}
+function renderChart(){
+  S=null;
+  const tot=totalStars();
+  const legs=Object.keys(LEGS).map(l=>{
+    const rows=STATIONS.map((s,i)=>s.leg!=l?'':`<li><button class="row" data-st="${s.id}"><span class="wpn">${i+1}</span><span class="rmain"><span class="sname">${s.name}</span><span class="topic">${s.topic}</span></span>${starsHTML(progress.stars[s.id]||0)}</button></li>`).join('');
+    return `<section class="leg"><h2>Unit ${l}. ${LEGS[l].title}</h2><p class="legsub">${LEGS[l].route}</p><ol class="plan">${rows}</ol></section>`;
+  }).join('');
+  app.innerHTML=`<main class="home">
+    <header class="mast"><h1>Complex Numbers &amp; Linear Algebra</h1>
+    <p class="lede">One course, two landscapes. Begin with algebra and the complex plane, then cross into vector space: components, products, lines, planes and matrices. Seven units, one continuous route.</p></header>
+    <figure class="chart">${chartSVG()}<figcaption>${STATIONS.length} nodes across seven units, five problems at each. Three right clears a node; five right earns three stars. Not a substitute for the lectures.</figcaption></figure>
+    <p class="standing">Rank: <b>${rankFor(tot)}</b>. ${tot} of ${STATIONS.length*3} stars. <b>Adaptive mode:</b> each node adjusts between Foundation, Core and Challenge as you play — five right moves it up, two or fewer brings it down.</p>
+    ${legs}
+    <div class="foot"><span>Nodes can be visited in any order.</span><a class="link" href="la/unit5-vector-products.webm" target="_blank" rel="noopener">Unit 5 overview</a><a class="link" href="la/unit6-lines-and-planes.webm" target="_blank" rel="noopener">Unit 6 overview</a><a class="link" href="la/unit7-matrix-algebra.webm" target="_blank" rel="noopener">Unit 7 overview</a><a class="link" href="complex-linear-shoot.html">Arcade version</a><button class="link" data-act="prove">Prove it — show your working</button><button class="link" data-act="reset">Clear my progress</button></div>
+  </main>`;
+  settle();
+}
+
+/* ---------- plots ---------- */
+let PLOT=null;
+function plotSVG(o){
+  const W=600,H=250,L=38,Rt=14,Tp=14,B=30,n=120,T=o.T||6;
+  const ys=[]; for(let i=0;i<=n;i++) ys.push(resp(o.b,o.c,T*i/n));
+  let hi=1.15,lo=-1.05,ticks=[-1,-0.5,0,0.5,1];
+  if(!o.dots){ const mx=Math.max(1,...ys.map(Math.abs)); hi=mx*1.12; lo=Math.min(...ys)<-0.05?-hi:-0.12*hi; const tk=mx<=1.3?1:Math.round(mx); ticks=lo<-0.5*hi?[-tk,0,tk]:[0,tk]; }
+  const px=t=>L+(W-L-Rt)*t/T, py=v=>Tp+(H-Tp-B)*(hi-v)/(hi-lo);
+  const path=(b,c)=>{ let d=''; for(let i=0;i<=n;i++){ const t=T*i/n; d+=(i?'L':'M')+px(t).toFixed(1)+','+py(resp(b,c,t)).toFixed(1); } return d; };
+  let g='';
+  ticks.forEach(v=>{ g+=`<line class="${v===0?'ax':'gr'}" x1="${L}" x2="${W-Rt}" y1="${py(v).toFixed(1)}" y2="${py(v).toFixed(1)}"/><text x="${L-6}" y="${(py(v)+4).toFixed(1)}" text-anchor="end">${v}</text>`; });
+  for(let t=0;t<=T;t++) g+=`<line class="ax" x1="${px(t).toFixed(1)}" x2="${px(t).toFixed(1)}" y1="${H-B}" y2="${H-B+4}"/><text x="${px(t).toFixed(1)}" y="${H-B+17}" text-anchor="middle">${t}</text>`;
+  g+=`<line class="ax" x1="${L}" x2="${L}" y1="${Tp}" y2="${H-B}"/><line class="ax" x1="${L}" x2="${W-Rt}" y1="${H-B}" y2="${H-B}"/><text x="${W-Rt}" y="${H-4}" text-anchor="end">t, seconds</text><text x="${L+6}" y="${Tp+10}">x</text>`;
+  let body;
+  if(o.dots){ let dots=''; for(let i=0;i<=30;i++){ const t=T*i/30; dots+=`<circle class="data" cx="${px(t).toFixed(1)}" cy="${py(resp(o.b,o.c,t)).toFixed(1)}" r="3"/>`; }
+    PLOT={path};
+    body=`<path class="truth" id="truth" d="" /><path class="mine" id="mine" d="${path(o.ub,o.uc)}"/>${dots}`; }
+  else body=`<path class="trace" d="${path(o.b,o.c)}"/>`;
+  return `<svg class="plot" viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.dots?'Logged data points with your adjustable curve':'Logged trace of x against time'}">${g}${body}</svg>`;
+}
+
+/* ---------- station ---------- */
+function startStation(id){
+  const st=STATIONS.find(s=>s.id===id); if(!st) return;
+  S={st,qs:st.round(),i:0,marks:[],score:0,streak:0,answered:false,sel:{},ub:0,uc:1};
+  renderQ(); window.scrollTo(0,0);
+}
+function pipsHTML(){
+  return `<div class="pips">${S.qs.map((q,i)=>`<span class="pip ${i<S.marks.length?(S.marks[i]?'ok':'no'):(i===S.i?'now':'')}"></span>`).join('')}<p class="count">Problem ${Math.min(S.i+1,S.qs.length)} of ${S.qs.length}</p></div>`;
+}
+function renderQ(){
+  const q=S.qs[S.i]; S.answered=false; S.sel={}; S.ub=0; S.uc=1;
+  let body='';
+  if(q.type==='mcq'){
+    body=(q.tex?`<div class="eq">\\[${q.tex}\\]</div>`:'')+(q.note?`<p class="note">${q.note}</p>`:'')+(q.plot?plotSVG(q.plot):'')+
+      `<div class="opts ${q.cols===2?'two':''}">${q.options.map((o,i)=>`<button class="opt" data-i="${i}"><span class="key">${i+1}</span><span class="otx">${texOpt(o)}</span></button>`).join('')}</div>`;
+  } else if(q.type==='panel'){
+    body=`<div class="eq">\\[${q.tex}\\]</div>`+q.rows.map((r,ri)=>`<div class="prow"><span class="plabel">${r.label}</span><div class="seg" role="group" aria-label="${r.label}">${r.opts.map((o,oi)=>`<button class="segb" data-r="${ri}" data-o="${oi}" aria-pressed="false">${o}</button>`).join('')}</div></div>`).join('')+
+      `<div class="after"><button class="primary" data-act="checkpanel" disabled>Check answer</button></div>`;
+  } else if(q.type==='num'){
+    body=`<div class="numrow"><label class="vh" for="ans">Your answer${q.unit?' in '+q.unit:''}</label><input id="ans" inputmode="decimal" autocomplete="off" placeholder="Your answer"><span class="unit">${q.unit||''}</span><button class="primary" data-act="checknum">Check answer</button></div><p class="hint">${q.unit?'Give three significant figures.':'An exact value is fine, or three significant figures.'}</p><p class="err" id="numerr" hidden>Enter a number, for example 12.5.</p>`;
+  } else if(q.type==='tune'){
+    body=plotSVG({b:q.b,c:q.c,T:6,dots:true,ub:S.ub,uc:S.uc})+
+      `<div class="sliders"><div class="sl"><label for="sb">Damping b</label><input type="range" id="sb" min="0" max="10" step="0.5" value="${S.ub}"><output id="ob">${S.ub}</output></div>
+       <div class="sl"><label for="sc">Stiffness c</label><input type="range" id="sc" min="1" max="30" step="1" value="${S.uc}"><output id="oc">${S.uc}</output></div></div>
+       <p class="note">Damping <b>b</b> is the water resistance (drag); stiffness <b>c</b> is the hull buoyancy. Fit your curve to the logged data.</p>
+       <div class="readout" id="readout" aria-live="polite"></div>
+       <button class="primary" data-act="checktune">Lock in b and c</button>`;
+  }
+  app.innerHTML=`<main class="station">
+    <div class="bar"><button class="link" data-act="chart">Back to chart</button><span class="tally">Score <b id="score">${S.score}</b> · Combo <b id="speed">${streakLabel(S.streak)}</b></span><button class="link" id="lamute" data-act="mute">${MUTED?'🔇 Muted':'🔊 Sound'}</button></div>
+    <div class="where"><span class="place">Unit ${S.st.leg} · Node ${STATIONS.indexOf(S.st)+1} of ${STATIONS.length} · Adaptive: ${LVNAME[lvl(S.st.id)-1]}</span><h1>${S.st.name}</h1></div>
+    ${toolkitHTML(S.st)}
+    ${lessonHTML(S.st.id)}
+    ${ytHTML(S.st.id)}
+    <div id="pips">${pipsHTML()}</div>
+    <section class="q"><p class="prompt">${esc(q.prompt)}</p>${body}</section>
+    <div id="fb"></div>
+  </main>`;
+  if(q.type==='tune') updateTune();
+  const mh=document.getElementById('miniholder'); if(mh) mh.innerHTML=miniArgand();
+  attachLesson(S.st.id);
+  settle();
+  if(q.type==='num'){ const inp=document.getElementById('ans'); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') checkNum(); }); }
+}
+function updateTune(){
+  const q=S.qs[S.i],info=rootInfo(S.ub,S.uc),g=gap(S.ub,S.uc,q.b,q.c);
+  document.getElementById('mine').setAttribute('d',PLOT.path(S.ub,S.uc));
+  document.getElementById('ob').textContent=S.ub; document.getElementById('oc').textContent=S.uc;
+  document.getElementById('readout').innerHTML=`<p class="eqt">${eqText(S.ub,S.uc)}</p><p>b² − 4ac = ${String(info.d).replace('-','−')}, ${info.kind}: ${info.roots}</p><p class="gapline">Average gap between your curve and the data: ${g.toFixed(3)}</p>`;
+}
+function mark(ok,extra){
+  const q=S.qs[S.i]; S.answered=true; S.marks.push(ok);
+  let gain=0; if(ok){ S.streak++; gain=100+Math.min(80,20*(S.streak-1)); S.score+=gain; SFX.correct(); praise(pick(PRAISE)); } else { S.streak=0; SFX.wrong(); praise(pick(OOPS)); }
+  saveProgress();
+  const last=S.i===S.qs.length-1;
+  document.getElementById('score').textContent=S.score;
+  const sp=document.getElementById('speed'); if(sp) sp.textContent=streakLabel(S.streak);
+  document.getElementById('pips').innerHTML=pipsHTML();
+  const head=ok?`Correct <span class="gain">+${gain}${S.streak>1?`, ${S.streak} in a row`:''}</span>`:'Not quite';
+  const why=ok?`<p>${esc(q.explain)}</p>`:`<div class="logbook"><b>Hint:</b> ${esc(q.explain)}</div>${extra?`<p>${esc(extra)}</p>`:''}`;
+  document.getElementById('fb').innerHTML=`<div class="fb ${ok?'good':'bad'}" role="status"><h2>${head}</h2><div class="why">${why}</div><button class="primary" data-act="next">${last?'See the result':'Next problem'}</button></div>`;
+  settle();
+  const nb=document.querySelector('[data-act="next"]'); if(nb) nb.focus({preventScroll:true});
+  const fb=document.getElementById('fb'); if(fb.scrollIntoView) fb.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function chooseOpt(i){
+  const q=S.qs[S.i]; if(S.answered||q.type!=='mcq') return;
+  const ok=q.accept.includes(i);
+  document.querySelectorAll('.opt').forEach((b,bi)=>{ b.disabled=true;
+    if(q.accept.includes(bi)) b.classList.add('right'); else if(bi===i) b.classList.add('wrong'); else b.classList.add('fade'); });
+  mark(ok);
+}
+function checkPanel(){
+  const q=S.qs[S.i]; if(S.answered) return; let all=true; const missed=[];
+  q.rows.forEach((r,ri)=>{ const chosen=r.opts[S.sel[ri]],good=chosen===r.ans; if(!good){ all=false; missed.push(r.label.toLowerCase()); }
+    document.querySelectorAll(`.segb[data-r="${ri}"]`).forEach((b,oi)=>{ b.disabled=true; if(r.opts[oi]===r.ans) b.classList.add('right'); else if(oi===S.sel[ri]) b.classList.add('wrong'); b.setAttribute('aria-pressed','false'); }); });
+  document.querySelector('[data-act="checkpanel"]').hidden=true;
+  mark(all,all?'':`Check the ${missed.join(' and the ')}: the right settings are marked in green.`);
+}
+function checkNum(){
+  const q=S.qs[S.i]; if(S.answered) return;
+  const inp=document.getElementById('ans'),v=parseFloat(inp.value.replace(/[,\s]/g,''));
+  const err=document.getElementById('numerr');
+  if(!isFinite(v)){ err.hidden=false; inp.focus(); return; }
+  err.hidden=true; inp.disabled=true; document.querySelector('[data-act="checknum"]').disabled=true;
+  const ok=Math.abs(v-q.answer)<=0.015*Math.abs(q.answer)+1e-9;
+  mark(ok,ok?'':`The answer is about ${sig(q.answer)} ${q.unit}.`);
+}
+function checkTune(){
+  const q=S.qs[S.i]; if(S.answered) return;
+  const g=gap(S.ub,S.uc,q.b,q.c),ok=g<0.015;
+  document.getElementById('sb').disabled=true; document.getElementById('sc').disabled=true; document.querySelector('[data-act="checktune"]').hidden=true;
+  if(!ok) document.getElementById('truth').setAttribute('d',PLOT.path(q.b,q.c));
+  const exact=S.ub===q.b&&S.uc===q.c;
+  mark(ok,ok?(exact?'':'Your constants fit the data within tolerance.'):'The dashed green curve shows the fit you were looking for.');
+}
+function nextQ(){
+  if(!S||!S.answered) return;
+  if(S.i<S.qs.length-1){ S.i++; renderQ(); window.scrollTo(0,0); } else renderResult();
+}
+function renderResult(){
+  const st=S.st,raw=S.marks.filter(Boolean).length;
+  const prevL=lvl(st.id),reach=reachFor(prevL),n=raw;
+  const stars=n>=5?3:n===4?2:n>=reach?1:0;
+  let newL=prevL; if(n>=5) newL=Math.min(3,prevL+1); else if(n<=2) newL=Math.max(1,prevL-1);
+  const moved=newL>prevL?' Difficulty rising — Challenge next.':newL<prevL?' Switching to Foundation for support.':'';
+  progress.level[st.id]=newL;
+  const prev=progress.stars[st.id]||0;
+  if(stars>prev) progress.stars[st.id]=stars;
+  if(S.score>(progress.best[st.id]||0)) progress.best[st.id]=S.score;
+  save();
+  const idx=STATIONS.indexOf(st),nx=STATIONS[idx+1];
+  const pips=`<div class="pips">${S.marks.map(k=>`<span class="pip ${k?'ok':'no'}"></span>`).join('')}</div>`;
+  const msg=(stars===3?'A clean run.':stars===2?'One problem short of three stars.':stars===1?'Cleared, with room to tighten up.':`You need ${reach} right to clear this node.`)+moved;
+  app.innerHTML=`<main class="result">
+    <span class="place">Unit ${st.leg} · Node ${idx+1} of ${STATIONS.length} · ${st.place} · Adaptive: ${LVNAME[newL-1]}</span>
+    <h1>${stars?'Node cleared':'Not there yet'}</h1>
+    ${starsHTML(stars)}
+    <p class="sum">${n} of ${S.qs.length} correct. Score ${S.score}${(progress.best[st.id]||0)>S.score?`, best ${progress.best[st.id]}`:''}. ${msg}</p>
+    ${pips}
+    <div class="actions">${stars&&nx?`<button class="primary" data-st="${nx.id}">Next node: ${nx.name}</button>`:''}<button class="${stars&&nx?'secondary':'primary'}" data-st="${st.id}">Try this node again</button><button class="secondary" data-act="chart">Back to chart</button></div>
+  </main>`;
+  if(stars>0){ celebrate(stars===3?'🏅':'◆', stars===3?'Three stars earned':'Node cleared', `${n} of ${S.qs.length} correct. ${st.name}.`); } else { SFX.wrong(); }
+  progress.current=null; save();
+  S=null; window.scrollTo(0,0);
+  const first=app.querySelector('.actions button'); if(first) first.focus({preventScroll:true});
+}
+
+/* ---------- lesson videos (inline at the top of each waypoint) ---------- */
+function lessonHTML(id){
+  const list=VIDEOS[id]||[]; if(!list.length) return '';
+  const first=list[0];
+  const tabs=list.length>1?`<div class="wlist" role="tablist">${list.map((v,i)=>`<button class="wtab${i===0?' on':''}" data-v="${i}" role="tab">${v[1]}</button>`).join('')}</div>`:'';
+  return `<section class="lesson" data-listlen="${list.length}">
+    <div class="lessonhead"><span class="lessonlab">▶ Watch the lesson</span>${list.length>1?'<span class="lessonhint">pick a method</span>':''}</div>
+    <video class="lessonvid" controls preload="metadata" playsinline aria-label="Worked-example lesson"><source src="la/${first[0].replace(/\.mp4$/,'.webm')}" type="video/webm"><source src="la/${first[0]}" type="video/mp4"><track kind="subtitles" srclang="en" label="English" src="la/${first[0].replace(/\.mp4$/,'.vtt')}" default></video>
+    ${tabs}
+    <p class="lessoncap">${first[1]}</p>
+    <p class="lessonai">Lesson audio and visuals generated by AI.</p>
+  </section>`;
+}
+function attachLesson(id){
+  const list=VIDEOS[id]||[]; if(list.length<2) return;
+  const sec=app.querySelector('.lesson'); if(!sec) return;
+  const vid=sec.querySelector('.lessonvid'), cap=sec.querySelector('.lessoncap');
+  sec.querySelectorAll('.wtab').forEach(b=>{ b.onclick=()=>{
+    const i=Number(b.dataset.v);
+    sec.querySelectorAll('.wtab').forEach(x=>x.classList.toggle('on',x===b));
+    vid.pause(); vid.innerHTML=`<source src="la/${list[i][0].replace(/\.mp4$/,'.webm')}" type="video/webm"><source src="la/${list[i][0]}" type="video/mp4"><track kind="subtitles" srclang="en" label="English" src="la/${list[i][0].replace(/\.mp4$/,'.vtt')}" default>`; cap.textContent=list[i][1]; vid.load();
+    SFX.tick();
+  }; });
+}
+/* YouTube deeper dives — thumbnails first, iframe only on click (keeps the page light). */
+function ytHTML(id){
+  const list=YT[id]||[]; if(!list.length) return '';
+  const items=list.map(v=>{ const id=v[0], title=v[1]; return `<button class="ytcard" data-yt="${id}" aria-label="Play: ${title}">
+      <span class="ytthumb"><img loading="lazy" src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt=""></span>
+      <span class="yttitle">${title}</span></button>`; }).join('');
+  return `<details class="deeper"><summary>Deeper dive on YouTube<span class="ytcount">${list.length}</span></summary><div class="ytlist">${items}</div></details>`;
+}
+function closeYT(card){
+  const f=card.querySelector('iframe'); if(f) f.src='about:blank';
+  if(card.dataset.card) card.innerHTML=card.dataset.card;
+  card.classList.remove('playing');
+}
+function openYT(btn){
+  const id=btn.dataset.yt; if(!id) return;
+  document.querySelectorAll('.ytcard.playing').forEach(closeYT);
+  if(!btn.dataset.card) btn.dataset.card=btn.innerHTML;
+  btn.classList.add('playing');
+  btn.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  SFX.tick();
+}
+
+/* ---------- events ---------- */
+app.addEventListener('click',e=>{
+  const t=e.target.closest('[data-st],[data-act],.opt,.segb,.ytcard'); if(!t) return;
+  if(t.dataset.st){ startStation(t.dataset.st); return; }
+  if(t.classList.contains('ytcard')){ openYT(t); return; }
+  if(t.classList.contains('opt')){ chooseOpt(Number(t.dataset.i)); return; }
+  if(t.classList.contains('segb')){ if(S.answered) return; const r=t.dataset.r;
+    document.querySelectorAll(`.segb[data-r="${r}"]`).forEach(b=>b.setAttribute('aria-pressed','false'));
+    t.setAttribute('aria-pressed','true'); S.sel[r]=Number(t.dataset.o);
+    document.querySelector('[data-act="checkpanel"]').disabled=Object.keys(S.sel).length<S.qs[S.i].rows.length; return; }
+  const a=t.dataset.act;
+  if(a==='chart'){ progress.current=null; save(); renderChart(); }
+  else if(a==='prove') renderProve();
+  else if(a==='pcheck') proveCheck();
+  else if(a==='mute'){ MUTED=!MUTED; try{localStorage.setItem('la-mute',MUTED?'1':'0');}catch(e){} const mb=document.getElementById('lamute'); if(mb) mb.textContent=MUTED?'🔇 Muted':'🔊 Sound'; if(!MUTED) SFX.tick(); }
+  else if(a==='next') nextQ();
+  else if(a==='checkpanel') checkPanel();
+  else if(a==='checknum') checkNum();
+  else if(a==='checktune') checkTune();
+  else if(a==='reset'){ if(t.dataset.sure){ progress={stars:{},best:{}}; save(); renderChart(); } else { t.dataset.sure='1'; t.textContent='Press again to clear all stars'; } }
+});
+app.addEventListener('input',e=>{
+  if(!S||S.answered) return;
+  if(e.target.id==='sb'){ S.ub=Number(e.target.value); updateTune(); }
+  if(e.target.id==='sc'){ S.uc=Number(e.target.value); updateTune(); }
+});
+document.addEventListener('keydown',e=>{
+  if(!S||S.answered||e.ctrlKey||e.metaKey||e.altKey) return;
+  const q=S.qs[S.i]; if(q.type!=='mcq') return;
+  if(e.target&&(e.target.tagName==='INPUT')) return;
+  const k=Number(e.key); if(k>=1&&k<=q.options.length){ e.preventDefault(); chooseOpt(k-1); }
+});
+renderChart();
+if(progress.current&&progress.current.st){ const pc=progress.current; startStation(pc.st); S.i=Math.min(pc.i||0,S.qs.length-1); S.marks=(pc.marks||[]).slice(0,S.i); S.score=pc.score||0; S.streak=pc.streak||0; renderQ(); }
+</script>
+</body>
+</html>

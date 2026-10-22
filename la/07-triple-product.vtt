@@ -1,0 +1,379 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,710
+All right, let's jump right into this
+explainer on LA07. Today, we're zeroing in on
+
+2
+00:00:05,560 --> 00:00:09,710
+one incredibly focused goal. By the end of
+this session, you are going to be able to
+
+3
+00:00:09,560 --> 00:00:14,510
+do two specific things with absolute
+confidence. Calculate the volume of a shape
+
+4
+00:00:14,360 --> 00:00:19,290
+formed by three vectors and rigorously
+test whether those vectors are coplanar.
+
+5
+00:00:19,700 --> 00:00:24,070
+Let's get to it. Our roadmap for today is
+pretty straightforward. We'll start with
+
+6
+00:00:23,920 --> 00:00:28,390
+the core formula, run through a step -by
+-step worked example, look at a crucial
+
+7
+00:00:28,240 --> 00:00:32,530
+common mistake to avoid, give you some
+practice where it's your turn to shine, and
+
+8
+00:00:32,380 --> 00:00:36,550
+wrap up with an application and a quick
+summary. All right, part one, the core
+
+9
+00:00:36,400 --> 00:00:41,470
+formula. Let's define the tool we'll be
+using. So this right here is the absolute
+
+10
+00:00:41,320 --> 00:00:46,910
+foundation of today's lesson, the scalar
+triple product. It's defined as vector A
+
+11
+00:00:46,760 --> 00:00:52,530
+dot the cross product of vectors B and C.
+But here's the thing, I really want you to
+
+12
+00:00:52,380 --> 00:00:56,930
+read this formula as a set of
+instructions, not just a label. It's literally telling
+
+13
+00:00:56,780 --> 00:01:01,890
+you exactly what to do. First, you
+identify your input vectors, then you cross two
+
+14
+00:01:01,740 --> 00:01:07,110
+of them. Next, dot that result with the
+third vector. And finally, take the absolute
+
+15
+00:01:06,960 --> 00:01:11,670
+value of that whole operation and boom,
+that outputs your volume. A quick pro tip
+
+16
+00:01:11,520 --> 00:01:16,830
+here, double check the sign of every
+single term as you go. Honestly, most errors in
+
+17
+00:01:16,680 --> 00:01:21,490
+this topic sneak in through just one
+dropped negative. Ask yourself what stays fixed
+
+18
+00:01:21,340 --> 00:01:26,390
+and what changes, because that contrast is
+where the real concept lives. Moving into
+
+19
+00:01:26,240 --> 00:01:30,830
+part two, let's look at a step by step
+worked example to see those calculation steps
+
+20
+00:01:30,680 --> 00:01:35,990
+in action. Okay, here's our scenario. We
+need to find the volume formed by these
+
+21
+00:01:35,840 --> 00:01:44,290
+three vectors. Vector A is 1, 0, 0. Vector
+B is 0, 1, 0. And vector C is 0, 0, 2.
+
+22
+00:01:44,860 --> 00:01:48,830
+I'd highly recommend jotting this question
+down in your notes right now. You really
+
+23
+00:01:48,680 --> 00:01:52,570
+want to keep it visible so the purpose of
+each step stays crystal clear as we work
+
+24
+00:01:52,420 --> 00:01:56,970
+through these three perpendicular edges.
+Let's break down the actual operation.
+
+25
+00:01:57,440 --> 00:02:02,370
+First up, we set up our equation exactly
+as the definition instructed us. A dot the
+
+26
+00:02:02,220 --> 00:02:07,070
+cross product of B and C. Now, because
+these specific vectors represent perfectly
+
+27
+00:02:06,920 --> 00:02:11,170
+perpendicular edges aligning with our
+axes, the calculation is beautifully
+
+28
+00:02:11,020 --> 00:02:16,370
+straightforward. Our second step is simply
+to calculate 1 times 1 times 2. And
+
+29
+00:02:16,220 --> 00:02:20,430
+finally, we take the absolute value. By
+the way, here's a fantastic study tactic for
+
+30
+00:02:20,280 --> 00:02:23,650
+you. If you ever feel like you're losing
+the thread while tracking these inputs,
+
+31
+00:02:23,500 --> 00:02:27,790
+just cover the next line on your page and
+try to predict what happens before you
+
+32
+00:02:27,640 --> 00:02:32,410
+actually write it out. And that brings us
+right to our result. Our final answer is
+
+33
+00:02:32,260 --> 00:02:38,170
+2. The volume is exactly 2. But keep in
+mind, this last line is purely the end
+
+34
+00:02:38,020 --> 00:02:42,090
+result. It's not a step in itself. So read
+it back against the initial question.
+
+35
+00:02:42,340 --> 00:02:46,290
+Make absolutely sure you can independently
+reproduce the mathematical steps that
+
+36
+00:02:46,140 --> 00:02:51,150
+produce that number 2. That brings us to
+part 3, a crucial common mistake.
+
+37
+00:02:51,620 --> 00:02:53,970
+Specifically, avoiding dropped negatives.
+
+38
+00:02:55,140 --> 00:02:59,010
+This is such an important point. A super
+common trap people fall into is just
+
+39
+00:02:58,860 --> 00:03:02,990
+forgetting to take the absolute value at
+the very end of the calculation. A lot of
+
+40
+00:03:02,840 --> 00:03:06,130
+students just accept dropping a negative
+sign without really checking, mostly
+
+41
+00:03:05,980 --> 00:03:10,770
+because, frankly, it sounds tidy. But
+don't jump to conclusions. If you look at the
+
+42
+00:03:10,620 --> 00:03:14,410
+left side, yeah, it might look neat, but
+pause and test it against the definition.
+
+43
+00:03:14,740 --> 00:03:20,410
+It's mathematically false. Volume is
+always positive. Always. So taking the absolute
+
+44
+00:03:20,260 --> 00:03:23,650
+value, like we see on the right, is
+strictly required. This fix matters
+
+45
+00:03:23,500 --> 00:03:27,170
+tremendously, because every single step
+you do later depends on this foundation
+
+46
+00:03:27,020 --> 00:03:30,610
+working correctly. Seriously, say the
+corrected statement out loud to yourself right
+
+47
+00:03:30,460 --> 00:03:35,330
+now before we move on. All right, section
+4, it is practice time, which means it's
+
+48
+00:03:35,180 --> 00:03:40,350
+your turn to apply the rule. Okay, here is
+your challenge. Find the volume from the
+
+49
+00:03:40,200 --> 00:03:46,690
+vectors 2, 0, 0, 0, 3, 0, and 0, 0, 1.
+Just like before, these vectors are
+
+50
+00:03:46,540 --> 00:03:51,570
+perpendicular edges. What I want you to do
+is pause this explainer right now, grab
+
+51
+00:03:51,420 --> 00:03:56,510
+some scratch paper, and actually try it.
+The most important thing here, write down a
+
+52
+00:03:56,360 --> 00:04:00,490
+clear starting line to prevent any silly
+slips before you calculate a single thing.
+
+53
+00:04:00,900 --> 00:04:06,210
+Go ahead, pause, and try calculating the
+volume for these perpendicular edges. All
+
+54
+00:04:06,060 --> 00:04:10,570
+right, welcome back. So the resulting
+volume is 6. Compare your work directly
+
+55
+00:04:10,420 --> 00:04:15,370
+against that result. Now, if you didn't
+get 6, don't just erase your work and copy
+
+56
+00:04:15,220 --> 00:04:19,170
+this answer down. That completely defeats
+the purpose. Scan through your math and
+
+57
+00:04:19,020 --> 00:04:23,150
+find the exact line where your work
+diverged from the right path. Was it the cross
+
+58
+00:04:23,000 --> 00:04:27,870
+product? Did you drop a sign somewhere?
+Finding that exact failure point, that is
+
+59
+00:04:27,720 --> 00:04:29,530
+where the real learning actually happens.
+
+60
+00:04:30,480 --> 00:04:35,210
+Finally, section 5, application and
+summary, where we look at how portable these
+
+61
+00:04:35,060 --> 00:04:40,170
+ideas really are. So this rule we've been
+practicing, it actually has a super
+
+62
+00:04:40,020 --> 00:04:45,050
+powerful secondary use. Vectors are
+considered coplanar, which basically means they
+
+63
+00:04:44,900 --> 00:04:49,530
+sit entirely flat within the exact same
+plane, when their scalar triple product
+
+64
+00:04:49,380 --> 00:04:53,770
+equals exactly zero. The surface level
+details of the problems you face might
+
+65
+00:04:53,620 --> 00:04:59,250
+change, but the exact same rule applies.
+Name the rule before you calculate, and if
+
+66
+00:04:59,100 --> 00:05:03,430
+you substitute carefully, and that triple
+product comes out to zero, boom, it means
+
+67
+00:05:03,280 --> 00:05:07,590
+your three vectors are entirely coplanar.
+It's so cool how a single mathematical
+
+68
+00:05:07,440 --> 00:05:12,190
+idea becomes incredibly portable like
+this. You use the scalar triple product to
+
+69
+00:05:12,040 --> 00:05:16,210
+calculate volume, and you remember that a
+zero value tells you those vectors are
+
+70
+00:05:16,060 --> 00:05:20,550
+perfectly coplanar. Take a second right
+now to assess your confidence on this, on a
+
+71
+00:05:20,400 --> 00:05:24,570
+scale from 1 to 5. If you're sitting
+anywhere below a 3, I highly recommend
+
+72
+00:05:24,420 --> 00:05:28,670
+replaying the worked example part of this
+explainer. But before you head out, I want
+
+73
+00:05:28,520 --> 00:05:33,610
+you to think about this. If a triple
+product of zero locks vectors entirely flat
+
+74
+00:05:33,460 --> 00:05:38,010
+into a single plane, how could we
+mathematically harness that exact same zero
+
+75
+00:05:37,860 --> 00:05:43,590
+constraint to define the infinite,
+continuous path of a line in 3D space? Keep that
+
+76
+00:05:43,440 --> 00:05:45,510
+puzzle in mind as we gear up for our next
+explainer.

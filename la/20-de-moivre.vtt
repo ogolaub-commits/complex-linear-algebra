@@ -1,0 +1,79 @@
+WEBVTT
+
+00:00.000 --> 00:04.273
+Is there a shortcut for powers and roots
+of complex numbers? You can write complex
+
+00:04.273 --> 00:08.545
+numbers in polar form. In this lesson we
+raise complex numbers to powers and find
+
+00:08.545 --> 00:12.818
+roots using de Moivre's theorem. By the
+end, Raise complex numbers to powers and
+
+00:12.818 --> 00:17.091
+find roots.
+
+00:17.091 --> 00:21.615
+De Moivre's theorem says that to raise a
+polar complex number to a power, raise the
+
+00:21.615 --> 00:26.139
+modulus to that power and multiply the
+angle by n.
+
+00:26.139 --> 00:31.260
+One plus i has modulus root two and angle
+forty five degrees. Raising to the fourth
+
+00:31.260 --> 00:36.381
+power gives modulus four and angle one
+hundred eighty degrees.
+
+00:36.381 --> 00:39.647
+Cosine of one hundred eighty degrees is
+minus one and sine is zero, so the answer
+
+00:39.647 --> 00:42.912
+is minus four.
+
+00:42.912 --> 00:47.969
+The same idea finds roots: the cube roots
+of one are equally spaced around the unit
+
+00:47.969 --> 00:53.027
+circle, at zero, one hundred twenty and
+two hundred forty degrees.
+
+00:53.027 --> 00:58.191
+A common mistake is to multiply the
+modulus by n. Pause and decide whether
+
+00:58.191 --> 01:03.355
+that is right. The modulus is raised to
+the power n, not multiplied.
+
+01:03.355 --> 01:08.209
+Your turn. Evaluate one plus i to the
+sixth power. Pause the video. Hint: Use
+
+01:08.209 --> 01:13.064
+modulus eight and angle two hundred
+seventy degrees.
+
+01:13.064 --> 01:18.036
+The result is minus eight i. In a new
+context, The cube roots of one are equally
+
+01:18.036 --> 01:23.008
+spaced around the unit circle. Rate your
+confidence from one to five.
+
+01:23.008 --> 01:27.852
+De Moivre powers the modulus and
+multiplies the angle. Roots are equally
+
+01:27.852 --> 01:32.696
+spaced around the circle. Next, we draw
+loci in the complex plane.

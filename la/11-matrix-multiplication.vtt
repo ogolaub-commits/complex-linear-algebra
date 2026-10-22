@@ -1,0 +1,469 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,070
+Welcome to this explainer. Today, we're
+going to set a really calm, focused tone as
+
+2
+00:00:04,920 --> 00:00:09,430
+we tackle an absolute pillar of
+mathematics. We are going to completely master
+
+3
+00:00:09,280 --> 00:00:13,630
+matrix multiplication. You know, if you've
+ever looked at a block of numbers and
+
+4
+00:00:13,480 --> 00:00:18,370
+wondered, how on earth does this interact
+with another block of numbers? Well, you
+
+5
+00:00:18,220 --> 00:00:23,110
+are in the exact right place. So grab a
+notebook, clear away those distractions, and
+
+6
+00:00:22,960 --> 00:00:27,930
+let's get ready to learn. Here's our
+roadmap for today. We'll hit one, the core rule
+
+7
+00:00:27,780 --> 00:00:33,030
+in dimensions, two, a step -by -step
+worked example, three, a common mistake to
+
+8
+00:00:32,880 --> 00:00:38,450
+avoid, four, your turn to practice, and
+finally, five, summary and next steps. This
+
+9
+00:00:38,300 --> 00:00:41,570
+learning sequence is highly deliberate.
+We're building this step -by -step, so
+
+10
+00:00:41,420 --> 00:00:42,930
+definitely follow along in order.
+
+11
+00:00:43,860 --> 00:00:48,330
+All right, section one, the core rule in
+dimensions. We are going to decode the
+
+12
+00:00:48,180 --> 00:00:53,810
+formula before we even try to memorize it.
+Okay, let's dive into this. What you're
+
+13
+00:00:53,660 --> 00:00:58,470
+seeing is the formal mathematical
+definition of matrix multiplication. But listen, I
+
+14
+00:00:58,320 --> 00:01:02,630
+don't want you to just read this as some
+passive label in a textbook. I want you to
+
+15
+00:01:02,480 --> 00:01:07,130
+read it as a direct set of instructions.
+It's literally telling us the input, the
+
+16
+00:01:06,980 --> 00:01:13,170
+operation, and the output. When we
+multiply matrix A by matrix B, the entry in row I
+
+17
+00:01:13,020 --> 00:01:18,170
+and column J of our brand new matrix is
+found by taking row I of matrix A and
+
+18
+00:01:18,020 --> 00:01:23,150
+performing a dot product with column J of
+matrix B. Really trace each symbol in this
+
+19
+00:01:23,000 --> 00:01:27,930
+rule and connect it to that specific
+physical action. The row from the first matrix
+
+20
+00:01:27,780 --> 00:01:32,050
+dotted with the column from the second
+matrix. That is the engine of matrix
+
+21
+00:01:31,900 --> 00:01:37,150
+multiplication. And this brilliantly
+illustrates something absolutely crucial. You
+
+22
+00:01:37,000 --> 00:01:40,790
+have to check that the inner dimensions
+agree before you even pick up a pencil to
+
+23
+00:01:40,640 --> 00:01:46,770
+start calculating. If matrix A is, say, an
+M by N matrix and matrix B is an N by P
+
+24
+00:01:46,620 --> 00:01:51,250
+matrix, those inner numbers, the N's, they
+have to match perfectly. The number of
+
+25
+00:01:51,100 --> 00:01:55,070
+columns in the first matrix literally must
+equal the number of rows in the second.
+
+26
+00:01:55,460 --> 00:01:59,750
+If they don't match, the multiplication is
+completely undefined. No way around it,
+
+27
+00:01:59,660 --> 00:02:04,530
+you just stop right there. But if they do
+match, the outer dimensions M and P give
+
+28
+00:02:04,380 --> 00:02:08,790
+you a sneak peek at the exact shape of
+your final answer. It's gonna be an M by P
+
+29
+00:02:08,640 --> 00:02:09,090
+matrix.
+
+30
+00:02:10,060 --> 00:02:14,450
+Step -by -step worked example. Let's see
+this rule in action. I'm gonna keep the
+
+31
+00:02:14,300 --> 00:02:17,110
+pacing nice and calm here so we can really
+process the numbers.
+
+32
+00:02:18,120 --> 00:02:21,510
+Okay, we're multiplying the matrix with
+rows 1, 2, and 3,
+
+33
+00:02:24,900 --> 00:02:28,810
+4 Now, before I show you the mechanics of
+how this works, I actually want you to
+
+34
+00:02:28,660 --> 00:02:33,470
+mentally predict the very first
+calculation step. How do we find that top left entry
+
+35
+00:02:33,320 --> 00:02:38,090
+of our answer? Just think back to our core
+rule, row of the first dotted with column
+
+36
+00:02:37,940 --> 00:02:43,270
+of the second. All right, step one. To
+find the top left entry, which by definition
+
+37
+00:02:43,120 --> 00:02:49,010
+is row one, column one, we identify row
+one of the first matrix, which is 1, 2, and
+
+38
+00:02:48,860 --> 00:02:54,790
+column one of the second matrix, which is
+2, 1. Step two, we do the dot product. We
+
+39
+00:02:54,640 --> 00:02:59,150
+multiply the corresponding pieces and add
+them all together. So that's 1 times 2
+
+40
+00:02:59,000 --> 00:03:04,630
+plus 2 times 1. Now, a quick but very
+serious warning here. You need to carefully
+
+41
+00:03:04,480 --> 00:03:08,890
+check the sign of every single term as you
+do this. Honestly, most errors in this
+
+42
+00:03:08,740 --> 00:03:13,330
+topic enter through one single dropped
+negative sign. Luckily, here, they are all
+
+43
+00:03:13,180 --> 00:03:20,330
+positive. 1 times 2 is 2, 2 times 1 is 2.
+Step three, 2 plus 2 is 4. Our top left
+
+44
+00:03:20,180 --> 00:03:25,170
+entry is 4. Make sure you keep the
+original question visible in your mind so the
+
+45
+00:03:25,020 --> 00:03:29,950
+purpose of this whole calculation stays
+crystal clear. Now, if we repeat that exact
+
+46
+00:03:29,800 --> 00:03:34,870
+same process, row dotted with column, for
+the other three positions, we get our
+
+47
+00:03:34,720 --> 00:03:40,510
+final matrix product. It has a top row of
+4, 6, and a bottom row of 10, 12.
+
+48
+00:03:41,080 --> 00:03:46,450
+Remember, this final matrix is the answer.
+It's not a step. Make absolutely sure you
+
+49
+00:03:46,300 --> 00:03:49,770
+can completely reproduce the steps that
+built it. It's all about knowing the
+
+50
+00:03:49,620 --> 00:03:54,210
+mechanism, right? Not just staring at the
+final result. Let's move to section three,
+
+51
+00:03:54,460 --> 00:03:59,050
+a common mistake to avoid. This is a major
+conceptual trap that catches a lot of
+
+52
+00:03:58,900 --> 00:04:03,470
+linear algebra students off guard. So the
+crucial point is understanding the
+
+53
+00:04:03,320 --> 00:04:07,930
+difference between your intuition and the
+actual definition. A super common false
+
+54
+00:04:07,780 --> 00:04:11,990
+assumption is to just multiply the
+matching entries. You know, top left times top
+
+55
+00:04:11,840 --> 00:04:15,690
+left, bottom right times bottom right.
+Honestly, many students accept this without
+
+56
+00:04:15,540 --> 00:04:21,050
+checking because it sounds tidy and, well,
+it's easy. But pause and think, is it
+
+57
+00:04:20,900 --> 00:04:27,910
+true? No, it is strictly false. The
+correct definition is always row i dotted with
+
+58
+00:04:27,760 --> 00:04:32,330
+column j. This correction matters heavily
+because every single later step in linear
+
+59
+00:04:32,180 --> 00:04:37,050
+algebra relies on it. Say it out loud to
+yourself right now. Row dotted with column.
+
+60
+00:04:38,020 --> 00:04:42,090
+All right, section four, your turn to
+practice. Let's apply this core rule
+
+61
+00:04:41,940 --> 00:04:47,050
+ourselves. Grab some paper. Here is your
+practice question. I want you to evaluate
+
+62
+00:04:46,900 --> 00:04:54,410
+the matrix 2, 0, 1, 3 multiplied by the
+matrix 1, 2, 3, 4. Notice anything? These
+
+63
+00:04:54,260 --> 00:04:59,010
+are the exact same matrices from earlier,
+but the order is swapped. So I want you to
+
+64
+00:04:58,860 --> 00:05:02,770
+pause this explainer right now, write out
+your clear starting line so you don't make
+
+65
+00:05:02,620 --> 00:05:06,630
+any slips and calculate the product
+directly from that definition we just hammered
+
+66
+00:05:06,480 --> 00:05:11,610
+home. Go ahead, pause and try it out. Real
+quick, if you're feeling a little stuck,
+
+67
+00:05:11,680 --> 00:05:17,210
+here is a hint for that first step. To
+find the top left entry, you take row one of
+
+68
+00:05:17,060 --> 00:05:21,990
+the first matrix, which is 2, 0, and
+dotted with column one of the second matrix,
+
+69
+00:05:22,040 --> 00:05:28,570
+which is 1, 3. So it's calculated by two
+times one plus zero times three. Really try
+
+70
+00:05:28,420 --> 00:05:32,150
+to construct every single entry from the
+rule, not from your memory of how the
+
+71
+00:05:32,000 --> 00:05:37,350
+previous example looked. Okay, and here is
+the final product. The resulting matrix
+
+72
+00:05:37,200 --> 00:05:43,890
+has a top row of 2, 4, and a bottom row of
+10, 12. Notice that this is entirely
+
+73
+00:05:43,740 --> 00:05:47,490
+different from our previous answer. In the
+math world, this means matrix
+
+74
+00:05:47,340 --> 00:05:52,470
+multiplication is not commutative. Order
+matters immensely. It's like putting on
+
+75
+00:05:52,320 --> 00:05:56,430
+your socks and then your shoes versus
+putting on your shoes and then your socks. You
+
+76
+00:05:56,280 --> 00:06:00,550
+are gonna get a very different result.
+Compare your work with this answer. If you
+
+77
+00:06:00,400 --> 00:06:04,290
+missed it, remember the real learning
+happens when you find the exact line where
+
+78
+00:06:04,140 --> 00:06:08,350
+your math diverged. Don't just copy this
+answer down. Find out exactly where your
+
+79
+00:06:08,200 --> 00:06:13,790
+dot product went off track. Finally,
+section five, summary and next steps. Let's
+
+80
+00:06:13,640 --> 00:06:17,910
+make this idea portable so you can take it
+anywhere. The core takeaways here are
+
+81
+00:06:17,760 --> 00:06:22,650
+actually incredibly simple. Number one,
+matrix multiplication is strictly row by
+
+82
+00:06:22,500 --> 00:06:27,450
+column. Number two, inner dimensions
+absolutely must agree. And brilliantly, this
+
+83
+00:06:27,300 --> 00:06:33,070
+exact same rule applies for any M by N
+matrix times an N by P matrix. The surface
+
+84
+00:06:32,920 --> 00:06:36,790
+details will change, sure, and the
+matrices might get massive, but the underlying
+
+85
+00:06:36,640 --> 00:06:41,430
+rule stays exactly identical. Name the
+rule before you calculate, substitute your
+
+86
+00:06:41,280 --> 00:06:45,610
+numbers carefully, and the concept becomes
+completely portable. I wanna leave you
+
+87
+00:06:45,460 --> 00:06:49,330
+with a quick self -assessment. Rate your
+confidence with matrix multiplication right
+
+88
+00:06:49,180 --> 00:06:53,770
+now from one to five. Can you name those
+two main ideas without looking? If your
+
+89
+00:06:53,620 --> 00:06:58,090
+confidence is below a three or you drew a
+blank on the ideas, I challenge you to
+
+90
+00:06:57,940 --> 00:07:02,430
+rewind and replay just the worked example
+scene of this explainer. Drill those
+
+91
+00:07:02,280 --> 00:07:06,730
+mechanics until they are second nature
+because up next, we're going to be computing
+
+92
+00:07:06,580 --> 00:07:10,950
+determinants, which is a wild concept that
+lets us compress an entire matrix
+
+93
+00:07:10,800 --> 00:07:15,510
+universe into a single powerful number.
+Thank you so much for focusing. Keep
+
+94
+00:07:15,360 --> 00:07:18,370
+practicing your DAW products, and I will
+see you in the next explainer.

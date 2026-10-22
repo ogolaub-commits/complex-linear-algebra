@@ -1,0 +1,389 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,230
+Alright, let's jump right in. Welcome to
+This Explainer. Today we've got one single
+
+2
+00:00:05,080 --> 00:00:09,630
+laser -focused goal – mastering exactly
+how to find the angle between two vectors.
+
+3
+00:00:10,320 --> 00:00:14,390
+Whether you're doing some last -minute
+review for a university exam or just building
+
+4
+00:00:14,240 --> 00:00:18,930
+up your foundation in linear algebra, we
+are going to tackle this step by step. That
+
+5
+00:00:18,780 --> 00:00:22,550
+way you're not just memorizing a string of
+symbols, but actually understanding how
+
+6
+00:00:22,400 --> 00:00:27,250
+the machinery works. Here's our game plan
+for today. We'll hit the cosine formula,
+
+7
+00:00:27,540 --> 00:00:32,110
+walk through a step -by -step example,
+look at a really common mistake, give you a
+
+8
+00:00:31,960 --> 00:00:37,030
+turn to practice, and wrap it all up with
+a quick summary. Okay, part one – the
+
+9
+00:00:36,880 --> 00:00:42,590
+cosine formula. Two directions, one angle.
+So before we even touch a calculator, I
+
+10
+00:00:42,440 --> 00:00:47,210
+want you to picture two vectors starting
+from the exact same spot – the origin. The
+
+11
+00:00:47,060 --> 00:00:50,930
+formula you're seeing here – this is
+basically our strict instruction manual for
+
+12
+00:00:50,780 --> 00:00:55,970
+finding that one specific angle wedged
+between them. On the left, we've got cosine
+
+13
+00:00:55,820 --> 00:01:00,110
+theta. Over on the right, our numerator is
+the dot product, and we're dividing that
+
+14
+00:00:59,960 --> 00:01:04,610
+whole thing by the product of the vector's
+magnitudes. You know, their lengths. Oh,
+
+15
+00:01:04,560 --> 00:01:08,510
+and a quick heads up here. Trace every
+single symbol super carefully as you work.
+
+16
+00:01:08,940 --> 00:01:12,250
+Honestly, most of the errors I see in this
+specific topic just come down to someone
+
+17
+00:01:12,100 --> 00:01:17,150
+dropping a sneaky negative sign. Our step
+-by -step worked example. Let's see this
+
+18
+00:01:17,000 --> 00:01:17,550
+in action.
+
+19
+00:01:18,420 --> 00:01:22,470
+Alright, here's the exact question we're
+looking at. What is the angle between the
+
+20
+00:01:22,320 --> 00:01:28,250
+vector 1, 0 and the vector 1, 1? Let's
+kind of map this out in our heads before we
+
+21
+00:01:28,100 --> 00:01:35,170
+start crunching numbers. 1, 0 just sits
+perfectly flat right on the x -axis. And 1,
+
+22
+00:01:35,200 --> 00:01:40,350
+1? That points diagonally up and to the
+right. Try to visualize that angle in your
+
+23
+00:01:40,200 --> 00:01:44,930
+mind right now. Breaking it down exactly
+like our formula tells us to. We kick
+
+24
+00:01:44,780 --> 00:01:49,410
+things off with step one, which is
+calculating that numerator – the dot product. The
+
+25
+00:01:49,260 --> 00:01:56,390
+dot product of 1, 0 and 1, 1 simply gives
+us 1. Easy enough, right? Next, step two,
+
+26
+00:01:56,540 --> 00:02:00,590
+we head down to the denominator to find
+the lengths. The magnitude of that first
+
+27
+00:02:00,440 --> 00:02:04,950
+vector is just 1. The magnitude of the
+second vector, if we use our trusty
+
+28
+00:02:04,800 --> 00:02:09,550
+Pythagorean theorem, is the square root of
+2. So for step three, plugging all those
+
+29
+00:02:09,400 --> 00:02:14,110
+inputs into the machine, our cosine theta
+equals 1 divided by the square root of 2.
+
+30
+00:02:14,760 --> 00:02:20,170
+And that hands us a final result of
+exactly 45 degrees. But hey, remember this. That
+
+31
+00:02:20,020 --> 00:02:24,630
+45 degrees is just the destination. It's
+not a step in itself. You need to be
+
+32
+00:02:24,480 --> 00:02:28,530
+absolutely certain you can reproduce the
+actual mathematical steps that got us to
+
+33
+00:02:28,380 --> 00:02:32,390
+that answer. If you're just memorizing the
+final number, well, the underlying
+
+34
+00:02:32,240 --> 00:02:37,870
+concept hasn't really clicked yet. A very
+common mistake. Please do not omit those
+
+35
+00:02:37,720 --> 00:02:38,370
+magnitudes.
+
+36
+00:02:39,340 --> 00:02:43,610
+Look, I totally get it. It is incredibly
+tempting to take a shortcut here. But as
+
+37
+00:02:43,460 --> 00:02:47,590
+you can see, omitting those magnitudes in
+the denominator is just fundamentally
+
+38
+00:02:47,440 --> 00:02:52,150
+false. A lot of students try to claim that
+cosine theta just equals the dot product,
+
+39
+00:02:52,580 --> 00:02:56,570
+mostly because, let's be honest, it looks
+a lot cleaner on your paper. Don't fall
+
+40
+00:02:56,420 --> 00:03:01,610
+for that trap. The true statement, the
+only correct statement, is that cosine equals
+
+41
+00:03:01,460 --> 00:03:05,410
+the dot product over the product of the
+lengths. Getting this right matters
+
+42
+00:03:05,260 --> 00:03:09,090
+immensely, because literally every single
+mathematical step you take after this
+
+43
+00:03:08,940 --> 00:03:13,590
+depends entirely on this foundation being
+rock solid. In fact, go ahead and say the
+
+44
+00:03:13,440 --> 00:03:18,350
+correct formula out loud right now just to
+help it stick. All right, part four, your
+
+45
+00:03:18,200 --> 00:03:23,050
+turn. Time to get some active practice
+going. Okay, time to grab a pen and some
+
+46
+00:03:22,900 --> 00:03:27,130
+paper, and go ahead and hit pause on this
+explainer for a minute. I want you to
+
+47
+00:03:26,980 --> 00:03:31,310
+start by writing down the actual formula
+definition from memory, and then calculate
+
+48
+00:03:31,160 --> 00:03:36,250
+the angle between the vector 01 and the
+vector 10. And hey, I'll even give you a
+
+49
+00:03:36,100 --> 00:03:40,370
+hint to start. The dot product is exactly
+zero. Work the whole thing out on paper
+
+50
+00:03:40,220 --> 00:03:45,490
+before you hit play again. All right,
+welcome back. So the correct angle is 90
+
+51
+00:03:45,340 --> 00:03:49,530
+degrees. Take a second to compare your
+work with that result. If you nailed it,
+
+52
+00:03:49,720 --> 00:03:53,990
+awesome job. But if you didn't quite get
+there, don't just erase your work and copy
+
+53
+00:03:53,840 --> 00:03:57,870
+the 90 degrees down. The real learning
+happens when you scan back through your
+
+54
+00:03:57,720 --> 00:04:02,090
+calculation and find the exact spot where
+things went off the rails. Was it a drop
+
+55
+00:04:01,940 --> 00:04:07,030
+negative? Did you forget the denominator?
+Find that specific divergence, because
+
+56
+00:04:06,880 --> 00:04:10,170
+that right there is where your brain
+actually updates its understanding.
+
+57
+00:04:11,120 --> 00:04:15,570
+Finally, part five, transfer and summary.
+Let's make these ideas portable.
+
+58
+00:04:16,500 --> 00:04:21,270
+You know, learning a formula is one thing,
+but making it portable? That is where
+
+59
+00:04:21,120 --> 00:04:25,790
+true mathematical fluency actually lives.
+The surface numbers might completely
+
+60
+00:04:25,640 --> 00:04:29,950
+change on you. For instance, you might be
+given a problem where cosine theta is one
+
+61
+00:04:29,800 --> 00:04:34,770
+half, which means theta is 60 degrees. The
+numbers look totally different, but the
+
+62
+00:04:34,620 --> 00:04:39,610
+exact same core rule still applies.
+Getting into the habit of naming the rule out
+
+63
+00:04:39,460 --> 00:04:43,950
+loud before substituting any values is
+exactly how you make this portable to
+
+64
+00:04:43,800 --> 00:04:46,190
+literally any vector problem you're ever
+going to face.
+
+65
+00:04:47,060 --> 00:04:51,150
+So let's just quickly summarize this
+sequential logic we've built up today. First,
+
+66
+00:04:51,200 --> 00:04:55,630
+you use the dot product and the vector
+lengths to find the cosine. Second, you hit
+
+67
+00:04:55,480 --> 00:04:59,190
+it with the inverse cosine to get your
+actual angle, whether you're working in
+
+68
+00:04:59,040 --> 00:05:03,770
+degrees or radians. Mastering this
+sequence is essentially the perfect warm up for
+
+69
+00:05:03,620 --> 00:05:06,510
+our next topic, which is going to be
+normalizing vectors.
+
+70
+00:05:07,420 --> 00:05:11,030
+Before you jump to the next explainer, I
+want you to quickly rate your confidence on
+
+71
+00:05:10,880 --> 00:05:15,330
+today's topic on a scale of one to five.
+Can you name the two core ideas we just
+
+72
+00:05:15,180 --> 00:05:19,310
+covered without peeking at your screen? If
+you're sitting at a three or below, or if
+
+73
+00:05:19,160 --> 00:05:22,710
+your mind just went completely blank,
+don't stress. You don't need to rewatch the
+
+74
+00:05:22,560 --> 00:05:26,370
+whole thing. Just quickly rewind and
+replay that worked example to lock it all in.
+
+75
+00:05:26,720 --> 00:05:30,870
+And as we wrap up, I'll leave you with
+this to ponder. If the angle mathematically
+
+76
+00:05:30,720 --> 00:05:35,230
+defines the precise relationship between
+two directions, what hidden geometric
+
+77
+00:05:35,080 --> 00:05:39,570
+truths do you think are revealed when that
+dot product becomes exactly zero? Keep
+
+78
+00:05:39,420 --> 00:05:41,770
+questioning the math, and I will see you
+in the next explainer.

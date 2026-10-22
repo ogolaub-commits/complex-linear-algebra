@@ -1,0 +1,531 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,170
+Okay, let's dive right into this welcome
+to this clean step -by -step explainer on
+
+2
+00:00:05,020 --> 00:00:10,170
+linear algebra today We're specifically
+focusing on lesson LA 13 Which is all about
+
+3
+00:00:10,020 --> 00:00:15,130
+finding two by two inverses and spotting
+what we call singular matrices I am super
+
+4
+00:00:14,980 --> 00:00:18,090
+thrilled to be guiding you through this
+material because honestly, we're gonna take
+
+5
+00:00:17,940 --> 00:00:22,630
+a highly structured super focused approach
+today By the time we wrap up you'll be
+
+6
+00:00:22,480 --> 00:00:26,850
+able to confidently execute one absolute
+game changer You'll know exactly how to
+
+7
+00:00:26,700 --> 00:00:31,190
+apply the rule to calculate an inverse And
+you'll immediately identify when a matrix
+
+8
+00:00:31,040 --> 00:00:36,470
+simply doesn't have one. So grab your
+notepad and let's get started To make sure you
+
+9
+00:00:36,320 --> 00:00:40,610
+know exactly where we're headed. Here's
+our roadmap We are covering six quick
+
+10
+00:00:40,460 --> 00:00:46,030
+sections first the core formula second a
+step -by -step worked example Third the
+
+11
+00:00:45,880 --> 00:00:51,570
+common mistake fourth your turn to
+practice fifth transfer to a new context and
+
+12
+00:00:51,420 --> 00:00:55,930
+finally number six a summary We're gonna
+minimize cognitive overload follow the
+
+13
+00:00:55,780 --> 00:01:01,050
+sequence and just focus purely on the math
+All right section one the core formula
+
+14
+00:01:00,900 --> 00:01:05,690
+specifically looking at the adjugate
+formula and singular matrices We're starting
+
+15
+00:01:05,540 --> 00:01:09,730
+right at the foundation to unpack the
+rule. We'll be building on today So the
+
+16
+00:01:09,580 --> 00:01:14,990
+absolutely crucial point is our main
+definition here the inverse of matrix a which
+
+17
+00:01:14,840 --> 00:01:20,690
+we write as a to the power of negative one
+is Calculated by taking one divided by
+
+18
+00:01:20,540 --> 00:01:24,930
+the determinant of a and then multiplying
+that by a modified version of our starting
+
+19
+00:01:24,780 --> 00:01:31,770
+matrix Basically for an original matrix
+with elements a B in the top row and C D in
+
+20
+00:01:31,620 --> 00:01:38,850
+the bottom row The new matrix rearranges
+to D negative B negative C and a but wait
+
+21
+00:01:38,700 --> 00:01:43,070
+pay close attention to that critical
+condition at the end This whole thing only
+
+22
+00:01:42,920 --> 00:01:47,750
+works provided the determinant of a does
+not equal zero if the determinant is
+
+23
+00:01:47,600 --> 00:01:52,870
+exactly zero Well, that means matrix a is
+what we call a singular matrix and a
+
+24
+00:01:52,720 --> 00:01:57,370
+singular matrix literally has no inverse
+You can't divide by zero in the formula. So
+
+25
+00:01:57,220 --> 00:02:02,130
+the operation just stops right there You
+know looking at algebraic formulas can
+
+26
+00:02:01,980 --> 00:02:06,790
+sometimes feel kind of abstract and dense
+So I want you to read this as an active
+
+27
+00:02:06,640 --> 00:02:11,910
+instruction. Not just a static label Let's
+break it down into three actionable steps
+
+28
+00:02:11,760 --> 00:02:16,730
+Step one swap the diagonal entries the
+elements in the top left and bottom right
+
+29
+00:02:16,580 --> 00:02:22,090
+just switch places Step two negate the
+other two entries the elements in the top
+
+30
+00:02:21,940 --> 00:02:26,570
+right and bottom left stay exactly where
+they are But their signs flip step three
+
+31
+00:02:26,420 --> 00:02:31,710
+divide everything by the determinant When
+you identify the input follow this
+
+32
+00:02:31,560 --> 00:02:36,090
+specific operation and calculate the
+output the whole process becomes incredibly
+
+33
+00:02:35,940 --> 00:02:41,390
+clear Our step by step worked example.
+Let's see this formula in action and apply
+
+34
+00:02:41,240 --> 00:02:46,850
+those exact instructions to some real
+numbers Okay, here's our challenge We need to
+
+35
+00:02:46,700 --> 00:02:51,850
+find the inverse of a matrix with a top
+row of two one and a bottom row of five
+
+36
+00:02:51,700 --> 00:02:56,750
+three Now before we actually reveal the
+solution, I want your brain fully engaged
+
+37
+00:02:56,600 --> 00:03:01,290
+try to predict the steps right now What's
+the determinant of this matrix going to be
+
+38
+00:03:01,140 --> 00:03:05,070
+which numbers are going to swap places and
+which ones are going to become negative?
+
+39
+00:03:05,460 --> 00:03:09,290
+Keep this question visible in your mind's
+eye. So the purpose of every single
+
+40
+00:03:09,140 --> 00:03:13,990
+calculation line stays completely clear
+Let's trace each symbol back to the original
+
+41
+00:03:13,840 --> 00:03:19,470
+rule and walk through the logical flow
+together Our starting matrix is two one five
+
+42
+00:03:19,320 --> 00:03:24,970
+three First up we calculate the
+determinant two times three is six minus one times
+
+43
+00:03:24,820 --> 00:03:31,290
+five which is five So six minus five gives
+us a determinant of exactly one Next we
+
+44
+00:03:31,140 --> 00:03:36,550
+follow step one of our rule swap the
+diagonals the two and three trade places Then
+
+45
+00:03:36,400 --> 00:03:41,810
+step two negate the others the one and
+five stay put but they become negative one
+
+46
+00:03:41,660 --> 00:03:46,870
+and negative five Finally we divide the
+whole thing by our determinant, which is one
+
+47
+00:03:46,720 --> 00:03:52,170
+now dividing by one changes Absolutely.
+Nothing. So our final inverse matrix is a
+
+48
+00:03:52,020 --> 00:03:57,670
+top row of three negative one and a bottom
+row of negative five two Make sure you
+
+49
+00:03:57,520 --> 00:04:01,570
+ask yourself what stayed fixed and what
+changed here. That contrast is the core
+
+50
+00:04:01,420 --> 00:04:07,830
+concept The common mistake we're looking
+at the danger of the tidy answer now that
+
+51
+00:04:07,680 --> 00:04:12,830
+we've seen it done perfectly We really
+need to navigate around a major trap What's
+
+52
+00:04:12,680 --> 00:04:16,890
+genuinely fascinating here is the human
+psychology side of math Look at this
+
+53
+00:04:16,740 --> 00:04:21,950
+comparison on the left is the correct
+method. You absolutely must multiply by one
+
+54
+00:04:21,800 --> 00:04:26,470
+over the determinant But on the right
+that's the incorrect method and it is the
+
+55
+00:04:26,320 --> 00:04:31,030
+absolute most common mistake students make
+They just swap the diagonals negate the
+
+56
+00:04:30,880 --> 00:04:34,830
+other entries and completely forget to
+divide by the determinant Why does this
+
+57
+00:04:34,680 --> 00:04:39,810
+happen? Well because the incorrect answer
+just feels visually tidier It's like a
+
+58
+00:04:39,660 --> 00:04:43,830
+siren song for math students many just
+accept that tidy answer without double
+
+59
+00:04:43,680 --> 00:04:47,730
+checking do not decide It's correct. Just
+because it looks clean always test it
+
+60
+00:04:47,580 --> 00:04:52,790
+against the definition Furthermore you've
+got to be meticulous Honestly, try saying
+
+61
+00:04:52,640 --> 00:04:56,970
+the corrected mathematical statement out
+loud to yourself pause and decide whether
+
+62
+00:04:56,820 --> 00:05:01,150
+it's true before you proceed the
+correction matters immensely because every later
+
+63
+00:05:01,000 --> 00:05:05,950
+step in your calculation depends on it and
+Please please check the sign of every
+
+64
+00:05:05,800 --> 00:05:10,550
+single term the source materials make this
+incredibly clear Most errors in this
+
+65
+00:05:10,400 --> 00:05:14,210
+topic don't come from a lack of
+understanding the big picture They sneak in through
+
+66
+00:05:14,060 --> 00:05:20,290
+one single dropped negative sign Alright
+section for your turn to practice. Let's
+
+67
+00:05:20,140 --> 00:05:24,370
+test your knowledge You've absorbed the
+theory and the pitfalls now. It's time for
+
+68
+00:05:24,220 --> 00:05:29,850
+some independent mastery What is the
+inverse of the matrix with a top row of one
+
+69
+00:05:29,700 --> 00:05:34,850
+zero and a bottom row of zero one? I
+strongly encourage you to physically pause this
+
+70
+00:05:34,700 --> 00:05:39,210
+explainer right now Grab some paper and
+write down your starting line a clear
+
+71
+00:05:39,060 --> 00:05:43,270
+starting line prevents so many careless
+slips Work it out starting purely from the
+
+72
+00:05:43,120 --> 00:05:47,390
+definition. We just covered not from
+memory and as a quick hint to reassure you This
+
+73
+00:05:47,240 --> 00:05:51,690
+is the identity matrix and the identity
+matrix is its own inverse go ahead and
+
+74
+00:05:51,540 --> 00:05:57,370
+calculate it now Okay, let's check your
+work scene by scene your matrix was one zero
+
+75
+00:05:57,220 --> 00:06:04,230
+zero one First the determinant calculation
+one times one minus zero times zero which
+
+76
+00:06:04,080 --> 00:06:09,590
+equals one Then we swap the diagonals the
+ones which places so they look identical
+
+77
+00:06:09,440 --> 00:06:14,650
+We negate the others zero becomes negative
+zero, which of course just remains zero
+
+78
+00:06:15,020 --> 00:06:19,970
+Finally we divide by our determinant of
+one the final result is exactly what we
+
+79
+00:06:19,820 --> 00:06:25,710
+started with one zero on top zero one on
+the bottom Now listen, if you miss this
+
+80
+00:06:25,560 --> 00:06:29,810
+don't just copy the result find the exact
+line on your paper where your work
+
+81
+00:06:29,660 --> 00:06:34,890
+diverged from what we just did Identifying
+that specific point of divergence that is
+
+82
+00:06:34,740 --> 00:06:39,870
+where the real learning happens Transfer
+an application. Let's take the rule to a
+
+83
+00:06:39,720 --> 00:06:44,030
+new context. You've got the mechanics down
+beautifully So let's see how this
+
+84
+00:06:43,880 --> 00:06:49,050
+mathematical idea becomes truly portable
+and this brilliantly illustrates Just how
+
+85
+00:06:48,900 --> 00:06:53,870
+robust the rule is. Let's look at this
+application Our input matrix has changed to
+
+86
+00:06:53,720 --> 00:06:59,190
+two zero on top and zero two on the bottom
+the surface details have changed sure but
+
+87
+00:06:59,040 --> 00:07:03,930
+by naming the rule first the adjugate
+formula and Substituting the new numbers
+
+88
+00:07:03,780 --> 00:07:08,570
+carefully. The outcome is mathematically
+guaranteed the determinant here is for
+
+89
+00:07:08,420 --> 00:07:12,830
+Swapping the twos and negating the zeros
+visually changes nothing inside the bracket
+
+90
+00:07:12,680 --> 00:07:19,050
+But because we multiply by 1 over the
+determinant So 1 over 4 our output inverse
+
+91
+00:07:18,900 --> 00:07:24,930
+becomes a matrix of 1 half 0 0 1 half This
+is exactly how your new knowledge
+
+92
+00:07:24,780 --> 00:07:31,230
+transfers to literally any 2 by 2 matrix
+you encounter Finally section 6 summary and
+
+93
+00:07:31,080 --> 00:07:35,870
+next steps. Let's wrap up LA 13 We've
+covered a tremendous amount of ground
+
+94
+00:07:35,720 --> 00:07:41,330
+efficiently today. So let's consolidate
+everything First you invert a 2 by 2 matrix
+
+95
+00:07:41,180 --> 00:07:46,330
+by applying the adjugate formula swap the
+diagonals negate the others and divide by
+
+96
+00:07:46,180 --> 00:07:51,910
+the determinant Second and this is
+absolutely crucial always remember that a zero
+
+97
+00:07:51,760 --> 00:07:56,540
+determinant means the matrix is singular
+resulting in no inverse at all Securing
+
+98
+00:07:56,390 --> 00:07:59,980
+these fundamentals provides a crystal
+clear map for what comes next in your linear
+
+99
+00:07:59,830 --> 00:08:04,900
+algebra journey, which will be the topic
+of row reduction Before you step away. I
+
+100
+00:08:04,750 --> 00:08:09,840
+have one final provocative challenge for
+you Rate your confidence on this topic from
+
+101
+00:08:09,690 --> 00:08:15,260
+a 1 to a 5 right now without looking at
+your notes Can you clearly name the two main
+
+102
+00:08:15,110 --> 00:08:20,040
+ideas? We just covered if your confidence
+level is sitting below a 3 or if you can't
+
+103
+00:08:19,890 --> 00:08:24,120
+quite recall the rules Hey Don't worry
+about it simply scrub back and replay just
+
+104
+00:08:23,970 --> 00:08:27,600
+the step -by -step worked example portion
+of this explainer You don't need to
+
+105
+00:08:27,450 --> 00:08:32,240
+rewatch the whole thing just zero in on
+the core concept Keep practicing trust the
+
+106
+00:08:32,090 --> 00:08:35,900
+structure and you'll be more than ready
+for row reduction next time. See you then

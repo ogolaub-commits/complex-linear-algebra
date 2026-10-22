@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00.000 --> 00:05.654
+How do you simplify a matrix to reveal its
+rank? You can solve simultaneous equations
+
+00:05.654 --> 00:11.308
+by elimination. In this lesson we use
+elementary row operations to find rank and
+
+00:11.308 --> 00:16.963
+solve systems. By the end, Use row
+operations, find rank and solve systems.
+
+00:16.963 --> 00:20.857
+The three elementary row operations are
+swapping rows, scaling a row, and adding a
+
+00:20.857 --> 00:24.752
+multiple of one row to another.
+
+00:24.752 --> 00:27.655
+Subtracting twice the first row from the
+second gives a zero row, so the rank is
+
+00:27.655 --> 00:30.557
+one.
+
+00:30.557 --> 00:34.228
+The rank is the number of non-zero rows in
+row echelon form, which equals the number
+
+00:34.228 --> 00:37.899
+of independent rows.
+
+00:37.899 --> 00:42.764
+A common mistake is to change only one
+entry when scaling a row. Pause and decide
+
+00:42.764 --> 00:47.629
+whether that is right. Apply the operation
+to the whole row.
+
+00:47.629 --> 00:51.609
+Your turn. Find the rank of one two three
+six. Pause the video. Hint: The second row
+
+00:51.609 --> 00:55.589
+is three times the first.
+
+00:55.589 --> 01:00.103
+The rank is one. In a new context, Rank is
+the number of non-zero rows in echelon
+
+01:00.103 --> 01:04.616
+form. Rate your confidence from one to
+five.
+
+01:04.616 --> 01:08.916
+Row reduce to echelon form, then count the
+non-zero rows to get the rank. Next, we
+
+01:08.916 --> 01:13.216
+find inverses by row reduction.

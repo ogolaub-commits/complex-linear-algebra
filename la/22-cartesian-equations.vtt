@@ -1,0 +1,66 @@
+WEBVTT
+
+00:00.000 --> 00:05.213
+How do you turn parametric lines and
+planes into x, y, z equations? You can
+
+00:05.213 --> 00:10.427
+eliminate a parameter. In this lesson we
+write Cartesian equations for lines and
+
+00:10.427 --> 00:15.640
+planes. By the end, Write Cartesian
+equations for lines and planes.
+
+00:15.640 --> 00:21.220
+For a line through x zero y zero with
+direction p q, eliminate t to get q times
+
+00:21.220 --> 00:26.800
+x minus x zero equals p times y minus y
+zero.
+
+00:26.800 --> 00:31.025
+With point two one and direction minus one
+minus three, the equation becomes minus
+
+00:31.025 --> 00:35.251
+three x plus y equals minus five.
+
+00:35.251 --> 00:39.124
+For a plane through three points, cross
+two direction vectors to get the normal,
+
+00:39.124 --> 00:42.997
+then use n dot r equals n dot p.
+
+00:42.997 --> 00:47.319
+A common mistake is to leave the parameter
+in the final equation. Pause and decide
+
+00:47.319 --> 00:51.640
+whether that is right. Eliminate t
+completely.
+
+00:51.640 --> 00:57.753
+Your turn. Find the Cartesian line through
+one two with direction two one. Pause the
+
+00:57.753 --> 01:03.867
+video. Hint: Use q times x minus x zero
+equals p times y minus y zero.
+
+01:03.867 --> 01:09.287
+x minus two y equals minus three. In a new
+context, A plane through three points uses
+
+01:09.287 --> 01:14.707
+a normal from a cross product. Rate your
+confidence from one to five.
+
+01:14.707 --> 01:18.953
+Cartesian lines come from eliminating the
+parameter, and planes come from a normal
+
+01:18.953 --> 01:23.200
+vector. Next, we multiply matrices.

@@ -1,0 +1,405 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:04,430
+Alright, let's dive straight into this
+explainer. Today we are mastering one
+
+2
+00:00:04,280 --> 00:00:08,830
+specific, highly practical goal, computing
+the cross product and then using it to
+
+3
+00:00:08,680 --> 00:00:12,690
+actually find geometric area. If you're
+looking to solidify your linear algebra
+
+4
+00:00:12,540 --> 00:00:16,350
+toolkit, you're in the right place. We're
+going to break this down step by step so
+
+5
+00:00:16,200 --> 00:00:18,010
+you can walk away totally confident.
+
+6
+00:00:18,940 --> 00:00:23,950
+Here is our roadmap for today. First, the
+core formula. Second, a step by step
+
+7
+00:00:23,800 --> 00:00:28,810
+example. Third, a really common mistake
+you'll want to avoid. Fourth, it'll be your
+
+8
+00:00:28,660 --> 00:00:34,050
+turn to practice. And finally, a quick
+summary and next steps. Okay, part one, the
+
+9
+00:00:33,900 --> 00:00:39,170
+core formula. We're defining both the math
+and the geometry. So look at this formula
+
+10
+00:00:39,020 --> 00:00:42,730
+right here. I want you to read it like a
+set of instructions, not just some random
+
+11
+00:00:42,580 --> 00:00:47,610
+math label. It clearly identifies your
+inputs, those two vectors, A and B. Then it
+
+12
+00:00:47,460 --> 00:00:51,750
+shows you the operation, which uses those
+two by two determinants and boom, it hands
+
+13
+00:00:51,600 --> 00:00:55,810
+you the output vector. Now, I know, it
+looks like an absolute alphabet soup of
+
+14
+00:00:55,660 --> 00:00:59,690
+letters and numbers at first glance,
+right? But honestly, if you just trace each
+
+15
+00:00:59,540 --> 00:01:03,250
+symbol, it's really just a systematic way
+of combining the components of your
+
+16
+00:01:03,100 --> 00:01:08,290
+original vectors. The trick is to ask
+yourself what stays fixed and what changes as
+
+17
+00:01:08,140 --> 00:01:13,090
+I move through the X, Y and Z coordinates.
+That contrast is the real secret here.
+
+18
+00:01:13,520 --> 00:01:18,370
+Now, geometrically, this rule is
+absolutely beautiful. The magnitude, you know, the
+
+19
+00:01:18,220 --> 00:01:23,070
+actual length of your resulting cross
+product is exactly equal to the area of the
+
+20
+00:01:22,920 --> 00:01:27,850
+parallelogram spanned by your two original
+vectors. So computing A cross B doesn't
+
+21
+00:01:27,700 --> 00:01:32,110
+just hand you a new vector out of nowhere.
+Its actual size literally tells you the
+
+22
+00:01:31,960 --> 00:01:36,470
+area of the 2D shape created by your
+inputs, scaled by the sign of the angle between
+
+23
+00:01:36,320 --> 00:01:41,510
+them. It is this perfect little bridge
+connecting abstract algebra directly to
+
+24
+00:01:41,360 --> 00:01:47,170
+physical geometry. A step by step example.
+Let's put this formula to work. All
+
+25
+00:01:47,020 --> 00:01:52,950
+right, here is our challenge. What exactly
+is the vector 1, 2, 3 crossed with the
+
+26
+00:01:52,800 --> 00:01:58,210
+vector 4, 5, 6? Keep this question locked
+in your mind. And hey, as we walk through
+
+27
+00:01:58,060 --> 00:02:02,710
+the steps, I challenge you to actively
+predict the next line before I even reveal
+
+28
+00:02:02,560 --> 00:02:08,050
+it. Active recall is really how this stuff
+sticks for good. Okay, let's trace the
+
+29
+00:02:07,900 --> 00:02:11,950
+components carefully. Step one, we apply
+that determinant formula we just looked at,
+
+30
+00:02:11,940 --> 00:02:17,210
+making sure to perfectly match up the
+components of 1, 2, 3 and 4, 5, 6. Now, step
+
+31
+00:02:17,060 --> 00:02:21,830
+two, and listen, this is absolutely
+crucial. Check your signs. Check the sign of
+
+32
+00:02:21,680 --> 00:02:25,250
+every single term. I can't stress this
+enough. The vast majority of errors in this
+
+33
+00:02:25,100 --> 00:02:29,530
+topic happen because of a single tiny
+dropped negative sign. It's the ultimate trap.
+
+34
+00:02:30,040 --> 00:02:34,870
+If we calculate it all out carefully, step
+three gives us our result. Negative 3, 6,
+
+35
+00:02:35,160 --> 00:02:39,170
+negative 3. Look at that result against
+the original question. That's your answer.
+
+36
+00:02:39,280 --> 00:02:42,830
+But the real key is making sure you can
+reproduce the exact steps that got us there.
+
+37
+00:02:43,540 --> 00:02:48,170
+Now, here is the best part. You have a
+built -in safety net to prove your answer is
+
+38
+00:02:48,020 --> 00:02:52,710
+right. Always, always verify your math by
+checking that the dot product of your new
+
+39
+00:02:52,560 --> 00:02:58,190
+result with each of the original input
+vectors equals exactly zero. Why? Well,
+
+40
+00:02:58,300 --> 00:03:01,910
+because the cross product creates a vector
+that is strictly perpendicular to both
+
+41
+00:03:01,760 --> 00:03:06,570
+inputs. So doing this quick dot product
+check will instantly expose if you dropped
+
+42
+00:03:06,420 --> 00:03:11,210
+one of those pesky negative signs earlier.
+Let's head into part three, a common
+
+43
+00:03:11,060 --> 00:03:16,110
+mistake. We really need to avoid this
+primary pitfall. Pay close attention here
+
+44
+00:03:15,960 --> 00:03:20,330
+because this is honestly the biggest trap
+students fall into. On the left, we have a
+
+45
+00:03:20,180 --> 00:03:25,250
+completely false statement. The cross
+product is a scalar. Now, a lot of people
+
+46
+00:03:25,100 --> 00:03:29,390
+accept that because, well, it sounds tidy,
+kind of like the dot product, right? But
+
+47
+00:03:29,240 --> 00:03:33,330
+look at the right side. The true statement
+is that the cross product is definitively
+
+48
+00:03:33,180 --> 00:03:38,150
+a vector. Say that out loud to yourself if
+you have to. Getting this right is a huge
+
+49
+00:03:38,000 --> 00:03:43,010
+deal because literally every single later
+step in linear algebra completely depends
+
+50
+00:03:42,860 --> 00:03:47,070
+on understanding the structural difference
+between these two operations. All right,
+
+51
+00:03:47,160 --> 00:03:50,550
+part four, your turn. Time for some
+independent practice.
+
+52
+00:03:51,440 --> 00:03:55,990
+Okay, I'm shifting the cognitive load over
+to you now. Find the cross product of the
+
+53
+00:03:55,840 --> 00:04:01,590
+vector two, zero, zero, and the vector
+zero, three, zero. Seriously, go ahead and
+
+54
+00:04:01,440 --> 00:04:05,150
+pause the explainer right here, grab some
+paper, start from the determinant
+
+55
+00:04:05,000 --> 00:04:09,130
+definition, and actually physically write
+down your first line before you calculate
+
+56
+00:04:08,980 --> 00:04:13,330
+anything. Setting up a clear starting line
+prevents almost all of those silly slips.
+
+57
+00:04:13,900 --> 00:04:18,670
+Go on, I'll wait. Let's see what you get.
+Okay, let's see how you did. The result is
+
+58
+00:04:18,520 --> 00:04:23,710
+the vector zero, zero, six, and it has a
+magnitude of exactly six. Compare your
+
+59
+00:04:23,560 --> 00:04:27,590
+scratch pad directly with that result.
+Now, if you missed it, don't just copy the
+
+60
+00:04:27,440 --> 00:04:31,710
+right answer down. Trace it back. Find the
+exact line where your work drifted away
+
+61
+00:04:31,560 --> 00:04:35,910
+from mine. Actually pinpointing that
+moment of divergence, that is exactly where the
+
+62
+00:04:35,760 --> 00:04:40,970
+real learning happens. And this brings us
+to a really crucial transfer rule. When
+
+63
+00:04:40,820 --> 00:04:44,630
+the surface details of a problem change,
+say, suddenly you're looking at a physics
+
+64
+00:04:44,480 --> 00:04:49,630
+problem or maybe some 3D modeling task,
+you've got to remember to consciously name
+
+65
+00:04:49,480 --> 00:04:55,030
+the rule before you calculate. The rule is
+the area of the parallelogram formed by
+
+66
+00:04:54,880 --> 00:04:59,650
+those vectors is the magnitude of their
+cross product. Substitute your numbers super
+
+67
+00:04:59,500 --> 00:05:04,250
+carefully. This mindset is exactly how
+this math concept stops being just another
+
+68
+00:05:04,100 --> 00:05:08,750
+classroom exercise and transforms into a
+highly portable, incredibly practical tool.
+
+69
+00:05:09,680 --> 00:05:13,670
+Finally, part five, summary and next
+steps. Let's wrap up our lesson.
+
+70
+00:05:14,580 --> 00:05:19,250
+Let's quickly review the absolute core
+takeaways we've mastered today. First, your
+
+71
+00:05:19,100 --> 00:05:23,730
+resulting vector is always, always
+strictly perpendicular to both of your original
+
+72
+00:05:23,580 --> 00:05:28,670
+input vectors. Second, its geometric
+length gives you the exact area that those two
+
+73
+00:05:28,520 --> 00:05:33,390
+vectors span. And looking ahead, next
+time, we're going to build on this exact same
+
+74
+00:05:33,240 --> 00:05:38,770
+foundation by using the scalar triple
+product to find 3D volume. Before we wrap up,
+
+75
+00:05:38,720 --> 00:05:42,950
+I want you to honestly rate your
+confidence on a scale of one to five. Could you
+
+76
+00:05:42,800 --> 00:05:46,910
+name the two main ideas right now without
+looking? If you're sitting anywhere below
+
+77
+00:05:46,760 --> 00:05:51,030
+a three, do yourself a favor and just
+replay that worked example to really lock this
+
+78
+00:05:50,880 --> 00:05:55,410
+in. But take a step back and think about
+this for a second. Just by multiplying a
+
+79
+00:05:55,260 --> 00:05:59,530
+few numbers in a matrix today, you've
+unlocked the mathematical ability to calculate
+
+80
+00:05:59,380 --> 00:06:04,450
+physical torque, simulate 3D graphics, and
+even measure magnetic forces. It's kind
+
+81
+00:06:04,300 --> 00:06:07,870
+of mind -blowing, right? So where are you
+going to apply the cross product first?

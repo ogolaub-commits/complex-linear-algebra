@@ -1,0 +1,376 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:04,050
+Welcome to this explainer. Today, we're
+going to build your confidence in doing one
+
+2
+00:00:03,900 --> 00:00:08,710
+very concrete thing, converting a vector
+line to symmetric form. We'll be following
+
+3
+00:00:08,560 --> 00:00:12,970
+a very deliberate sequence today, so this
+concept actually sticks. You're going to
+
+4
+00:00:12,820 --> 00:00:17,270
+see the rule, watch a worked example, try
+one yourself, and then we'll apply it all
+
+5
+00:00:17,120 --> 00:00:21,010
+in a new context. This sequence is
+absolutely crucial for building up your
+
+6
+00:00:20,860 --> 00:00:22,130
+understanding step by step.
+
+7
+00:00:23,200 --> 00:00:28,550
+Okay, let's just dive right into our
+agenda. We've got one, the core formula, two, a
+
+8
+00:00:28,400 --> 00:00:34,030
+worked example, three, the common zero
+mistake, four, your turn to practice, and
+
+9
+00:00:33,880 --> 00:00:35,390
+finally five, a quick summary.
+
+10
+00:00:36,260 --> 00:00:40,950
+The core formula, where we'll be solving
+coordinate equations for t. So the
+
+11
+00:00:40,800 --> 00:00:44,730
+symmetric form is found by taking each of
+your coordinate equations and solving them
+
+12
+00:00:44,580 --> 00:00:49,450
+for the parameter t. And you can basically
+think of t geometrically as a measure of
+
+13
+00:00:49,300 --> 00:00:54,130
+movement or time along our line. By
+setting those three resulting expressions equal
+
+14
+00:00:53,980 --> 00:00:58,950
+to each other, we completely eliminate t.
+It's gone. Now, I want you to read this
+
+15
+00:00:58,800 --> 00:01:02,270
+formula more like an instruction manual,
+rather than just a bunch of letters.
+
+16
+00:01:02,780 --> 00:01:08,190
+Identify the input, the operation, and the
+output. And please, please check the sign
+
+17
+00:01:08,040 --> 00:01:13,070
+of every single term. I can't stress this
+enough. Most errors in this topic sneak in
+
+18
+00:01:12,920 --> 00:01:17,770
+through just one single drop to negative.
+Now, this brings up a really important
+
+19
+00:01:17,620 --> 00:01:23,230
+exception. What happens if a direction
+component is just zero? Well, it means our
+
+20
+00:01:23,080 --> 00:01:27,430
+line literally isn't moving at all in that
+particular dimension. So you must keep
+
+21
+00:01:27,280 --> 00:01:32,350
+that coordinate entirely separate. For
+example, say you have the point one, two,
+
+22
+00:01:32,340 --> 00:01:38,210
+three, and a direction of three, four,
+zero. Since that z direction is zero, your
+
+23
+00:01:38,060 --> 00:01:43,270
+symmetric equations would actually become
+x minus one over three, equals y minus two
+
+24
+00:01:43,120 --> 00:01:48,490
+over four, and then you just have a
+separate equation entirely. z equals three. It's
+
+25
+00:01:48,340 --> 00:01:52,550
+like the animation just stops in that one
+dimension. Whatever stays fixed has to
+
+26
+00:01:52,400 --> 00:01:54,350
+stay completely separate from those
+fractions.
+
+27
+00:01:55,220 --> 00:02:00,690
+Worked example, applying the formula step
+by step. All right, here is our challenge.
+
+28
+00:02:01,020 --> 00:02:05,830
+We need to find the symmetric equations
+for a line passing through point P at one,
+
+29
+00:02:05,840 --> 00:02:11,150
+two, three, and point Q at three, one,
+four. Let's keep these two points right at
+
+30
+00:02:11,000 --> 00:02:14,830
+the front of our minds as we build out the
+solution. Let's walk through this
+
+31
+00:02:14,680 --> 00:02:20,050
+together. Step one, we find the direction,
+which is just point Q minus point P.
+
+32
+00:02:20,320 --> 00:02:25,270
+Doing the math there, that gives us a
+direction of two, negative one, one. Now, step
+
+33
+00:02:25,120 --> 00:02:29,110
+two is to substitute those direction
+components, right alongside our point P,
+
+34
+00:02:29,320 --> 00:02:34,290
+straight into the formula. Now, before I
+reveal step three, I highly recommend just
+
+35
+00:02:34,140 --> 00:02:38,110
+pausing for a second to predict the final
+outcome in your head. Okay, ready?
+
+36
+00:02:39,180 --> 00:02:44,330
+Step three, the result is x minus one over
+two, equals y minus two over negative
+
+37
+00:02:44,180 --> 00:02:49,270
+one, equals z minus three over one. Read
+that back against the original question.
+
+38
+00:02:49,520 --> 00:02:53,810
+And remember, this last line is the
+answer, not a step. You really need to ensure
+
+39
+00:02:53,660 --> 00:02:57,450
+you can actually reproduce the logic that
+got us here, rather than just reading off
+
+40
+00:02:57,300 --> 00:03:02,090
+the final answer. The common zero mistake.
+Beware the tidy trap.
+
+41
+00:03:02,960 --> 00:03:08,330
+Now, a super common mistake is attempting
+to divide by a zero direction component. A
+
+42
+00:03:08,180 --> 00:03:12,150
+lot of students just accept dividing by
+zero without really checking because, let's
+
+43
+00:03:12,000 --> 00:03:16,590
+be honest, it looks pretty neat and tidy
+on the page. But pausing really think about
+
+44
+00:03:16,440 --> 00:03:21,090
+whether that's true. It's not. It's false.
+You have to remember that a zero
+
+45
+00:03:20,940 --> 00:03:25,630
+component actually becomes a fixed
+separate coordinate. This correction matters
+
+46
+00:03:25,480 --> 00:03:29,710
+immensely because otherwise, literally
+every later step you take will be completely
+
+47
+00:03:29,560 --> 00:03:34,750
+wrong. So, say the corrected statement out
+loud with me right now. A zero component
+
+48
+00:03:34,600 --> 00:03:36,230
+becomes a fixed coordinate.
+
+49
+00:03:37,180 --> 00:03:41,970
+Your turn for practice. Let's test your
+understanding on paper. Okay, it's time for
+
+50
+00:03:41,820 --> 00:03:45,950
+you to take the wheel. Here's your
+question. Write the symmetric equations for a
+
+51
+00:03:45,800 --> 00:03:50,950
+line passing through the origin with a
+direction of one, two, three. Please go ahead
+
+52
+00:03:50,800 --> 00:03:54,710
+and pause the explainer right now and
+actually do this on paper. Start from the
+
+53
+00:03:54,560 --> 00:03:58,710
+definition itself, not just from memory.
+Write out your clear starting line before
+
+54
+00:03:58,560 --> 00:04:02,470
+you do any calculations because a crystal
+clear starting line is going to prevent
+
+55
+00:04:02,320 --> 00:04:07,110
+most slips. Here's a quick hint. Divide
+each coordinate difference by its direction
+
+56
+00:04:06,960 --> 00:04:11,490
+component. Work it all out and then hit
+play to check your answer. Alright, welcome
+
+57
+00:04:11,340 --> 00:04:17,170
+back. Let's take a look at the answer.
+Since the origin is 0, 0, 0, your coordinate
+
+58
+00:04:17,020 --> 00:04:22,170
+differences are simply x, y, and z. So,
+dividing those by our direction components,
+
+59
+00:04:22,260 --> 00:04:29,150
+we end up with x over 1 equals y over 2
+equals z over 3. Compare your own working
+
+60
+00:04:29,000 --> 00:04:33,330
+with this exact result. If you missed it,
+don't just copy the answer down. Actually
+
+61
+00:04:33,180 --> 00:04:37,110
+find the precise line where your work
+diverged from ours because, honestly, that's
+
+62
+00:04:36,960 --> 00:04:41,950
+where the real learning actually happens.
+Finally, section 5, summary and next
+
+63
+00:04:41,800 --> 00:04:43,790
+steps. Reviewing the core concepts.
+
+64
+00:04:44,800 --> 00:04:48,590
+So, let's wrap this up. Here are your two
+foundational takeaways for symmetric
+
+65
+00:04:48,440 --> 00:04:53,470
+lines. Number one, you eliminate the
+parameter t to get your symmetric equations.
+
+66
+00:04:53,880 --> 00:04:58,930
+And number two, you absolutely must handle
+zero direction components separately as
+
+67
+00:04:58,780 --> 00:05:03,470
+fixed values. Master these two rules and
+they'll perfectly set us up for our next
+
+68
+00:05:03,320 --> 00:05:08,150
+big mathematical challenge, writing the
+equation of a plane. Before you leave this
+
+69
+00:05:08,000 --> 00:05:11,830
+explainer today, I want you to take a
+second and rate your confidence on this topic
+
+70
+00:05:11,680 --> 00:05:16,550
+from a 1 to a 5. Just be honest with
+yourself. If your confidence is sitting
+
+71
+00:05:16,400 --> 00:05:20,750
+anywhere below a 3, don't worry about
+replaying the whole explainer. Just go back
+
+72
+00:05:20,600 --> 00:05:24,990
+and revisit that worked example. But
+before you go, challenge yourself with this
+
+73
+00:05:24,840 --> 00:05:29,150
+final thought. If these symmetric
+equations perfectly describe a one -dimensional
+
+74
+00:05:29,000 --> 00:05:33,430
+line cutting through 3D space, what would
+happen if we introduced a second set of
+
+75
+00:05:33,280 --> 00:05:37,210
+directions? Would it create a plane? Keep
+that in the back of your mind and I'll see
+
+76
+00:05:37,060 --> 00:05:38,010
+you in the next explainer.

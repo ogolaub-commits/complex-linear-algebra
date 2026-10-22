@@ -1,0 +1,393 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:04,990
+Welcome to this linear algebra explainer.
+Today, we are zeroing in on one incredibly
+
+2
+00:00:04,840 --> 00:00:09,990
+crucial topic, LA10, the plane equation.
+Now, by the end of our time together here,
+
+3
+00:00:10,060 --> 00:00:14,350
+you're going to be able to do one concrete
+thing with absolute certainty. And that
+
+4
+00:00:14,200 --> 00:00:18,650
+is write a plane equation from a given
+point and a normal. I'm so glad you're here
+
+5
+00:00:18,500 --> 00:00:23,950
+with us. So go ahead, take a deep breath,
+get your paper ready, and let's set a
+
+6
+00:00:23,800 --> 00:00:28,870
+nice, calm, structured tone for mastering
+this foundational math concept. Okay,
+
+7
+00:00:28,920 --> 00:00:33,290
+let's dive into this deliberate sequence.
+First, we'll cover the core formula, then
+
+8
+00:00:33,140 --> 00:00:37,830
+walk through a worked example, highlight a
+common vector mistake, let you try it out
+
+9
+00:00:37,680 --> 00:00:43,070
+in practice your turn, and finally wrap up
+with transfer and summary. Let's jump
+
+10
+00:00:42,920 --> 00:00:47,250
+into section one, the core formula. This
+is that first essential step for
+
+11
+00:00:47,100 --> 00:00:51,730
+understanding the rule that defines a
+plane. Right, so here is our core definition.
+
+12
+00:00:52,140 --> 00:00:58,570
+A plane is fixed by exactly two things, a
+fixed point, A, and a normal vector, N. So
+
+13
+00:00:58,420 --> 00:01:03,510
+every point R that lives in the plane
+satisfies this equation, N dot open
+
+14
+00:01:03,360 --> 00:01:08,870
+parenthesis, R minus A close parenthesis
+equals zero. Now, I really want you to read
+
+15
+00:01:08,720 --> 00:01:13,970
+this formula as a direct set of
+instructions, not just some label on a page. Look
+
+16
+00:01:13,820 --> 00:01:18,190
+closely and identify the input, the
+operation, which right here is the dot product,
+
+17
+00:01:18,260 --> 00:01:23,210
+and the output. As you're looking at this,
+ask yourself, what actually stays fixed
+
+18
+00:01:23,060 --> 00:01:28,110
+and what changes? Well, the point A and
+the normal N, they stay perfectly fixed,
+
+19
+00:01:28,320 --> 00:01:32,530
+while R changes because it represents
+literally every possible point in that plane.
+
+20
+00:01:33,020 --> 00:01:37,230
+Oh, and please remember, the normal vector
+always points out of the plane. It is
+
+21
+00:01:37,080 --> 00:01:41,930
+absolutely perpendicular to every single
+direction inside the plane. Now, taking
+
+22
+00:01:41,780 --> 00:01:46,330
+that vector definition, we can
+equivalently write the plane in its Cartesian form,
+
+23
+00:01:46,420 --> 00:01:54,290
+which looks like this, N1X plus N2Y plus
+N3Z equals D. This alternative form is
+
+24
+00:01:54,140 --> 00:01:58,590
+incredibly useful, but I gotta give you a
+quick word of caution right here. When you
+
+25
+00:01:58,440 --> 00:02:02,870
+are translating over to this form, you
+have to check the sign of every single term.
+
+26
+00:02:03,340 --> 00:02:07,750
+Seriously, most errors in this entire
+topic sneak in through just one single dropped
+
+27
+00:02:07,600 --> 00:02:13,530
+negative sign. So substitute very, very
+carefully. A worked example. Let's see this
+
+28
+00:02:13,380 --> 00:02:18,710
+rule in action. Now, what's really
+interesting here is the setup itself. We've got
+
+29
+00:02:18,560 --> 00:02:24,190
+our fixed normal, N equals the vector two,
+negative one, three, and our fixed point,
+
+30
+00:02:24,420 --> 00:02:29,430
+A equals one, one, one. I actually want
+you to pause for a second. Actively predict
+
+31
+00:02:29,280 --> 00:02:33,690
+how we're going to plug these specific
+numbers right into our core rule. Think about
+
+32
+00:02:33,540 --> 00:02:38,090
+it. What is that very first line of
+working actually gonna look like? All right,
+
+33
+00:02:38,080 --> 00:02:42,290
+let's see if your prediction matches up.
+Step one, we start with an equivalent form
+
+34
+00:02:42,140 --> 00:02:48,370
+of our definition, N dot R equals N dot A.
+Step two, we go ahead and substitute our
+
+35
+00:02:48,220 --> 00:02:53,450
+normal and our point. So on the right
+side, the dot product of N and A gives us two
+
+36
+00:02:53,300 --> 00:02:58,370
+times one plus negative one times one plus
+three times one, which all equals four.
+
+37
+00:02:58,980 --> 00:03:04,630
+Step three, expanding the left side, we
+get two X minus Y plus three Z equals four.
+
+38
+00:03:05,320 --> 00:03:08,390
+You know, if you ever lose the thread
+while working through a problem like this,
+
+39
+00:03:08,520 --> 00:03:12,870
+just cover the next line on your page and
+try to predict it before looking. It helps
+
+40
+00:03:12,720 --> 00:03:17,630
+so much. Read that final result back
+against the question and always remember that
+
+41
+00:03:17,480 --> 00:03:21,350
+last line is your answer, not just another
+step. You wanna make sure you can
+
+42
+00:03:21,200 --> 00:03:25,570
+reproduce the exact mathematical step that
+produced it. Let's head into section
+
+43
+00:03:25,420 --> 00:03:30,250
+three, a common vector mistake. We
+definitely wanna avoid future mathematical slips
+
+44
+00:03:30,100 --> 00:03:36,230
+here. So the crucial point I wanna make is
+this exact contrast. A very, very common
+
+45
+00:03:36,080 --> 00:03:40,830
+mistake is using a direction vector
+instead of the normal vector. And look, it's
+
+46
+00:03:40,680 --> 00:03:45,070
+tempting, right? Grabbing a vector that
+already lies in the plane feels nice and
+
+47
+00:03:44,920 --> 00:03:50,070
+tidy, but hit pause and check that against
+our core definition. The normal
+
+48
+00:03:49,920 --> 00:03:54,870
+absolutely must be perpendicular to the
+plane. Literally every single later step
+
+49
+00:03:54,720 --> 00:04:00,130
+depends on correctly using a perpendicular
+normal vector. I highly recommend saying
+
+50
+00:03:59,980 --> 00:04:04,290
+this corrected statement out loud right
+now. The normal is perpendicular to the
+
+51
+00:04:04,140 --> 00:04:04,490
+plane.
+
+52
+00:04:05,360 --> 00:04:10,030
+All right, section four, practice, your
+turn. Let's see you apply what you've just
+
+53
+00:04:09,880 --> 00:04:14,790
+learned completely on your own. Here is
+your challenge. I want you to find the plane
+
+54
+00:04:14,640 --> 00:04:21,510
+with the normal 111 passing through the
+point 001. So go ahead and pause this
+
+55
+00:04:21,360 --> 00:04:25,190
+explainer right now and work it out on
+paper. Please start completely from the
+
+56
+00:04:25,040 --> 00:04:29,250
+definition to prevent any tiny slips. Do
+not just rely on memory here. Write that
+
+57
+00:04:29,100 --> 00:04:33,510
+first clear starting line out before you
+calculate anything. Go ahead, pause and
+
+58
+00:04:33,360 --> 00:04:33,930
+give it a try.
+
+59
+00:04:34,820 --> 00:04:39,670
+Okay, welcome back. Let's compare your
+working with the final result, which is X
+
+60
+00:04:39,520 --> 00:04:45,370
+plus Y plus Z equals one. Did you get it?
+Now, if you missed it, please do not
+
+61
+00:04:45,220 --> 00:04:49,730
+simply copy down this answer. Go back into
+your paper notes and find the exact line
+
+62
+00:04:49,580 --> 00:04:54,410
+where your work diverged from the correct
+path. Was it a dropped negative sign? Did
+
+63
+00:04:54,260 --> 00:04:58,830
+you maybe use the wrong starting formula?
+Finding that exact point of divergence is
+
+64
+00:04:58,680 --> 00:05:00,470
+honestly where the true learning happens.
+
+65
+00:05:01,480 --> 00:05:06,150
+Finally, we arrive at section five,
+transfer and summary. Let's see how this builds
+
+66
+00:05:06,000 --> 00:05:11,390
+into new contexts. You know, this really
+brilliantly illustrates how a mathematical
+
+67
+00:05:11,240 --> 00:05:16,170
+idea becomes totally portable. For
+example, in a totally new context, you might be
+
+68
+00:05:16,020 --> 00:05:20,590
+told that three points fix a plane and
+you'll need to cross two directions to find
+
+69
+00:05:20,440 --> 00:05:25,050
+the normal all by yourself. The surface
+details of the problem change, sure, but the
+
+70
+00:05:24,900 --> 00:05:30,250
+core rule, the exact equation we mastered
+today still perfectly applies. This is
+
+71
+00:05:30,100 --> 00:05:34,670
+exactly why you must always name the rule
+before you calculate and then substitute
+
+72
+00:05:34,520 --> 00:05:39,950
+carefully. Use a point and a normal, then
+expand that dot product to write out those
+
+73
+00:05:39,800 --> 00:05:44,670
+Cartesian equations. Before you leave this
+explainer, I have a quick metacognitive
+
+74
+00:05:44,520 --> 00:05:49,790
+challenge for you. Rate your confidence
+right now from a one to a five. Can you name
+
+75
+00:05:49,640 --> 00:05:54,530
+the two core ideas without looking at the
+screen? Be honest. If your confidence is
+
+76
+00:05:54,380 --> 00:05:58,830
+below a three or if you can't quite name
+them, there is absolutely no need to
+
+77
+00:05:58,680 --> 00:06:03,290
+rewatch the entire thing. Just replay the
+specific scene or the exact worked example
+
+78
+00:06:03,140 --> 00:06:07,530
+that gave you trouble. That targeted
+review is truly how you master linear algebra.
+
+79
+00:06:08,220 --> 00:06:10,430
+Thanks so much for focusing in today and
+keep practicing.

@@ -1,0 +1,62 @@
+WEBVTT
+
+00:00.000 --> 00:05.292
+How do you find an inverse using only row
+operations? You can perform elementary row
+
+00:05.292 --> 00:10.583
+operations. In this lesson we find an
+inverse by row reducing an augmented
+
+00:10.583 --> 00:15.875
+matrix. By the end, Find an inverse with
+the extended Gauss algorithm.
+
+00:15.875 --> 00:20.559
+Form the augmented matrix A next to the
+identity, then row reduce until the left
+
+00:20.559 --> 00:25.243
+block becomes the identity. The right
+block is the inverse.
+
+00:25.243 --> 00:30.195
+For the matrix two one five three, write
+it beside the two by two identity.
+
+00:30.195 --> 00:33.076
+After row reduction, the right block is
+three minus one minus five two, the
+
+00:33.076 --> 00:35.957
+inverse.
+
+00:35.957 --> 00:40.716
+A common mistake is to stop before the
+left block is the identity. Pause and
+
+00:40.716 --> 00:45.475
+decide whether that is right. Reduce fully
+to the identity on the left.
+
+00:45.475 --> 00:49.412
+Your turn. Find the inverse of one two
+zero one. Pause the video. Hint: Clear the
+
+00:49.412 --> 00:53.349
+entry below the leading one.
+
+00:53.349 --> 00:58.599
+The inverse is one minus two zero one. In
+a new context, A zero row on the left
+
+00:58.599 --> 01:03.848
+means the matrix is singular. Rate your
+confidence from one to five.
+
+01:03.848 --> 01:07.209
+Augment with the identity, row reduce, and
+read the inverse from the right block.
+
+01:07.209 --> 01:10.571
+That completes the course.

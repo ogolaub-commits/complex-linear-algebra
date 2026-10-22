@@ -1,0 +1,326 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,110
+All right, welcome back to this explainer
+on linear algebra today. We've got a super
+
+2
+00:00:04,960 --> 00:00:09,230
+specific really actionable goal We're
+gonna methodically break down exactly how to
+
+3
+00:00:09,080 --> 00:00:14,430
+compute 2x2 and 3x3 determinants This is a
+totally fundamental mathematical skill
+
+4
+00:00:14,280 --> 00:00:17,670
+and by the end of this lesson, you're
+gonna have the whole process completely locked
+
+5
+00:00:17,520 --> 00:00:24,630
+down Here is our roadmap first the core
+formula Second a worked example third a
+
+6
+00:00:24,480 --> 00:00:29,890
+common mistake to watch out for fourth
+You'll try one yourself and finally transfer
+
+7
+00:00:29,740 --> 00:00:37,650
+and summary Section 1 the core formula for
+2x2 and 3x3 determinants Okay, so here's
+
+8
+00:00:37,500 --> 00:00:43,510
+the golden rule for a 2x2 matrix If your
+top row is A and B and your bottom row is C
+
+9
+00:00:43,360 --> 00:00:49,170
+and D The determinant is just A times D
+minus B times C. No, don't just read this as
+
+10
+00:00:49,020 --> 00:00:53,230
+a static label Treat it like an
+instruction manual. Oh, and here is an absolutely
+
+11
+00:00:53,080 --> 00:00:57,870
+crucial piece of advice Carefully check
+the sign of every single term. Honestly,
+
+12
+00:00:57,980 --> 00:01:02,070
+most errors in this topic sneak in through
+one little dropped negative Let's see
+
+13
+00:01:01,920 --> 00:01:09,330
+this in action for a matrix with rows 2 1
+and 3 4 The rule says to multiply 2 and 4
+
+14
+00:01:09,180 --> 00:01:16,030
+which gives us 8 Then we subtract the
+product of 1 and 3 which is well 3 8 minus 3
+
+15
+00:01:15,880 --> 00:01:21,250
+gives us 5 Super clean, right? But before
+you just memorize that calculation really
+
+16
+00:01:21,100 --> 00:01:25,490
+trace each number back to its original
+spot in the matrix Figure out what stays
+
+17
+00:01:25,340 --> 00:01:31,170
+fixed and what moves Moving right along to
+section 2 the worked example 3 by 3
+
+18
+00:01:31,020 --> 00:01:37,090
+matrix expansion So here is our target.
+What is the determinant of the 3 by 3 matrix
+
+19
+00:01:36,940 --> 00:01:45,330
+with rows 1 2 3? 0 1 4 and 5 6 0 Try to
+keep this exact setup in your head. So the
+
+20
+00:01:45,180 --> 00:01:49,910
+purpose of the next few calculations stays
+totally clear Now for a 3 by 3 we
+
+21
+00:01:49,760 --> 00:01:54,730
+actually expand along the first row and we
+use alternating signs Let's look at what
+
+22
+00:01:54,580 --> 00:01:59,350
+that actually looks like in practice
+Expanding step by step along that top row gives
+
+23
+00:01:59,200 --> 00:02:04,370
+us three separate components First up we
+take the 1 from the top left and we
+
+24
+00:02:04,220 --> 00:02:08,170
+multiply it by the determinant of the
+remaining 2 by 2 matrix in the bottom Right,
+
+25
+00:02:08,520 --> 00:02:15,930
+that's 1 times the quantity 0 minus 6
+times 4 giving us 0 minus 24 Next remember
+
+26
+00:02:15,780 --> 00:02:21,670
+those alternating signs. It's minus 2
+times its remaining matrix Which is 0 minus 20
+
+27
+00:02:21,520 --> 00:02:27,790
+and finally plus 3 times 0 minus 5 when we
+actually crunch those numbers we get
+
+28
+00:02:27,640 --> 00:02:33,710
+minus 24 plus 40 minus 15 and Believe it
+or not that whole shebang simplifies down
+
+29
+00:02:33,560 --> 00:02:39,310
+to exactly one Read that final result back
+against our original matrix. Just make
+
+30
+00:02:39,160 --> 00:02:43,810
+sure you can independently reproduce the
+exact steps that got us this answer Section
+
+31
+00:02:43,660 --> 00:02:50,350
+3 a common mistake check your order Listen
+a really common trap here is subtracting
+
+32
+00:02:50,200 --> 00:02:54,410
+the diagonals in the wrong order I know it
+might sound tidy in your head to just
+
+33
+00:02:54,260 --> 00:02:58,510
+subtract however feels natural but doing
+it backward produces a completely false
+
+34
+00:02:58,360 --> 00:03:02,950
+result and Since every later step and your
+linear algebra work depends on getting
+
+35
+00:03:02,800 --> 00:03:07,830
+this right. It's a huge deal Actually say
+the corrected rule out loud to yourself
+
+36
+00:03:07,680 --> 00:03:13,550
+right now main diagonal minus the other
+diagonal Always always verify that before
+
+37
+00:03:13,400 --> 00:03:20,790
+you move forward Section 4 try it yourself
+active recall Okay challenge time find
+
+38
+00:03:20,640 --> 00:03:25,890
+the determinant of the matrix with the top
+row 1 2 and the bottom row 3 4 Seriously
+
+39
+00:03:25,740 --> 00:03:29,890
+pause the explainer right here grab some
+scratch paper Start from the core
+
+40
+00:03:29,740 --> 00:03:33,770
+definition and absolutely write out the
+first line of your working before you
+
+41
+00:03:33,620 --> 00:03:38,230
+calculate a single thing Setting up a
+clear starting line literally prevents most of
+
+42
+00:03:38,080 --> 00:03:42,830
+those minor slips Go ahead. Give it a shot
+a Fierce staring at a blank page and just
+
+43
+00:03:42,680 --> 00:03:47,550
+need a tiny nudge think back to our core
+operation that first line should be the
+
+44
+00:03:47,400 --> 00:03:54,110
+main Diagonal minus the other diagonal. So
+1 times 4 minus 2 times 3 and the
+
+45
+00:03:53,960 --> 00:04:00,550
+determinant is minus 2 Compare your
+scratch paper directly with that result if you
+
+46
+00:04:00,400 --> 00:04:05,310
+missed it Don't just erase your work and
+write down minus 2 instead play detective
+
+47
+00:04:05,160 --> 00:04:10,210
+find the exact line where your math
+diverged from the correct path I promise you
+
+48
+00:04:10,060 --> 00:04:15,410
+that specific moment of realization is
+where the real learning happens Section 5
+
+49
+00:04:15,260 --> 00:04:20,870
+transfer and summary applying the rules So
+what does this all mean in the grand
+
+50
+00:04:20,720 --> 00:04:24,890
+scheme of things? Well when the
+determinant you calculate turns out to be exactly
+
+51
+00:04:24,740 --> 00:04:30,170
+zero that matrix is what we call singular
+Geometrically speaking this means the
+
+52
+00:04:30,020 --> 00:04:35,710
+matrix literally compresses your entire
+space flat It scales its area or volume down
+
+53
+00:04:35,560 --> 00:04:40,530
+to absolute zero Now the surface details
+of your problems might change like you
+
+54
+00:04:40,380 --> 00:04:45,090
+might apply this to advanced geometry or
+complex systems of equations later on But
+
+55
+00:04:44,940 --> 00:04:49,210
+knowing this rule and executing it
+perfectly makes this powerful concept completely
+
+56
+00:04:49,060 --> 00:04:53,570
+portable for whatever you tackle next
+Let's wrap this up with a quick self -check
+
+57
+00:04:53,420 --> 00:04:58,230
+Write your confidence on computing
+determinants right now from 1 to 5 if you're
+
+58
+00:04:58,080 --> 00:05:03,110
+below a 3 pay no stress at all Just replay
+the worked example section to lock it in
+
+59
+00:05:02,960 --> 00:05:07,330
+We're doing this because our very next
+major step in linear algebra is Inverting
+
+60
+00:05:07,180 --> 00:05:11,390
+matrices and you really need to be rock
+solid on determinants for that to make any
+
+61
+00:05:11,240 --> 00:05:16,750
+sense as a final check to prove You've got
+this down test yourself right now Can you
+
+62
+00:05:16,600 --> 00:05:22,390
+recite the exact formulas for the 2 by 2
+and the 3 by 3 completely from memory if
+
+63
+00:05:22,240 --> 00:05:27,610
+you can you are? Absolutely ready to
+conquer matrix inversion if not jump back and
+
+64
+00:05:27,460 --> 00:05:31,870
+solidify it because next time we aren't
+just calculating these matrices We are gonna
+
+65
+00:05:31,720 --> 00:05:35,350
+learn how to flip them completely inside
+out. See you then
