@@ -1660,7 +1660,7 @@ function renderChart(){
   }).join('');
   app.innerHTML=`<main class="home">
     <header class="mast"><h1>Complex Numbers &amp; Linear Algebra</h1>
-    <p class="lede">Four units, straight from the MAT2103 outline: complex algebra, vector algebra, matrix algebra, and differential calculus. Every map node is an outline section, shown in brackets.</p></header>
+    <p class="lede">MAT2103 course outline</p></header>
     <figure class="chart">${chartSVG()}<figcaption>${STATIONS.length} nodes across four units — one per outline section — five problems at each. Three right clears a node; five right earns three stars. Not a substitute for the lectures.</figcaption></figure>
     <p class="standing">Rank: <b>${rankFor(tot)}</b>. ${tot} of ${STATIONS.length*3} stars. <b>Adaptive mode:</b> each node adjusts between Foundation, Core and Challenge as you play — five right moves it up, two or fewer brings it down.</p>
     ${legs}
