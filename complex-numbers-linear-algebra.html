@@ -89,7 +89,7 @@ mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
 .link:hover{color:var(--mag)}
 @media (max-width:700px){
   .sound,.town,.rose{display:none}
-  .wp text{font-size:26px}
+  .wp text{font-size:19px}
   .gratlab{display:none}
   .wp circle.ring{r:16px}
   .wp circle.dot{r:6px}
@@ -1030,155 +1030,454 @@ function qInv3(){
 }
 
 
-const LEGS={
- 1:{title:'Algebra foundations',route:'Expanding, factorising, indices and equations'},
- 2:{title:'Enter i',route:'Arithmetic, conjugates, modulus and argument'},
- 3:{title:'The complex plane',route:'Quadratic roots, polynomials, de Moivre and loci'},
- 4:{title:'Vector algebra',route:'Components, addition, the dot product and angles'},
- 5:{title:'Vector products',route:'Unit vectors, the cross product and volumes'},
- 6:{title:'Lines and planes',route:'Vector, Cartesian and symmetric forms in space'},
- 7:{title:'Matrix algebra',route:'Multiplication, determinants, inverses and row reduction'}
-};
-const CSTATIONS=[
-  {id:'1.1',leg:1,name:'Expand and factorise',topic:'Brackets, common factors and difference of squares',
-   toolkit:R`<p><b>FOIL:</b> \((x+a)(x+b)=x^{2}+(a+b)x+ab\).</p><p><b>Difference of squares:</b> \(a^{2}-b^{2}=(a-b)(a+b)\).</p><p>Always take out the highest common factor first.</p>`,
-   round:()=>sample(A1,5).map(f=>f())},
-  {id:'1.2',leg:1,name:'Indices and surds',topic:'Index laws, negative and fractional powers, radicals',
-   toolkit:R`<p>\(x^{a}x^{b}=x^{a+b}\), \(\frac{x^{a}}{x^{b}}=x^{a-b}\), \((x^{a})^{b}=x^{ab}\).</p><p>\(x^{-n}=\frac{1}{x^{n}}\) and \(x^{m/n}=\sqrt[n]{x^{m}}\).</p><p>Simplify surds by pulling out square factors: \(\sqrt{72}=6\sqrt{2}\).</p>`,
-   round:()=>sample(A2,5).map(f=>f())},
-  {id:'1.3',leg:1,name:'Linear and quadratic equations',topic:'Rearranging, factorising, discriminant and the formula',
-   toolkit:R`<p>For \(ax^{2}+bx+c=0\), the roots are \(x=\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}\).</p><p>The discriminant \(b^{2}-4ac\) tells you how many real roots there are: positive two, zero one, negative none.</p>`,
-   round:()=>sample(A3,5).map(f=>f())},
-  {id:'1.4',leg:1,name:'Simultaneous equations',topic:'Elimination and substitution for 2x2 and 3x3 systems',
-   toolkit:R`<p>Eliminate one variable at a time: scale a row, then add or subtract rows to cancel it.</p><p>For three unknowns, reduce the \(3\times3\) system to a \(2\times2\) system first.</p><p>Check the solution in every original equation.</p>`,
-   round:()=>[qSolve2(),qSolve3(),qSolve2(),qSolve3(),qSolve2()]},
-  {id:'2.1',leg:2,name:'The imaginary unit',topic:'Powers of i, square roots of negatives',
-   toolkit:R`<p>\(i^{2}=-1\). The powers repeat with period 4: \(i,\,-1,\,-i,\,1\).</p><p>\(\sqrt{-n}=i\sqrt{n}\) for \(n>0\). For a power \(i^{n}\), just look at \(n\bmod 4\).</p><p><b>Common mistake:</b> writing \(i^{2}=1\). It is \(-1\).</p>`,
-   round:()=>sample(B1,5).map(f=>f())},
-  {id:'2.2',leg:2,name:'Add, subtract, multiply',topic:'Complex arithmetic in the form a + bi',
-   toolkit:R`<p>Add real parts and imaginary parts separately.</p><p>Multiply like brackets, then replace \(i^{2}\) with \(-1\).</p><p>\((a+bi)(a-bi)=a^{2}+b^{2}\), a real number.</p><p><b>Common mistake:</b> dropping the \(i^{2}\) term; it becomes a real number.</p>`,
-   round:()=>sample(B2,5).map(f=>f())},
-  {id:'2.3',leg:2,name:'Conjugates and division',topic:'Rationalising complex denominators',
-   toolkit:R`<p>The conjugate of \(a+bi\) is \(a-bi\).</p><p>To divide, multiply top and bottom by the conjugate of the denominator.</p><p>\(z\overline{z}=|z|^{2}=a^{2}+b^{2}\).</p><p><b>Common mistake:</b> multiplying by the numerator's conjugate instead of the denominator's.</p>`,
-   round:()=>sample(B3,5).map(f=>f())},
-  {id:'2.4',leg:2,name:'Modulus, argument and polar form',topic:'Distances, angles and exact polar values',
-   toolkit:R`<p>\(|a+bi|=\sqrt{a^{2}+b^{2}}\); the argument is the angle from the positive real axis.</p><p>Polar form: \(z=r(\cos\theta+i\sin\theta)\).</p><p>Exact values: \(30^{\circ},45^{\circ},60^{\circ},90^{\circ}\) and their multiples.</p><p><b>Common mistake:</b> ignoring the quadrant; sketch the point before naming the argument.</p>`,
-   round:()=>sample(B4,5).map(f=>f())},
-  {id:'3.1',leg:3,name:'Complex quadratic roots',topic:'Negative discriminants and Vieta',
-   toolkit:R`<p>If \(b^{2}-4ac&lt;0\), the roots are a conjugate pair \(\frac{-b\pm i\sqrt{4ac-b^{2}}}{2a}\).</p><p>Sum of roots \(=-\frac{b}{a}\), product \(=\frac{c}{a}\).</p><p><b>Common mistake:</b> dropping the \(\pm\), so only one of the conjugate roots is found.</p>`,
-   round:()=>sample(C1,5).map(f=>f())},
-  {id:'3.2',leg:3,name:'Polynomials and conjugate roots',topic:'Factor and remainder theorems with complex roots',
-   toolkit:R`<p>A real polynomial has non-real roots in conjugate pairs.</p><p>Remainder theorem: dividing by \((x-a)\) leaves \(p(a)\).</p><p>Factor theorem: \((x-a)\) is a factor exactly when \(p(a)=0\).</p><p><b>Common mistake:</b> assuming one complex root can occur alone; its conjugate must also be a root.</p>`,
-   round:()=>sample(C2,5).map(f=>f())},
-  {id:'3.3',leg:3,name:'De Moivre and roots',topic:'Powers and roots in polar form',
-   toolkit:R`<p>De Moivre: \((\cos\theta+i\sin\theta)^{n}=\cos n\theta+i\sin n\theta\).</p><p>For \(z=r(\cos\theta+i\sin\theta)\), \(z^{n}=r^{n}(\cos n\theta+i\sin n\theta)\).</p><p>The \(n\)th roots are equally spaced around a circle.</p><p><b>Common mistake:</b> multiplying the modulus by \(n\) instead of raising it to the power \(n\).</p>`,
-   round:()=>sample(C3,5).map(f=>f())},
-  {id:'3.4',leg:3,name:'Loci and geometry',topic:'Circles, rays and perpendicular bisectors in the Argand diagram',
-   toolkit:R`<p>\(|z-a|=r\) is a circle centred at \(a\) with radius \(r\).</p><p>\(|z-a|=|z-b|\) is the perpendicular bisector of the segment \(ab\).</p><p>\(\arg(z-a)=\theta\) is a ray from \(a\) at angle \(\theta\).</p><p><b>Common mistake:</b> treating it as a full line; it is only a ray.</p><div id="miniholder"></div>`,
-   round:()=>sample(C4,5).map(f=>f())}
-];
-const LSTATIONS=[
- {id:'1.1',leg:1,place:'The Origin',name:'Vector basics',topic:'Components, addition, subtraction, scalar multiples',
-  round:()=>[qVecAdd(),qVecScalar(),qVecSub(),qVecAdd(),qVecScalar()]},
- {id:'1.2',leg:1,place:'Length Street',name:'Magnitude & distance',topic:'Length of a vector; distance between points',
-  round:()=>[qMag(),qDist(),qMag(),qDist(),qMag()]},
- {id:'1.3',leg:1,place:'The Right Angle',name:'The dot product',topic:'\\(Compute a·b; acute, right or obtuse\\)',
-  round:()=>[qDot(),qPerp(),qDot(),qPerp(),qDot()]},
- {id:'1.4',leg:1,place:'Compass Point',name:'Angle between vectors',topic:'\\(cos θ = a·b / (|a||b|)\\)',
-  round:()=>[qCosAngle(),qPerp(),qCosAngle(),qDot(),qCosAngle()]},
- {id:'2.1',leg:2,place:'Normalise',name:'Unit vectors',topic:'Normalisation and direction',
-  round:()=>[qUnit(),qUnit(),qMag(),qUnit(),qUnit()]},
- {id:'2.2',leg:2,place:'Parallelogram',name:'The cross product',topic:'\\(Compute a×b and the area it spans\\)',
-  round:()=>[qCross(),qArea(),qCross(),qArea(),qCross()]},
- {id:'2.3',leg:2,place:'Volume City',name:'Triple product',topic:'Scalar triple product and coplanarity',
-  round:()=>[qTriple(),qCoplanar(),qTriple(),qCoplanar(),qTriple()]},
- {id:'3.1',leg:3,place:'The Path',name:'Vector equation of a line',topic:'\\(r = a + t d\\)',
-  round:()=>[qLineVec(),qDir(),qLineVec(),qDir(),qLineVec()]},
- {id:'3.2',leg:3,place:'Symmetry',name:'Symmetric equations of a line',topic:'From two points to symmetric form',
-  round:()=>[qSym(),qDir(),qSym(),qSym(),qDir()]},
- {id:'3.3',leg:3,place:'The Surface',name:'Equation of a plane',topic:'\\(n·(r − a) = 0\\)',
-  round:()=>[qPlane(),qPlane(),qPlane(),qPlane(),qPlane()]},
- {id:'3.4',leg:3,place:'The Cartesian',name:'Cartesian equations',topic:'Lines in the plane and planes in space',
-  round:()=>[qCartLine(),qPlane3(),qCartLine(),qPlane(),qPlane3()]},
- {id:'4.1',leg:4,place:'The Grid',name:'Matrix multiplication',topic:'Products of matrices',
-  round:()=>[qMatMul(),qMatMul(),qMatMul(),qMatMul(),qMatMul()]},
- {id:'4.2',leg:4,place:'Scale Factor',name:'Determinants',topic:'\\(2×2 and 3×3 determinants\\)',
-  round:()=>[qDet2(),qDet3(),qDet2(),qDet3(),qDet2()]},
- {id:'4.3',leg:4,place:'The Undo',name:'Inverse & singular matrices',topic:'Inverses, and when none exists',
-  round:()=>[qInv2(),qSingular(),qInv2(),qSingular(),qInv2()]},
- {id:'4.4',leg:4,place:'The Pivot',name:'Row reduction & rank',topic:'Elementary operations, echelon form and rank',
-  round:()=>[qRowOp(),qRank(),qSolve2(),qSolve3(),qRowOp()]},
- {id:'4.5',leg:4,place:'Gauss-Jordan',name:'Inverse by row reduction',topic:'Extended Gauss algorithm for 3x3 inverses',
-  round:()=>[qInv3(),qRowOp(),qInv3(),qInv2(),qSingular()]}
-];
-const LVIDEOS={
- '1.1':[['01-vector-basics.mp4','Vector basics']],
- '1.2':[['02-magnitude-and-distance.mp4','Magnitude & distance']],
- '1.3':[['03-dot-product.mp4','The dot product']],
- '1.4':[['04-angle-between-vectors.mp4','Angle between vectors']],
- '2.1':[['05-unit-vectors.mp4','Unit vectors']],
- '2.2':[['06-cross-product.mp4','The cross product']],
- '2.3':[['07-triple-product.mp4','The triple product']],
- '3.1':[['08-line-vector-equation.mp4','Vector equation of a line']],
- '3.2':[['09-symmetric-lines.mp4','Symmetric equations of a line']],
- '3.3':[['10-plane-equation.mp4','Equation of a plane']],
- '4.1':[['11-matrix-multiplication.mp4','Matrix multiplication']],
- '4.2':[['12-determinants.mp4','Determinants']],
- '4.3':[['13-inverse-and-singular.mp4','Inverse & singular matrices']]
-};
-const LYT={
- '1.1':[['fNk_zzaMoSs','3Blue1Brown — Vectors (Essence of linear algebra)']],
- '1.2':[['fNk_zzaMoSs','3Blue1Brown — Vectors (magnitude and direction)']],
- '1.3':[['LyGKycYT2v0','3Blue1Brown — Dot products and duality']],
- '1.4':[['LyGKycYT2v0','3Blue1Brown — Dot products and duality']],
- '2.1':[['9ylUcCOTH8Y','Khan Academy — Unit vector notation']],
- '2.2':[['eu6i7WJeinw','3Blue1Brown — Cross products'],['pJzmiywagfY','Khan Academy — Cross product introduction']],
- '2.3':[['eu6i7WJeinw','3Blue1Brown — Cross products and volume']],
- '3.1':[['hWhs2cIj7Cw','Khan Academy — Parametric representations of lines']],
- '3.2':[['hWhs2cIj7Cw','Khan Academy — Parametric representations of lines']],
- '3.3':[['UJxgcVaNTqY','Khan Academy — Defining a plane in R3']],
- '4.1':[['XkY2DOUCWMU','3Blue1Brown — Matrix multiplication as composition'],['kYB8IZa5AuE','3Blue1Brown — Linear transformations and matrices']],
- '4.2':[['Ip3X9LOh2dk','3Blue1Brown — The determinant']],
- '4.3':[['uQhTuRlWMxw','3Blue1Brown — Inverse matrices, column space and null space']]
-};
+/* ============================================================
+   MAT2103 outline extras: Euler/De Moivre, physical applications,
+   eigenvalues, diagonalization, differential calculus.
+   ============================================================ */
 
+/* ---------------- 1.5 Euler and De Moivre identities ---------------- */
+function qEulerForm(){
+  return mcq(R`Euler's formula says `+m(R`e^{i\theta}`)+R` equals which expression?`,
+    m(R`\cos\theta+i\sin\theta`),
+    [m(R`\cos\theta-i\sin\theta`),m(R`\sin\theta+i\cos\theta`),m(R`\cos\theta+\sin\theta`)],
+    R`Euler's formula: `+m(R`e^{i\theta}=\cos\theta+i\sin\theta`)+R`.`);
+}
+function qEulerPi(){
+  return mcq(R`Use Euler's formula to evaluate `+m(R`e^{i\pi}`)+R`.`,
+    m('-1'),[m('1'),m('i'),m('-i')],
+    R`\(e^{i\pi}=\cos\pi+i\sin\pi=-1+0i=-1\).`);
+}
+function qMoivrePower(){
+  const n=pick([2,3,4,5]);
+  return mcq(R`By De Moivre's theorem, `+m(R`(\cos\theta+i\sin\theta)^{`+n+'}')+R` equals which expression?`,
+    m(R`\cos `+n+R`\theta+i\sin `+n+R`\theta`),
+    [m(R`\cos \theta+i\sin `+n+R`\theta`),m(n+R`\cos\theta+i`+n+R`\sin\theta`),m(R`\cos `+n+R`\theta-i\sin `+n+R`\theta`)],
+    R`De Moivre: `+m(R`(\cos\theta+i\sin\theta)^{n}=\cos n\theta+i\sin n\theta`)+R`.`);
+}
+function qMoivreZ(){
+  const deg=pick([30,45,60]),n=pick([2,3]),z=pick([2,3,4]);
+  const rn=Math.pow(z,n), nd=n*deg;
+  return mcq(R`If `+m(R`z=`+z+R`(\cos `+deg+R`^{\circ}+i\sin `+deg+R`^{\circ})`)+R`, find `+m(`z^{${n}}`)+R`.`,
+    m(R`${rn}(\cos ${nd}^{\circ}+i\sin ${nd}^{\circ})`),
+    [m(R`${z*n}(\cos ${nd}^{\circ}+i\sin ${nd}^{\circ})`),
+     m(R`${rn}(\cos ${deg}^{\circ}+i\sin ${deg}^{\circ})`),
+     m(R`${rn}(\cos ${nd}^{\circ}-i\sin ${nd}^{\circ})`)],
+    R`Raise the modulus to the power and multiply the argument by the power: `+m(`${z}^{${n}}=${rn}`)+R`, argument `+m(`${n}\times${deg}=${nd}^{\circ}`)+R`.`);
+}
+function qZPlusInv(){
+  const n=pick([2,3,4]);
+  return mcq(R`If `+m(R`z=\cos\theta+i\sin\theta`)+R`, then `+m(`z^{${n}}+z^{-${n}}`)+R` equals which expression?`,
+    m(R`2\cos `+n+R`\theta`),
+    [m(R`2i\sin `+n+R`\theta`),m(R`2\cos \theta`),m(R`\cos `+n+R`\theta`)],
+    R`Since `+m(R`z^{n}=\cos n\theta+i\sin n\theta`)+R` and `+m(R`z^{-n}=\cos n\theta-i\sin n\theta`)+R`, adding cancels the sine terms: `+m(R`z^{n}+z^{-n}=2\cos n\theta`)+R`.`);
+}
+function qIdentityExpand(){
+  return mcq(R`Expand `+m(R`(\cos\theta+i\sin\theta)^{2}`)+R` using `+m(R`i^{2}=-1`)+R`.`,
+    m(R`\cos 2\theta+i\sin 2\theta`),
+    [m(R`\cos^{2}\theta+i\sin^{2}\theta`),m(R`1+2i\sin\theta\cos\theta`),m(R`\cos^{2}\theta-\sin^{2}\theta`)],
+    R`Expand: `+m(R`\cos^{2}\theta+2i\sin\theta\cos\theta-\sin^{2}\theta`)+R`. The real part is `+m(R`\cos^{2}\theta-\sin^{2}\theta=\cos2\theta`)+R` and the imaginary part is `+m(R`2\sin\theta\cos\theta=\sin2\theta`)+R`.`);
+}
+
+/* ---------------- 2.4 Physical applications ---------------- */
+function qWork(){
+  const F=[rnd(-6,6),rnd(-6,6),rnd(-6,6)],d=[rnd(-5,5),rnd(-5,5),rnd(-5,5)];
+  const W=dot(F,d);
+  return {type:'num',prompt:R`A constant force `+m(pmat(F))+R` N moves an object through displacement `+m(pmat(d))+R` m. Find the work done, `+m(R`W=\mathbf{F}\cdot\mathbf{d}`)+R`, in joules.`,unit:'J',answer:W,
+    explain:R`Work is the dot product: `+m(R`W=`+pmat(F)+R`\cdot`+pmat(d)+'='+W)+R` J.`};
+}
+function qTorque(){
+  let r,F,t; do{ r=vr(3); F=vr(3); t=cross(r,F); }while(t.every(x=>!x));
+  const mag=vmag(t);
+  return {type:'num',prompt:R`A force `+m(pmat(F))+R` N acts at position `+m(pmat(r))+R` m from a pivot. Find the magnitude of the moment (torque) `+m(R`|\mathbf{r}\times\mathbf{F}|`)+R`, in N·m. Two decimal places.`,unit:'N·m',answer:mag,
+    explain:R`The moment vector is `+m(R`\mathbf{r}\times\mathbf{F}=`+pmat(t))+R`, whose magnitude is `+m(num(mag))+R` N·m.`};
+}
+function qWorkAngle(){
+  const f=pick([10,12,15,20,25]),d=pick([2,3,4,5,6]),deg=pick([0,30,45,60,90,180]);
+  const W=f*d*Math.cos(deg*Math.PI/180);
+  return {type:'num',prompt:R`A force of `+m(String(f))+R` N acts at `+m(deg+'^{\\circ}')+R` to a displacement of `+m(String(d))+R` m. Find the work done, `+m(R`W=|\mathbf{F}||\mathbf{d}|\cos\theta`)+R`, in joules.`,unit:'J',answer:W,
+    explain:R`\(W=${f}\times${d}\cos${deg}^{\circ}=${num(W)}\) J.`};
+}
+function qProjection(){
+  const F=nz(2),d=nz(2);
+  const proj=dot(F,d)/vmag(d);
+  return {type:'num',prompt:R`Find the component of force `+m(pmat(F))+R` along the displacement `+m(pmat(d))+R`, `+m(R`\frac{\mathbf{F}\cdot\mathbf{d}}{|\mathbf{d}|}`)+R`. Two decimal places.`,unit:'',answer:proj,
+    explain:R`The scalar projection is `+m(R`\frac{\mathbf{F}\cdot\mathbf{d}}{|\mathbf{d}|}=`+num(proj))+R`.`};
+}
+function qResultant(){
+  const F1=vr(2),F2=vr(2),Rr=add(F1,F2),mag=vmag(Rr);
+  return {type:'num',prompt:R`Two forces `+m(pmat(F1))+R` N and `+m(pmat(F2))+R` N act on a particle. Find the magnitude of the resultant force, in newtons. Two decimal places.`,unit:'N',answer:mag,
+    explain:R`The resultant is `+m(R`\mathbf{F}_1+\mathbf{F}_2=`+pmat(Rr))+R`, with magnitude `+m(num(mag))+R` N.`};
+}
+
+/* ---------------- 3.5 Eigenvalues and eigenvectors ---------------- */
+function eigenPair(){
+  const l1=pick([1,2,3,4]);
+  let l2; do{ l2=pick([-3,-2,-1,2,3,4,5]); }while(l2===l1||l2===-l1);
+  const A=[[2*l1-l2, l2-l1],[2*l1-2*l2, 2*l2-l1]];
+  return {l1,l2,A};
+}
+function qEigenValues(){
+  const {l1,l2,A}=eigenPair(),tr=l1+l2,dt=l1*l2;
+  return mcq(R`Find the eigenvalues of `+m(mp(A))+R`.`,
+    m(`${l1},\\ ${l2}`),
+    [m(`${-l1},\\ ${-l2}`),m(`${tr},\\ ${dt}`),m(`${dt},\\ ${tr}`)],
+    R`Solve `+m(R`\det(A-\lambda I)=0`)+R`. This gives `+m(R`\lambda^{2}-`+tr+R`\lambda+`+dt+'=0')+R`, i.e. `+m(R`(\lambda-`+l1+R`)(\lambda-`+l2+')=0')+R`.`);
+}
+function qCharPoly(){
+  const {l1,l2,A}=eigenPair(),tr=l1+l2,dt=l1*l2;
+  return mcq(R`The characteristic polynomial of `+m(mp(A))+R` is which?`,
+    m(R`\lambda^{2}-`+tr+R`\lambda+`+dt),
+    [m(R`\lambda^{2}+`+tr+R`\lambda+`+dt),m(R`\lambda^{2}-`+tr+R`\lambda-`+dt),m(R`\lambda^{2}-`+dt+R`\lambda+`+tr)],
+    R`For a `+m(R`2\times2`)+R` matrix, `+m(R`\det(A-\lambda I)=\lambda^{2}-(\operatorname{tr}A)\lambda+\det A`)+R`. Here `+m(R`\operatorname{tr}A=`+tr)+R` and `+m(R`\det A=`+dt)+R`.`);
+}
+function qEigenVector(){
+  const {l1,l2,A}=eigenPair(),v1=[1,1],v2=[1,2];
+  const which=pick([l1,l2]),v=which===l1?v1:v2,other=which===l1?v2:v1;
+  return mcq(R`Which vector is an eigenvector of `+m(mp(A))+R` for `+m(R`\lambda=`+which)+R`?`,
+    m(vstr(v)),
+    [m(vstr(other)),m(vstr(add(v1,v2))),m(vstr(sub(v1,v2)))],
+    R`Check `+m(R`A\mathbf{v}=\lambda\mathbf{v}`)+R`. For `+m(vstr(v))+R`, `+m(R`A\mathbf{v}=`+pmat([dot(A[0],v),dot(A[1],v)])+R`=`+m(String(which))+R`\mathbf{v}`)+R`.`);
+}
+function qTraceDet(){
+  const {l1,l2,A}=eigenPair();
+  return mcq(R`For `+m(mp(A))+R`, find the trace and the determinant.`,
+    `trace ${m(String(l1+l2))}, determinant ${m(String(l1*l2))}`,
+    [`trace ${m(String(l1*l2))}, determinant ${m(String(l1+l2))}`,
+     `trace ${m(String(l1+l2))}, determinant ${m(String(-l1*l2))}`,
+     `trace ${m(String(l1+l2+1))}, determinant ${m(String(l1*l2))}`],
+    R`The trace is the sum of the diagonal entries, and also the sum of the eigenvalues: `+m(String(l1+l2))+R`. The determinant is the product of the eigenvalues: `+m(String(l1*l2))+R`.`);
+}
+function qEigenCheck(){
+  let a=rnd(-3,3)||1,b=rnd(-3,3)||2,c=rnd(-3,3)||3;
+  while(a===b||b===c||a===c){ b=rnd(-3,3)||2; c=rnd(-3,3)||3; }
+  const A=[[a,rnd(-2,2),rnd(-2,2)],[0,b,rnd(-2,2)],[0,0,c]];
+  return mcq(R`Find the eigenvalues of the upper-triangular matrix `+m(mp(A))+R`.`,
+    m(`${a},\\ ${b},\\ ${c}`),
+    [m(`${a+b},\\ ${b+c},\\ ${a+c}`),m(`0,\\ 0,\\ 0`),m(`${a*b},\\ ${b*c},\\ ${a*c}`)],
+    R`The characteristic polynomial of a triangular matrix is the product of the diagonal factors `+m(R`(\lambda-a_{ii})`)+R`, so the eigenvalues are the diagonal entries `+m(`${a},\\ ${b},\\ ${c}`)+R`.`);
+}
+
+/* ---------------- 3.6 Diagonalization ---------------- */
+function qDiagCondition(){
+  return mcq(R`A `+m(R`2\times2`)+R` matrix is diagonalizable exactly when…`,
+    'it has two linearly independent eigenvectors',
+    ['it has two distinct eigenvalues','it is invertible','its determinant is non-zero'],
+    R`Distinct eigenvalues guarantee independent eigenvectors, but a repeated eigenvalue can still be diagonalizable when its eigenvectors are independent. The general condition is a full set of independent eigenvectors.`);
+}
+function qDiagP(){
+  const {l1,l2,A}=eigenPair();
+  return mcq(R`Which pair `+m(R`(P,D)`)+R` satisfies `+m(R`A=PDP^{-1}`)+R` for `+m(mp(A))+R`?`,
+    m(R`P=`+mp([[1,1],[1,2]])+R`,\quad D=`+mp([[l1,0],[0,l2]])),
+    [m(R`P=`+mp([[1,2],[1,1]])+R`,\quad D=`+mp([[l1,0],[0,l2]])),
+     m(R`P=`+mp([[1,1],[1,2]])+R`,\quad D=`+mp([[l2,0],[0,l1]])),
+     m(R`P=`+mp([[1,0],[0,1]])+R`,\quad D=`+mp(A))],
+    R`The columns of `+m('P')+R` are eigenvectors and the diagonal of `+m('D')+R` holds the matching eigenvalues: `+m(R`P=`+mp([[1,1],[1,2]]))+R` and `+m(R`D=`+mp([[l1,0],[0,l2]]))+R`.`);
+}
+function qDiagPow(){
+  const {l1,l2}=eigenPair(),n=pick([2,3]);
+  const p1=Math.pow(l1,n),p2=Math.pow(l2,n);
+  return mcq(R`If `+m(R`A=PDP^{-1}`)+R` with `+m(R`D=`+mp([[l1,0],[0,l2]]))+R`, find the eigenvalues of `+m(`A^{${n}}`)+R`.`,
+    m(`${p1},\\ ${p2}`),
+    [m(`${l1},\\ ${l2}`),m(`${p1+1},\\ ${p2}`),m(`${p1},\\ ${p2+1}`)],
+    R`Powers of a diagonalizable matrix keep the eigenvectors, and each eigenvalue is raised to the power: `+m(R`A^{n}=PD^{n}P^{-1}`)+R`.`);
+}
+function qDiagMatrix(){
+  const {l1,l2}=eigenPair();
+  return mcq(R`Which of these matrices is diagonal?`,
+    m(R`\begin{pmatrix}`+l1+R`&0\\0&`+l2+R`\end{pmatrix}`),
+    [m(R`\begin{pmatrix}`+l1+R`&1\\0&`+l2+R`\end{pmatrix}`),
+     m(R`\begin{pmatrix}0&`+l1+R`\\`+l2+R`&0\end{pmatrix}`),
+     m(R`\begin{pmatrix}`+l1+R`&`+l2+R`\\`+l2+R`&`+l1+R`\end{pmatrix}`)],
+    R`A diagonal matrix has every off-diagonal entry equal to zero.`);
+}
+function qDiagNo(){
+  const a=pick([2,3,-2]);
+  const A=[[a,1],[0,a]];
+  return mcq(R`Is `+m(mp(A))+R` diagonalizable?`,
+    'No — the repeated eigenvalue has only one independent eigenvector',
+    ['Yes — it has two distinct eigenvalues','Yes — every matrix is diagonalizable','No — its determinant is non-zero'],
+    R`The only eigenvalue is `+m(String(a))+R`. Solving `+m(R`(A-`+a+R` I)\mathbf{v}=0`)+R` gives only `+m(R`\mathbf{v}=(1,0)`)+R`, so one independent eigenvector is not enough for a `+m(R`2\times2`)+R` matrix.`);
+}
+
+/* ---------------- 4.1 Differentiation rules ---------------- */
+function qPowerRule(){
+  const a=pick([2,3,4,5]),n=pick([2,3,4]);
+  return mcq(R`Differentiate `+m(`${a}x^{${n}}`)+R` with respect to \(x\).`,
+    m(`${a*n}x^{${n-1}}`),
+    [m(`${a*n}x^{${n}}`),m(`${a}x^{${n-1}}`),m(`${a*n}x^{${n+1}}`)],
+    R`Power rule: `+m(R`\frac{d}{dx}(ax^{n})=anx^{n-1}`)+R`.`);
+}
+function qProductRule(){
+  const a=pick([2,3,4]),b=pick([1,2,3]);
+  return mcq(R`Differentiate `+m(`(x^{2}+${a})(x^{3}+${b})`)+R` with respect to \(x\).`,
+    m(`5x^{4}+${3*a}x^{2}+${2*b}x`),
+    [m(`5x^{4}+${3*a}x^{2}`),m(`5x^{4}+${3*a}x^{3}+${2*b}x`),m(`2x^{4}+${3*a}x^{2}+${2*b}x`)],
+    R`Product rule: `+m(`(2x)(x^{3}+${b})+(x^{2}+${a})(3x^{2})`)+R`, which simplifies to `+m(`5x^{4}+${3*a}x^{2}+${2*b}x`)+R`.`);
+}
+function qQuotientRule(){
+  let a,b,c,k;
+  do{ a=pick([2,3,4]); b=pick([1,2,3,4]); c=pick([1,2,3,4]); k=a*c-b; }while(k===0);
+  return mcq(R`Differentiate `+m(R`\frac{${a}x+${b}}{x+${c}}`)+R` with respect to \(x\).`,
+    m(R`\frac{${k}}{(x+${c})^{2}}`),
+    [m(R`\frac{${a}}{(x+${c})^{2}}`),m(R`\frac{${k}}{x+${c}}`),m(R`\frac{${a*c+b}}{(x+${c})^{2}}`)],
+    R`Quotient rule: `+m(R`\left(\frac{u}{v}\right)'=\frac{u'v-uv'}{v^{2}}`)+R`. Here `+m(R`\frac{${a}(x+${c})-(${a}x+${b})}{(x+${c})^{2}}=\frac{${k}}{(x+${c})^{2}}`)+R`.`);
+}
+function qChainRule(){
+  const a=pick([2,3,4]),n=pick([2,3,4]);
+  return mcq(R`Differentiate `+m(`(${a}x+1)^{${n}}`)+R` with respect to \(x\).`,
+    m(`${a*n}(${a}x+1)^{${n-1}}`),
+    [m(`${n}(${a}x+1)^{${n-1}}`),m(`${a*n}(${a}x+1)^{${n}}`),m(`${a}(${a}x+1)^{${n-1}}`)],
+    R`Chain rule: `+m(R`\frac{d}{dx}(ax+1)^{n}=n(ax+1)^{n-1}\cdot a`)+R`.`);
+}
+function qDerivEval(){
+  const a=pick([2,3,4]),n=pick([2,3,4]),x0=pick([1,2,3]);
+  const v=a*n*Math.pow(x0,n-1);
+  return {type:'num',prompt:R`If `+m(`f(x)=${a}x^{${n}}`)+R`, find `+m(`f'(${x0})`)+R`.`,unit:'',answer:v,
+    explain:R`\(f'(x)=${a*n}x^{${n-1}}\), so `+m(`f'(${x0})=`+v)+R`.`};
+}
+function qDerivExp(){
+  const a=pick([2,3,4]);
+  return mcq(R`Differentiate `+m(`e^{${a}x}`)+R` with respect to \(x\).`,
+    m(`${a}e^{${a}x}`),
+    [m(`e^{${a}x}`),m(`${a}xe^{${a}x}`),m(`${a}e^{x}`)],
+    R`\(\frac{d}{dx}e^{ax}=ae^{ax}\).`);
+}
+
+/* ---------------- 4.2 Implicit and parametric differentiation ---------------- */
+function qImplicitCircle(){
+  const r=pick([2,3,4,5]);
+  return mcq(R`For `+m(`x^{2}+y^{2}=${r*r}`)+R`, find `+m(R`\frac{dy}{dx}`)+R`.`,
+    m(R`-\frac{x}{y}`),[m(R`\frac{x}{y}`),m(R`-\frac{y}{x}`),m(R`\frac{y}{x}`)],
+    R`Differentiate implicitly: `+m(R`2x+2y\frac{dy}{dx}=0`)+R`, so `+m(R`\frac{dy}{dx}=-\frac{x}{y}`)+R`.`);
+}
+function qImplicitXY(){
+  const k=pick([1,2,3]);
+  return mcq(R`For `+m(`xy+y^{2}=${k}`)+R`, find `+m(R`\frac{dy}{dx}`)+R`.`,
+    m(R`-\frac{y}{x+2y}`),
+    [m(R`\frac{y}{x+2y}`),m(R`-\frac{x}{x+2y}`),m(R`-\frac{y}{x+y}`)],
+    R`Differentiate: `+m(R`y+x\frac{dy}{dx}+2y\frac{dy}{dx}=0`)+R`, so `+m(R`\frac{dy}{dx}=-\frac{y}{x+2y}`)+R`.`);
+}
+function qParamPoly(){
+  const n=pick([3,4]);
+  return mcq(R`A curve has `+m('x=t^{2}')+R` and `+m(`y=t^{${n}}`)+R`. Find `+m(R`\frac{dy}{dx}`)+R` in terms of \(t\).`,
+    m(R`\frac{${n}}{2}t^{${n-2}}`),
+    [m(R`\frac{${n}}{2}t^{${n-1}}`),m(R`${2*n}t^{${n-1}}`),m(R`\frac{2}{${n}}t^{${n-2}}`)],
+    R`Use `+m(R`\frac{dy}{dx}=\frac{dy/dt}{dx/dt}`)+R`: `+m(R`\frac{${n}t^{${n-1}}}{2t}=\frac{${n}}{2}t^{${n-2}}`)+R`.`);
+}
+function qParamTrig(){
+  const a=pick([2,3,4]),b=pick([2,3,4]);
+  return mcq(R`A curve has `+m(`x=${a}\cos t`)+R` and `+m(`y=${b}\sin t`)+R`. Find `+m(R`\frac{dy}{dx}`)+R`.`,
+    m(R`-\frac{${b}}{${a}}\cot t`),
+    [m(R`-\frac{${a}}{${b}}\cot t`),m(R`\frac{${b}}{${a}}\tan t`),m(R`-\frac{${b}}{${a}}\sin t`)],
+    R`Use `+m(R`\frac{dy}{dx}=\frac{dy/dt}{dx/dt}`)+R`: `+m(R`\frac{${b}\cos t}{-${a}\sin t}=-\frac{${b}}{${a}}\cot t`)+R`.`);
+}
+function qParamSlope(){
+  const t0=pick([1,2]),n=pick([3,4]);
+  const slope=(n/2)*Math.pow(t0,n-2);
+  return {type:'num',prompt:R`For `+m(`x=t^{2},\ y=t^{${n}}`)+R`, find the slope `+m(R`\frac{dy}{dx}`)+R` at `+m(`t=${t0}`)+R`.`,unit:'',answer:slope,
+    explain:R`\(\frac{dy}{dx}=\frac{${n}}{2}t^{${n-2}}\), so at `+m(`t=${t0}`)+R` the slope is `+m(num(slope))+R`.`};
+}
+
+/* ---------------- 4.3 Multivariable functions ---------------- */
+function qEvalF(){
+  const a=pick([1,2,3]),b=pick([1,2,3]),x0=pick([1,2,-1]),y0=pick([1,2,-1]);
+  const v=a*x0*x0+b*y0;
+  return {type:'num',prompt:R`If `+m(`f(x,y)=${a===1?'':a}x^{2}+${b}y`)+R`, find `+m(`f(${x0},${y0})`)+R`.`,unit:'',answer:v,
+    explain:R`Substitute: `+m(`${a}(${x0})^{2}+${b}(${y0})=`+v)+R`.`};
+}
+function qDomain(){
+  return mcq(R`What is the domain of `+m(R`f(x,y)=\sqrt{9-x^{2}-y^{2}}`)+R`?`,
+    m(R`x^{2}+y^{2}\le 9`),
+    [m(R`x^{2}+y^{2}<9`),m(R`x^{2}+y^{2}\ge 9`),m(R`x+y\le 9`)],
+    R`The expression under the square root must be non-negative: `+m(R`9-x^{2}-y^{2}\ge 0`)+R`, i.e. `+m(R`x^{2}+y^{2}\le 9`)+R`.`);
+}
+function qLevelCurves(){
+  return mcq(R`The level curves `+m('f(x,y)=c')+R` of `+m('f(x,y)=x^{2}+y^{2}')+R` are…`,
+    'circles centred at the origin',
+    ['straight lines','parabolas','hyperbolas'],
+    R`Setting `+m(R`x^{2}+y^{2}=c`)+R` gives a circle of radius `+m(R`\sqrt{c}`)+R` for each `+m('c>0')+R`.`);
+}
+function qMultivarID(){
+  return mcq(R`Which of these is a function of two independent variables?`,
+    m('z=x^{2}+3xy-y^{2}'),
+    [m('y=2x+1'),m('z=x^{2}+y^{2}+w'),m('y=x^{3}')],
+    R`A function of two variables assigns a value to each pair `+m('(x,y)')+R`; `+m('z=x^{2}+3xy-y^{2}')+R` has exactly two independent inputs.`);
+}
+function qLevelLines(){
+  return mcq(R`The level curves of `+m('f(x,y)=x+y')+R` are…`,
+    'parallel straight lines',
+    ['concentric circles','parabolas','the coordinate axes'],
+    R`For a fixed `+m('c')+R`, `+m('x+y=c')+R` is a straight line of slope `+m('-1')+R`; changing `+m('c')+R` shifts it, giving a family of parallel lines.`);
+}
+
+/* ---------------- 4.4 Partial derivatives ---------------- */
+function qPartialX(){
+  const a=pick([2,3,4]),b=pick([2,3,4]);
+  return mcq(R`Find `+m(R`\frac{\partial f}{\partial x}`)+R` for `+m(`f(x,y)=${a}x^{2}y+${b}y^{2}`)+R`.`,
+    m(`${2*a}xy`),
+    [m(`${a}x^{2}+${2*b}y`),m(`${a}x^{2}y`),m(`${2*a}x+${b}y^{2}`)],
+    R`Differentiate with respect to \(x\), treating \(y\) as a constant: `+m(R`\frac{\partial}{\partial x}(${a}x^{2}y)=${2*a}xy`)+R`; the `+m(`${b}y^{2}`)+R` term is constant in \(x\).`);
+}
+function qPartialY(){
+  const a=pick([2,3,4]),b=pick([2,3,4]);
+  return mcq(R`Find `+m(R`\frac{\partial f}{\partial y}`)+R` for `+m(`f(x,y)=${a}x^{2}y+${b}y^{2}`)+R`.`,
+    m(`${a}x^{2}+${2*b}y`),
+    [m(`${2*a}xy`),m(`${b}y^{2}`),m(`${a}x^{2}+${b}y`)],
+    R`Differentiate with respect to \(y\), treating \(x\) as a constant: `+m(R`\frac{\partial}{\partial y}(${a}x^{2}y)=${a}x^{2}`)+R` and `+m(R`\frac{\partial}{\partial y}(${b}y^{2})=${2*b}y`)+R`.`);
+}
+function qSecondPartial(){
+  const a=pick([2,3,4]),n=pick([2,3]);
+  return mcq(R`Find `+m(R`\frac{\partial^{2} f}{\partial x^{2}}`)+R` for `+m(`f(x,y)=${a}x^{${n+1}}+xy`)+R`.`,
+    m(`${a*(n+1)*n}x^{${n-1}}`),
+    [m(`${a*(n+1)}x^{${n}}`),m(`${a*(n+1)*n}x^{${n}}`),m(`${a*n}x^{${n-1}}+1`)],
+    R`First `+m(R`\frac{\partial f}{\partial x}=${a*(n+1)}x^{${n}}+y`)+R`; differentiating again in \(x\) gives `+m(`${a*(n+1)*n}x^{${n-1}}`)+R`.`);
+}
+function qMixedPartial(){
+  const a=pick([2,3]),b=pick([2,3]);
+  return mcq(R`For `+m(`f(x,y)=${a}x^{2}y^{3}+${b}xy`)+R`, find `+m(R`\frac{\partial^{2} f}{\partial x\,\partial y}`)+R`.`,
+    m(`${6*a}xy^{2}+${b}`),
+    [m(`${6*a}x^{2}y+${b}`),m(`${6*a}xy^{2}`),m(`${2*a}xy^{3}+${b}`)],
+    R`First `+m(R`\frac{\partial f}{\partial y}=${3*a}x^{2}y^{2}+${b}x`)+R`, then differentiate in \(x\): `+m(`${6*a}xy^{2}+${b}`)+R`. For these smooth functions the mixed partials are equal.`);
+}
+function qGradient(){
+  const a=pick([2,3]),b=pick([2,3]),x0=pick([1,2]),y0=pick([1,2]);
+  const gx=2*a*x0,gy=2*b*y0;
+  return mcq(R`Find `+m(R`\nabla f`)+R` at `+m(`(${x0},${y0})`)+R` for `+m(`f(x,y)=${a}x^{2}+${b}y^{2}`)+R`.`,
+    m(vstr([gx,gy])),
+    [m(vstr([2*a,2*b])),m(vstr([gx,0])),m(vstr([gy,gx]))],
+    R`\(\nabla f=(2ax,\ 2by)\); at `+m(`(${x0},${y0})`)+R` this is `+m(vstr([gx,gy]))+R`.`);
+}
+
+const LEGS={
+ 1:{title:'Complex algebra',route:'Operations, Cartesian and polar form, roots and powers, geometry, Euler and De Moivre'},
+ 2:{title:'Vector algebra',route:'Vectors and forms, dot and cross products, lines and planes, physical models'},
+ 3:{title:'Matrix algebra',route:'Determinants and inverses, rank, row operations, systems, eigenvalues, diagonalization'},
+ 4:{title:'Differential calculus and applications',route:'Rules, implicit and parametric differentiation, multivariable functions, partial derivatives'}
+};
+const five=arr=>{const src=shuffle(arr),out=[]; while(out.length<5) out.push(src[out.length%src.length]()); return out;};
 const STATIONS=[
- ...CSTATIONS,
- ...LSTATIONS.map(s=>({...s,leg:s.leg+3,id:`${s.leg+3}.${s.id.split('.')[1]}`}))
+ /* ---------------- UNIT 1: COMPLEX ALGEBRA ---------------- */
+ {id:'1.1',leg:1,place:'Complex arithmetic',name:'Operations on complex numbers',
+  topic:'Add, subtract, multiply, divide; powers of i',
+  toolkit:R`<p><b>Add/subtract:</b> combine real parts and imaginary parts separately.</p><p><b>Multiply:</b> expand like brackets, then replace \(i^{2}\) with \(-1\).</p><p><b>Divide:</b> multiply top and bottom by the conjugate of the denominator.</p><p><b>Powers of i:</b> \(i^{2}=-1\), so the values repeat with period 4: \(i,\,-1,\,-i,\,1\).</p><p><b>Common mistake:</b> writing \(i^{2}=1\); it is \(-1\).</p>`,
+  round:()=>five([...B1,...B2,...B3])},
+ {id:'1.2',leg:1,place:'Polar form',name:'Cartesian and polar forms',
+  topic:R`Modulus, argument, and conversions between \(a+bi\) and \(r(\cos\theta+i\sin\theta)\)`,
+  toolkit:R`<p>\(|a+bi|=\sqrt{a^{2}+b^{2}}\) and \(\arg(a+bi)\) is the angle from the positive real axis.</p><p>Polar form: \(z=r(\cos\theta+i\sin\theta)\), with \(a=r\cos\theta\) and \(b=r\sin\theta\).</p><p>The principal argument lies in \((-180^{\circ},180^{\circ}]\); sketch the point to fix the quadrant.</p><p><b>Common mistake:</b> ignoring the quadrant when naming the argument.</p>`,
+  round:()=>five([...B4])},
+ {id:'1.3',leg:1,place:'Roots and powers',name:'Complex roots and powers',
+  topic:'Quadratic roots with negative discriminant; powers and roots in polar form',
+  toolkit:R`<p>If \(b^{2}-4ac<0\), the roots are the conjugate pair \(\frac{-b\pm i\sqrt{4ac-b^{2}}}{2a}\).</p><p>De Moivre: \(z^{n}=r^{n}(\cos n\theta+i\sin n\theta)\) for \(z=r(\cos\theta+i\sin\theta)\).</p><p>The \(n\)th roots are equally spaced around a circle of radius \(r^{1/n}\).</p><p><b>Common mistake:</b> raising the modulus to \(n\) by multiplying by \(n\) instead of using a power.</p>`,
+  round:()=>five([...C1,...C3])},
+ {id:'1.4',leg:1,place:'Argand geometry',name:'Geometric representation',
+  topic:'Argand diagram: circles, rays and perpendicular bisectors',
+  toolkit:R`<p>\(|z-a|=r\) is a circle centred at \(a\) with radius \(r\).</p><p>\(|z-a|=|z-b|\) is the perpendicular bisector of the segment \(ab\).</p><p>\(\arg(z-a)=\theta\) is a ray from \(a\) at angle \(\theta\).</p><p><b>Common mistake:</b> treating a ray as a full line.</p>`,
+  round:()=>five([...C4])},
+ {id:'1.5',leg:1,place:'Euler and De Moivre',name:'Euler and De Moivre identities',
+  topic:R`\(e^{i\theta}=\cos\theta+i\sin\theta\); identities from \((\cos\theta+i\sin\theta)^{n}\)`,
+  toolkit:R`<p>Euler: \(e^{i\theta}=\cos\theta+i\sin\theta\), so \(e^{i\pi}=-1\).</p><p>De Moivre: \((\cos\theta+i\sin\theta)^{n}=\cos n\theta+i\sin n\theta\).</p><p>If \(z=\cos\theta+i\sin\theta\), then \(z^{n}+z^{-n}=2\cos n\theta\) and \(z^{n}-z^{-n}=2i\sin n\theta\).</p><p><b>Common mistake:</b> expanding \((\cos\theta+i\sin\theta)^{2}\) as \(\cos^{2}\theta+i\sin^{2}\theta\), forgetting the \(2i\sin\theta\cos\theta\) term.</p>`,
+  round:()=>five([qEulerForm,qEulerPi,qMoivrePower,qMoivreZ,qZPlusInv,qIdentityExpand])},
+
+ /* ---------------- UNIT 2: VECTOR ALGEBRA ---------------- */
+ {id:'2.1',leg:2,place:'Vectors and forms',name:'Vectors and forms',
+  topic:'Components, position vectors, addition, scalar multiples, magnitude, unit vectors',
+  toolkit:R`<p>A vector has magnitude and direction; in components, \(\mathbf{a}=(a_1,a_2,a_3)\).</p><p>Add and subtract component by component; multiply each component by a scalar.</p><p>\(|\mathbf{a}|=\sqrt{a_1^{2}+a_2^{2}+a_3^{2}}\); the unit vector is \(\hat{\mathbf{a}}=\mathbf{a}/|\mathbf{a}|\).</p><p>The vector from \(P\) to \(Q\) is \(\overrightarrow{PQ}=\mathbf{q}-\mathbf{p}\).</p>`,
+  round:()=>five([qVecAdd,qVecSub,qVecScalar,qMag,qDist,qUnit])},
+ {id:'2.2',leg:2,place:'Vector operations',name:'Vector operations',
+  topic:'Dot and cross products, angles, areas and volumes',
+  toolkit:R`<p>\(\mathbf{a}\cdot\mathbf{b}=a_1b_1+a_2b_2+a_3b_3\); it is zero when the vectors are perpendicular.</p><p>\(\cos\theta=\frac{\mathbf{a}\cdot\mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\).</p><p>\(\mathbf{a}\times\mathbf{b}\) is perpendicular to both; \(|\mathbf{a}\times\mathbf{b}|\) is the parallelogram area.</p><p>The scalar triple product \(\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})\) is the signed volume; it is zero for coplanar vectors.</p>`,
+  round:()=>five([qDot,qPerp,qCosAngle,qCross,qArea,qTriple])},
+ {id:'2.3',leg:2,place:'Lines and planes',name:'Equations of geometric constructs',
+  topic:'Vector, parametric, symmetric and Cartesian equations of lines and planes',
+  toolkit:R`<p>Line: \(\mathbf{r}=\mathbf{a}+t\mathbf{d}\), or symmetric form by eliminating \(t\).</p><p>Plane: \(\mathbf{n}\cdot(\mathbf{r}-\mathbf{a})=0\), giving \(n_1x+n_2y+n_3z=d\).</p><p>A normal to a plane through three points is the cross product of two direction vectors in the plane.</p><p><b>Common mistake:</b> using a point where the direction vector belongs in the line equation.</p>`,
+  round:()=>five([qLineVec,qDir,qSym,qPlane,qCartLine,qPlane3])},
+ {id:'2.4',leg:2,place:'Physical models',name:'Applications to physical models',
+  topic:'Work, moments and projections',
+  toolkit:R`<p>Work: \(W=\mathbf{F}\cdot\mathbf{d}=|\mathbf{F}||\mathbf{d}|\cos\theta\).</p><p>Moment (torque) about a pivot: \(\boldsymbol{\tau}=\mathbf{r}\times\mathbf{F}\), magnitude \(|\mathbf{r}||\mathbf{F}|\sin\theta\).</p><p>Component of \(\mathbf{F}\) along \(\mathbf{d}\): \(\frac{\mathbf{F}\cdot\mathbf{d}}{|\mathbf{d}|}\).</p><p><b>Common mistake:</b> adding force magnitudes directly when the forces are not parallel; add the vectors first.</p>`,
+  round:()=>five([qWork,qTorque,qWorkAngle,qProjection,qResultant])},
+
+ /* ---------------- UNIT 3: MATRIX ALGEBRA ---------------- */
+ {id:'3.1',leg:3,place:'Determinants and inverses',name:'Determinants and inverses',
+  topic:R`\(2\times2\) and \(3\times3\) determinants; inverse matrices; singular matrices`,
+  toolkit:R`<p>For \(A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\), \(\det A=ad-bc\).</p><p>\(A^{-1}=\frac{1}{\det A}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\) when \(\det A\neq0\).</p><p>A matrix is singular exactly when its determinant is zero.</p><p><b>Common mistake:</b> swapping the signs of \(b\) and \(c\) in the adjugate.</p>`,
+  round:()=>five([qDet2,qDet3,qInv2,qInv3,qSingular])},
+ {id:'3.2',leg:3,place:'Rank',name:'Matrix rank',
+  topic:'Independent rows and columns; rank from echelon form',
+  toolkit:R`<p>The rank is the number of non-zero rows in row-echelon form, i.e. the number of independent rows.</p><p>Row operations do not change the rank.</p><p>Rank is also the number of independent columns, so rank \(=\min\)(row rank, column rank) for a square matrix with full rank.</p>`,
+  round:()=>five([qRank,qRank,qRowOp])},
+ {id:'3.3',leg:3,place:'Row operations',name:'Elementary row operations',
+  topic:R`\(R_i\to R_i+kR_j\), scaling, and row swaps`,
+  toolkit:R`<p>Allowed elementary row operations: swap two rows, multiply a row by a non-zero scalar, and add a multiple of one row to another.</p><p>Apply the operation to the stated row only; every other row stays unchanged.</p><p>These operations preserve the solution set of a linear system.</p>`,
+  round:()=>five([qRowOp])},
+ {id:'3.4',leg:3,place:'Systems',name:'Solving systems of equations',
+  topic:R`Elimination, substitution and row reduction for \(2\times2\) and \(3\times3\) systems`,
+  toolkit:R`<p>Eliminate one variable at a time: scale a row, then add or subtract rows to cancel it.</p><p>For three unknowns, reduce the \(3\times3\) system to a \(2\times2\) system first.</p><p>Check the solution in every original equation.</p><p><b>Common mistake:</b> applying an operation to one side of an equation only.</p>`,
+  round:()=>five([qSolve2,qSolve3,qInv2])},
+ {id:'3.5',leg:3,place:'Eigenvalues',name:'Eigenvalues and eigenvectors',
+  topic:'Characteristic polynomial, trace and determinant, eigenvectors',
+  toolkit:R`<p>Eigenvalues solve \(\det(A-\lambda I)=0\).</p><p>For a \(2\times2\) matrix: \(\lambda^{2}-(\operatorname{tr}A)\lambda+\det A=0\).</p><p>Eigenvectors solve \((A-\lambda I)\mathbf{v}=0\) for each eigenvalue.</p><p>Triangular matrices have their eigenvalues on the diagonal.</p>`,
+  round:()=>five([qEigenValues,qCharPoly,qEigenVector,qTraceDet,qEigenCheck])},
+ {id:'3.6',leg:3,place:'Diagonalization',name:'Diagonalization',
+  topic:R`\(A=PDP^{-1}\); independent eigenvectors; powers of a matrix`,
+  toolkit:R`<p>\(A\) is diagonalizable when it has a full set of linearly independent eigenvectors.</p><p>Then \(A=PDP^{-1}\), where the columns of \(P\) are eigenvectors and \(D\) holds the matching eigenvalues.</p><p>Powers: \(A^{n}=PD^{n}P^{-1}\), so the eigenvalues of \(A^{n}\) are the \(n\)th powers of those of \(A\).</p><p><b>Common mistake:</b> assuming a repeated eigenvalue always prevents diagonalization; check the eigenvectors first.</p>`,
+  round:()=>five([qDiagCondition,qDiagP,qDiagPow,qDiagMatrix,qDiagNo])},
+
+ /* ---------------- UNIT 4: DIFFERENTIAL CALCULUS ---------------- */
+ {id:'4.1',leg:4,place:'Differentiation rules',name:'Differentiation rules',
+  topic:'Power, product, quotient and chain rules; exponential functions',
+  toolkit:R`<p>Power rule: \(\frac{d}{dx}(ax^{n})=anx^{n-1}\).</p><p>Product rule: \((uv)'=u'v+uv'\).</p><p>Quotient rule: \(\left(\frac{u}{v}\right)'=\frac{u'v-uv'}{v^{2}}\).</p><p>Chain rule: \(\frac{d}{dx}f(g(x))=f'(g(x))g'(x)\).</p>`,
+  round:()=>five([qPowerRule,qProductRule,qQuotientRule,qChainRule,qDerivEval,qDerivExp])},
+ {id:'4.2',leg:4,place:'Implicit and parametric',name:'Implicit and parametric differentiation',
+  topic:R`\(\frac{dy}{dx}\) from implicit relations and from parameter equations`,
+  toolkit:R`<p>Implicit: differentiate both sides with respect to \(x\), treating \(y\) as a function of \(x\), then solve for \(\frac{dy}{dx}\).</p><p>Parametric: \(\frac{dy}{dx}=\frac{dy/dt}{dx/dt}\), provided \(dx/dt\neq0\).</p><p><b>Common mistake:</b> forgetting the chain-rule factor \(\frac{dy}{dx}\) when differentiating a \(y\)-term.</p>`,
+  round:()=>five([qImplicitCircle,qImplicitXY,qParamPoly,qParamTrig,qParamSlope])},
+ {id:'4.3',leg:4,place:'Multivariable functions',name:'Multivariable functions',
+  topic:'Functions of two variables, domains and level curves',
+  toolkit:R`<p>A function of two variables, \(z=f(x,y)\), assigns one value to each pair \((x,y)\).</p><p>The domain is the set of pairs for which the expression is defined.</p><p>Level curves \(f(x,y)=c\) are the slices of the surface at height \(c\); for \(x^{2}+y^{2}\) they are circles.</p>`,
+  round:()=>five([qEvalF,qDomain,qLevelCurves,qMultivarID,qLevelLines])},
+ {id:'4.4',leg:4,place:'Partial derivatives',name:'Partial derivatives',
+  topic:'First and second partial derivatives; the gradient',
+  toolkit:R`<p>\(\frac{\partial f}{\partial x}\) differentiates in \(x\) while holding \(y\) constant, and vice versa.</p><p>Second partials: \(f_{xx}\), \(f_{yy}\), and the mixed \(f_{xy}=f_{yx}\) for smooth functions.</p><p>The gradient \(\nabla f=(f_x,f_y)\) points in the direction of steepest increase.</p>`,
+  round:()=>five([qPartialX,qPartialY,qSecondPartial,qMixedPartial,qGradient])}
 ];
 const VIDEOS={
- '2.1':[['14-imaginary-unit.mp4','The imaginary unit']],
- '2.2':[['15-complex-arithmetic.mp4','Adding and multiplying']],
- '2.3':[['16-conjugates-division.mp4','Conjugates and division']],
- '2.4':[['17-modulus-argument.mp4','Modulus and argument']],
- '3.1':[['18-complex-quadratic.mp4','Quadratic roots']],
- '3.2':[['19-conjugate-roots.mp4','Conjugate roots']],
- '3.3':[['20-de-moivre.mp4','De Moivre\'s theorem']],
- '3.4':[['21-loci-geometry.mp4','Loci and geometry']],
- '6.4':[['22-cartesian-equations.mp4','Cartesian equations']],
- '7.4':[['23-row-reduction.mp4','Row reduction and rank']],
- '7.5':[['24-inverse-row-reduction.mp4','Inverse by row reduction']]
+ '1.1':[['15-complex-arithmetic-v2.mp4','Adding and multiplying complex numbers'],['16-conjugates-division-v2.mp4','Conjugates and division']],
+ '1.2':[['17-modulus-argument-v3.mp4','Modulus, argument and polar form']],
+ '1.3':[['18-complex-quadratic-v2.mp4','Quadratic equations with complex roots'],['20-de-moivre.mp4',"De Moivre's theorem"]],
+ '1.4':[['21-loci-geometry.mp4','Loci and geometry in the Argand diagram']],
+ '1.5':[['20-de-moivre.mp4',"De Moivre's theorem and identities"]],
+ '2.1':[['01-vector-basics-v2.mp4','Vector basics']],
+ '2.2':[['03-dot-product-v2.mp4','The dot product'],['06-cross-product-v2.mp4','The cross product']],
+ '2.3':[['08-line-vector-equation-v2.mp4','Vector equation of a line'],['10-plane-equation-v2.mp4','Equation of a plane'],['22-cartesian-equations-v2.mp4','Cartesian equations']],
+ '3.1':[['12-determinants-v2.mp4','Determinants'],['13-inverse-and-singular.mp4','Inverse and singular matrices']],
+ '3.2':[['23-row-reduction-v2.mp4','Row reduction and rank']],
+ '3.3':[['23-row-reduction-v2.mp4','Elementary row operations']],
+ '3.4':[['23-row-reduction-v2.mp4','Row reduction and systems'],['24-inverse-row-reduction-v2.mp4','Inverse by row reduction']],
+ '2.4':[['25-physical-applications-v2.mp4','Physical applications: work and moments']],
+ '3.5':[['26-eigenvalues-eigenvectors-v2.mp4','Eigenvalues and eigenvectors']],
+ '3.6':[['27-diagonalization-v2.mp4','Diagonalization']],
+ '4.1':[['28-differentiation-rules-v2.mp4','Differentiation rules']],
+ '4.2':[['29-implicit-parametric.mp4','Implicit and parametric differentiation']],
+ '4.3':[['30-multivariable-functions.mp4','Multivariable functions']],
+ '4.4':[['31-partial-derivatives.mp4','Partial derivatives']]
 };
-Object.keys(LVIDEOS).forEach(k=>{ const p=k.split('.'); VIDEOS[`${+p[0]+3}.${p[1]}`]=LVIDEOS[k]; });
 const YT={
- '1.1':[['813YPh2SSnw','Cognito — How to expand single brackets'],['3kE_Q-JdlO4','Cognito — Factorising quadratics (x² coefficient 1)']],
- '1.2':[['e1J3MJtM2UM','Corbettmaths — Laws of indices'],['ndU_cCbPAm4','Corbettmaths — Surds']],
- '1.3':[['9FuR91H8EVU','Cognito — How to solve algebraic equations'],['i7idZfS8t8w','Khan Academy — How to use the quadratic formula']],
- '1.4':[['68hMhae269k','Cognito — Simultaneous equations by elimination'],['vA-55wZtLeE','Khan Academy — Solving systems by elimination']],
- '2.1':[['SP-YJe7Vldo','Khan Academy — Introduction to complex numbers'],['5PcpBw5Hbwo','3Blue1Brown — Complex number fundamentals']],
- '2.2':[['kpywdu1afas','Khan Academy — Complex numbers, part 1']],
- '2.3':[['Z8j5RDOibV4','Khan Academy — Dividing complex numbers'],['BZxZ_eEuJBM','Khan Academy — Complex conjugates']],
- '2.4':[['FwuPXchH2rA','Khan Academy — Modulus and angle of a complex number']],
- '3.1':[['oSRRXm-N0Jg','Math with Sophie — Quadratic equations with complex roots']],
- '3.2':[['N_3upZZTIk0','Eddie Woo — Complex conjugate root theorem']],
- '3.3':[['k2gO530rwmU','Existsforall Academy — De Moivre\'s formula']],
- '3.4':[['vdIKqeF7_rs','Eddie Woo — Perpendicular bisector locus'],['kmdIgrFgV1Q','ExamSolutions — Loci: half-lines']],
- '6.4':[['hWhs2cIj7Cw','Khan Academy — Parametric representations of lines'],['UJxgcVaNTqY','Khan Academy — Defining a plane in R3']],
- '7.4':[['f1e2Zij6W3s','Houston Math Prep — The row reduction algorithm']],
- '7.5':[['uQhTuRlWMxw','3Blue1Brown — Inverse matrices and null space']]
+ '1.1':[['kpywdu1afas','Khan Academy — Complex numbers, part 1'],['Z8j5RDOibV4','Khan Academy — Dividing complex numbers']],
+ '1.2':[['FwuPXchH2rA','Khan Academy — Modulus and angle of a complex number'],['5PcpBw5Hbwo','3Blue1Brown — Complex number fundamentals']],
+ '1.3':[['k2gO530rwmU',"Existsforall Academy — De Moivre's formula"],['oSRRXm-N0Jg','Math with Sophie — Quadratic equations with complex roots']],
+ '1.4':[['vdIKqeF7_rs','Eddie Woo — Perpendicular bisector locus'],['kmdIgrFgV1Q','ExamSolutions — Loci: half-lines']],
+ '1.5':[['SP-YJe7Vldo','Khan Academy — Introduction to complex numbers'],['k2gO530rwmU',"Existsforall Academy — De Moivre's formula"]],
+ '2.1':[['fNk_zzaMoSs','3Blue1Brown — Vectors (Essence of linear algebra)']],
+ '2.2':[['LyGKycYT2v0','3Blue1Brown — Dot products and duality'],['eu6i7WJeinw','3Blue1Brown — Cross products']],
+ '2.3':[['hWhs2cIj7Cw','Khan Academy — Parametric representations of lines'],['UJxgcVaNTqY','Khan Academy — Defining a plane in R3']],
+ '2.4':[['eu6i7WJeinw','3Blue1Brown — Cross products']],
+ '3.1':[['Ip3X9LOh2dk','3Blue1Brown — The determinant'],['uQhTuRlWMxw','3Blue1Brown — Inverse matrices and null space']],
+ '3.2':[['f1e2Zij6W3s','Houston Math Prep — The row reduction algorithm']],
+ '3.3':[['f1e2Zij6W3s','Houston Math Prep — The row reduction algorithm']],
+ '3.4':[['f1e2Zij6W3s','Houston Math Prep — The row reduction algorithm']]
 };
-Object.keys(LYT).forEach(k=>{ const p=k.split('.'); YT[`${+p[0]+3}.${p[1]}`]=LYT[k]; });
 if(typeof module!=='undefined'&&module.exports){ module.exports={STATIONS,LEGS,VIDEOS,YT}; }
+
 
 </script>
 
@@ -1308,10 +1607,10 @@ document.addEventListener('mathready',()=>{ document.getElementById('mathnote').
 
 const starsHTML=n=>`<span class="stars" role="img" aria-label="${n} of 3 stars">${'★'.repeat(n)}<span class="dim">${'★'.repeat(3-n)}</span></span>`;
 const totalStars=()=>STATIONS.reduce((s,st)=>s+(progress.stars[st.id]||0),0);
-function rankFor(n){ return n>=80?'Eigenmaster':n>=58?'Tensor':n>=36?'Matrix':n>=18?'Vector':'Scalar'; }
+function rankFor(n){ return n>=48?'Eigenmaster':n>=36?'Tensor':n>=24?'Matrix':n>=12?'Vector':'Scalar'; }
 
-/* ---------- course map: seven rows, one per unit ---------- */
-const GW=1000, GH=580;
+/* ---------- course map: four rows, one per MAT2103 unit ---------- */
+const GW=1000, GH=360;
 const POS=[];
 (function(){
   const counts={};
@@ -1320,15 +1619,15 @@ const POS=[];
   STATIONS.forEach(s=>{
     seen[s.leg]=(seen[s.leg]||0)+1;
     const k=seen[s.leg]-1, n=counts[s.leg];
-    let xs = n===5?[220,390,560,730,900] : n===3?[330,560,790] : [260,460,660,860];
+    let xs = n===6?[170,320,470,620,770,920] : n===5?[220,390,560,730,900] : n===4?[260,460,660,860] : [330,560,790];
     if(s.leg%2===0) xs=xs.slice().reverse();
-    POS.push({x:xs[k], y:64+(s.leg-1)*72});
+    POS.push({x:xs[k], y:70+(s.leg-1)*84});
   });
 })();
 function chartSVG(){
   let grid='';
-  for(let leg=1;leg<=7;leg++){
-    const y=64+(leg-1)*72;
+  for(let leg=1;leg<=Object.keys(LEGS).length;leg++){
+    const y=70+(leg-1)*84;
     grid+=`<line class="grat" x1="196" y1="${y}" x2="952" y2="${y}"/>`;
     grid+=`<text class="gratlab" x="10" y="${y+4}" style="font-weight:700">Unit ${leg} \u00b7 ${LEGS[leg].title}</text>`;
   }
@@ -1336,7 +1635,7 @@ function chartSVG(){
   STATIONS.forEach((s,i)=>{ if(i>0){ const done=(progress.stars[s.id]||0)>0;
     course+=`<path class="course ${done?'':'todo'}" d="M${POS[i-1].x},${POS[i-1].y}L${POS[i].x},${POS[i].y}"/>`; } });
   const wps=STATIONS.map((s,i)=>{ const p=POS[i],done=(progress.stars[s.id]||0)>0;
-    return `<g class="wp ${done?'done':''}" data-st="${s.id}" transform="translate(${p.x},${p.y})" role="button" tabindex="0" aria-label="Node ${i+1}: ${s.name}"><title>${s.name}</title><circle class="ring" r="13"/><circle class="dot" r="4"/><text y="-19" text-anchor="middle">${i+1}</text></g>`; }).join('');
+    return `<g class="wp ${done?'done':''}" data-st="${s.id}" transform="translate(${p.x},${p.y})" role="button" tabindex="0" aria-label="Section ${s.id}: ${s.name}"><title>Section ${s.id} — ${s.name}</title><circle class="ring" r="13"/><circle class="dot" r="4"/><text y="-19" text-anchor="middle">${s.id}</text></g>`; }).join('');
   return `<svg viewBox="0 0 ${GW} ${GH}" aria-hidden="true">${grid}${course}${wps}</svg>`;
 }
 function toolkitHTML(st){
@@ -1356,16 +1655,16 @@ function renderChart(){
   S=null;
   const tot=totalStars();
   const legs=Object.keys(LEGS).map(l=>{
-    const rows=STATIONS.map((s,i)=>s.leg!=l?'':`<li><button class="row" data-st="${s.id}"><span class="wpn">${i+1}</span><span class="rmain"><span class="sname">${s.name}</span><span class="topic">${s.topic}</span></span>${starsHTML(progress.stars[s.id]||0)}</button></li>`).join('');
+    const rows=STATIONS.map((s,i)=>s.leg!=l?'':`<li><button class="row" data-st="${s.id}"><span class="wpn">[${s.id}]</span><span class="rmain"><span class="sname">${s.name}</span><span class="topic">${s.topic}</span></span>${starsHTML(progress.stars[s.id]||0)}</button></li>`).join('');
     return `<section class="leg"><h2>Unit ${l}. ${LEGS[l].title}</h2><p class="legsub">${LEGS[l].route}</p><ol class="plan">${rows}</ol></section>`;
   }).join('');
   app.innerHTML=`<main class="home">
     <header class="mast"><h1>Complex Numbers &amp; Linear Algebra</h1>
-    <p class="lede">One course, two landscapes. Begin with algebra and the complex plane, then cross into vector space: components, products, lines, planes and matrices. Seven units, one continuous route.</p></header>
-    <figure class="chart">${chartSVG()}<figcaption>${STATIONS.length} nodes across seven units, five problems at each. Three right clears a node; five right earns three stars. Not a substitute for the lectures.</figcaption></figure>
+    <p class="lede">Four units, straight from the MAT2103 outline: complex algebra, vector algebra, matrix algebra, and differential calculus. Every map node is an outline section, shown in brackets.</p></header>
+    <figure class="chart">${chartSVG()}<figcaption>${STATIONS.length} nodes across four units — one per outline section — five problems at each. Three right clears a node; five right earns three stars. Not a substitute for the lectures.</figcaption></figure>
     <p class="standing">Rank: <b>${rankFor(tot)}</b>. ${tot} of ${STATIONS.length*3} stars. <b>Adaptive mode:</b> each node adjusts between Foundation, Core and Challenge as you play — five right moves it up, two or fewer brings it down.</p>
     ${legs}
-    <div class="foot"><span>Nodes can be visited in any order.</span><a class="link" href="la/unit5-vector-products.webm" target="_blank" rel="noopener">Unit 5 overview</a><a class="link" href="la/unit6-lines-and-planes.webm" target="_blank" rel="noopener">Unit 6 overview</a><a class="link" href="la/unit7-matrix-algebra.webm" target="_blank" rel="noopener">Unit 7 overview</a><a class="link" href="complex-linear-shoot.html">Arcade version</a><button class="link" data-act="prove">Prove it — show your working</button><button class="link" data-act="reset">Clear my progress</button></div>
+    <div class="foot"><span>Sections on the MAT2103 outline: 1.1–1.5, 2.1–2.4, 3.1–3.6, 4.1–4.4. Off-outline material is not included.</span><a class="link" href="complex-linear-shoot.html">Arcade version</a><button class="link" data-act="prove">Prove it — show your working</button><button class="link" data-act="reset">Clear my progress</button></div>
   </main>`;
   settle();
 }
@@ -1421,7 +1720,7 @@ function renderQ(){
   }
   app.innerHTML=`<main class="station">
     <div class="bar"><button class="link" data-act="chart">Back to chart</button><span class="tally">Score <b id="score">${S.score}</b> · Combo <b id="speed">${streakLabel(S.streak)}</b></span><button class="link" id="lamute" data-act="mute">${MUTED?'🔇 Muted':'🔊 Sound'}</button></div>
-    <div class="where"><span class="place">Unit ${S.st.leg} · Node ${STATIONS.indexOf(S.st)+1} of ${STATIONS.length} · Adaptive: ${LVNAME[lvl(S.st.id)-1]}</span><h1>${S.st.name}</h1></div>
+    <div class="where"><span class="place">Unit ${S.st.leg} · Section ${S.st.id} · Adaptive: ${LVNAME[lvl(S.st.id)-1]}</span><h1>${S.st.name}</h1></div>
     ${toolkitHTML(S.st)}
     ${lessonHTML(S.st.id)}
     ${ytHTML(S.st.id)}
@@ -1506,7 +1805,7 @@ function renderResult(){
   const pips=`<div class="pips">${S.marks.map(k=>`<span class="pip ${k?'ok':'no'}"></span>`).join('')}</div>`;
   const msg=(stars===3?'A clean run.':stars===2?'One problem short of three stars.':stars===1?'Cleared, with room to tighten up.':`You need ${reach} right to clear this node.`)+moved;
   app.innerHTML=`<main class="result">
-    <span class="place">Unit ${st.leg} · Node ${idx+1} of ${STATIONS.length} · ${st.place} · Adaptive: ${LVNAME[newL-1]}</span>
+    <span class="place">Unit ${st.leg} · Section ${st.id} · ${st.place} · Adaptive: ${LVNAME[newL-1]}</span>
     <h1>${stars?'Node cleared':'Not there yet'}</h1>
     ${starsHTML(stars)}
     <p class="sum">${n} of ${S.qs.length} correct. Score ${S.score}${(progress.best[st.id]||0)>S.score?`, best ${progress.best[st.id]}`:''}. ${msg}</p>

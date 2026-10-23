@@ -1323,32 +1323,340 @@ function mPlaneNormal(){
 }
 // ================= End course generators =================
 
+// ================= MAT2103 outline extras =================
+function mLoci(){
+  const L=[
+    {z:'2 + i',r:3},{z:'−1 + 2i',r:2},{z:'0',r:4},{z:'1 − i',r:5}
+  ];
+  const e=pick(L);
+  const lhs=e.z==='0'?'|z|':`|z − (${e.z})|`;
+  return T({gen:'mLoci',type:'pick',prompt:`Describe the locus ${lhs} = ${e.r}.`,
+    ans:`circle centre ${e.z}, radius ${e.r}`,
+    dist:[D(`circle centre 0, radius ${e.r}`,'Ignored the centre','|z − a| = r is centred at a.'),
+          D(`circle centre ${e.z}, radius ${e.r*e.r}`,'Squared the radius','The radius is r, not r².'),
+          D(`straight line through ${e.z}`,'Used the wrong locus','A fixed distance gives a circle.')],
+    explain:`|z − a| = r is a circle centred at a with radius r. Here a = ${e.z} and r = ${e.r}.`});
+}
+function mQuadrant(){
+  const QS=[{z:'2 + 3i',q:'first'},{z:'−2 + 3i',q:'second'},{z:'−2 − 3i',q:'third'},{z:'2 − 3i',q:'fourth'}];
+  const e=pick(QS);
+  return T({gen:'mQuadrant',type:'pick',prompt:`In which quadrant of the Argand diagram is z = ${e.z}?`,
+    ans:`the ${e.q} quadrant`,
+    dist:['first','second','third','fourth'].filter(q=>q!==e.q).map(q=>D(`the ${q} quadrant`,'Wrong quadrant','Check the signs of the real and imaginary parts.')),
+    explain:`Real part and imaginary part signs place the point in the ${e.q} quadrant.`});
+}
+function mEuler(){
+  return T({gen:'mEuler',type:'pick',prompt:`Euler's formula gives e^(iθ) = ?`,
+    ans:`cos θ + i sin θ`,
+    dist:[D('cos θ − i sin θ','Wrong sign','Euler has a plus sign.'),
+          D('sin θ + i cos θ','Swapped sine and cosine','The real part is cos θ.'),
+          D('cos θ + sin θ','Missing i','The imaginary part keeps the factor i.')],
+    explain:'Euler: e^(iθ) = cos θ + i sin θ.'});
+}
+function mMoivre(){
+  const n=pick([2,3,4]);
+  return T({gen:'mMoivre',type:'pick',prompt:`By De Moivre's theorem, (cos θ + i sin θ)^${n} = ?`,
+    ans:`cos ${n}θ + i sin ${n}θ`,
+    dist:[D(`cos θ + i sin ${n}θ`,'Only scaled the sine','The angle is multiplied in both parts.'),
+          D(`${n}cos θ + i ${n}sin θ`,'Scaled the values','Multiply the angle, not the cosine and sine.'),
+          D(`cos ${n}θ − i sin ${n}θ`,'Wrong sign','De Moivre keeps the plus sign.')],
+    explain:`De Moivre: (cos θ + i sin θ)^n = cos nθ + i sin nθ, so here the angle is ${n}θ.`});
+}
+function mMoivreZ(){
+  const r=pick([2,3]),d=pick([30,45,60]),n=pick([2,3]);
+  return T({gen:'mMoivreZ',type:'pick',prompt:`If z = ${r}(cos ${d}° + i sin ${d}°), find z^${n}.`,
+    ans:`${r**n}(cos ${n*d}° + i sin ${n*d}°)`,
+    dist:[D(`${r*n}(cos ${n*d}° + i sin ${n*d}°)`,'Multiplied the modulus','Raise the modulus to the power.'),
+          D(`${r**n}(cos ${d}° + i sin ${d}°)`,'Kept the angle','Multiply the angle by the power.'),
+          D(`${r**n}(cos ${n*d}° − i sin ${n*d}°)`,'Wrong sign','Both parts keep the plus sign.')],
+    explain:`Raise the modulus and multiply the angle: ${r}^${n} = ${r**n}, and ${n} × ${d}° = ${n*d}°.`});
+}
+function mZInv(){
+  const n=pick([2,3,4]);
+  return T({gen:'mZInv',type:'pick',prompt:`If z = cos θ + i sin θ, then z^${n} + z^−${n} = ?`,
+    ans:`2 cos ${n}θ`,
+    dist:[D(`2i sin ${n}θ`,'Used the sine combination','The cosine terms add; the sine terms cancel.'),
+          D(`2 cos θ`,'Kept the base angle','Multiply the angle by the power.'),
+          D(`cos ${n}θ`,'Dropped the factor 2','The two conjugates add.')],
+    explain:`z^n = cos nθ + i sin nθ and z^−n = cos nθ − i sin nθ, so the sum is 2 cos nθ.`});
+}
+
+// --- extra vector generators ---
+function mVecScalar(){
+  const a=[rnd(-4,4),rnd(-4,4),rnd(-4,4)],k=pick([-3,-2,2,3]);
+  return T({gen:'mVecScalar',type:'pick',prompt:`Given a = (${a.join(', ')}), find ${k}a.`,
+    ans:`(${a.map(v=>k*v).join(', ')})`,
+    dist:[D(`(${a.join(', ')})`,'Left the vector unchanged','Multiply every component by k.'),
+          D(`(${a.map(v=>-v).join(', ')})`,'Negated only','Multiply each component by the given scalar.'),
+          D(`(${a.map(v=>(k+1)*v).join(', ')})`,'Used k + 1','Multiply by k.')],
+    explain:`Multiply every component by ${k}.`});
+}
+function mVecSub(){
+  const a=[rnd(-4,4),rnd(-4,4),rnd(-4,4)],b=[rnd(-4,4),rnd(-4,4),rnd(-4,4)];
+  const d=a.map((v,i)=>v-b[i]);
+  return T({gen:'mVecSub',type:'pick',prompt:`Given a = (${a.join(', ')}) and b = (${b.join(', ')}), find a − b.`,
+    ans:`(${d.join(', ')})`,
+    dist:[D(`(${a.map((v,i)=>v+b[i]).join(', ')})`,'Added instead','Subtract component by component.'),
+          D(`(${b.map((v,i)=>v-a[i]).join(', ')})`,'Reversed the subtraction','Compute a − b, not b − a.'),
+          D(`(${a.join(', ')})`,'Gave a','Subtract the matching components of b.')],
+    explain:`Subtract matching components: (${a.join(', ')}) − (${b.join(', ')}) = (${d.join(', ')}).`});
+}
+
+// --- physical applications ---
+function mWork(){
+  const F=[rnd(-5,5),rnd(-5,5),rnd(-5,5)],d=[rnd(-4,4),rnd(-4,4),rnd(-4,4)];
+  const w=F.reduce((s,v,i)=>s+v*d[i],0);
+  return T({gen:'mWork',type:'pick',prompt:`A force F = (${F.join(', ')}) N acts through d = (${d.join(', ')}) m. Find the work W = F · d.`,
+    ans:`${mn(w)} J`,
+    dist:[D(`${mn(-w)} J`,'Wrong sign','Work is the dot product with its sign.'),
+          D(`${mn(Math.abs(F[0])+Math.abs(F[1])+Math.abs(F[2]))} J`,'Added the force components','Use F · d.'),
+          D(`${mn(w+2)} J`,'Arithmetic slip','Multiply matching components, then add.')],
+    explain:`W = (${F.join(', ')}) · (${d.join(', ')}) = ${w} J.`});
+}
+function mMoment(){
+  const r=[rnd(-4,4),rnd(-4,4)],F=[rnd(-5,5),rnd(-5,5)];
+  const t=r[0]*F[1]-r[1]*F[0];
+  return T({gen:'mMoment',type:'pick',prompt:`A force F = (${F.join(', ')}) N acts at r = (${r.join(', ')}) m from a pivot. Find the magnitude of the moment.`,
+    ans:`${mn(Math.abs(t))} N·m`,
+    dist:[D(`${mn(-Math.abs(t))} N·m`,'Negative magnitude','The magnitude is never negative.'),
+          D(`${mn(Math.abs(r[0]*F[0]+r[1]*F[1]))} N·m`,'Used the dot product','The moment uses r × F.'),
+          D(`${mn(Math.abs(t)+2)} N·m`,'Arithmetic slip','Use |x Fy − y Fx|.')],
+    explain:`Moment = |x Fy − y Fx| = |${r[0]}(${F[1]}) − ${r[1]}(${F[0]})| = ${Math.abs(t)} N·m.`});
+}
+function mProj(){
+  const d=pick([[3,4],[1,2],[4,3]]),F=[rnd(-5,5),rnd(-5,5)];
+  const dot=F[0]*d[0]+F[1]*d[1];
+  const mag=Math.sqrt(d[0]*d[0]+d[1]*d[1]);
+  const p=dot/mag;
+  return T({gen:'mProj',type:'pick',prompt:`Find the component of F = (${F.join(', ')}) along d = (${d.join(', ')}).`,
+    ans:N(p,2),
+    dist:[D(N(dot,2),'Gave the dot product','Divide by |d|.'),
+          D(N(p*mag,2),'Multiplied by |d|','The scalar component is (F · d)/|d|.'),
+          D(N(-p,2),'Wrong sign','Keep the sign of the dot product.')],
+    explain:`(F · d)/|d| = ${dot}/${N(mag,3)} = ${N(p,2)}.`});
+}
+
+// --- solving systems ---
+function mSolve2(){
+  let x0,y0,a,b,c,d;
+  do{
+    x0=rnd(-3,3); y0=rnd(-3,3);
+    a=pick([1,2,3]); b=pick([1,2,-1,-2]); c=pick([1,2,3]); d=pick([1,-1,2,-2]);
+  }while(a*d-b*c===0||x0===0||y0===0);
+  const e=a*x0+b*y0,f=c*x0+d*y0;
+  return T({gen:'mSolve2',type:'pick',prompt:`Solve ${a}x ${sgnT(b)} ${Math.abs(b)}y = ${e} and ${c}x ${sgnT(d)} ${Math.abs(d)}y = ${f}.`,
+    ans:`x = ${mn(x0)}, y = ${mn(y0)}`,
+    dist:[D(`x = ${mn(y0)}, y = ${mn(x0)}`,'Swapped the values','Substitute both back to check.'),
+          D(`x = ${mn(-x0)}, y = ${mn(y0)}`,'Wrong sign on x','Eliminate one variable carefully.'),
+          D(`x = ${mn(x0)}, y = ${mn(-y0)}`,'Wrong sign on y','Check the sign after elimination.')],
+    explain:`Elimination gives x = ${x0} and y = ${y0}.`});
+}
+function mSolve3(){
+  const x0=rnd(-2,2)||1,y0=rnd(-2,2)||2,z0=rnd(-2,2)||3;
+  const A=[[1,1,1],[0,1,1],[0,0,1]];
+  const rhs=A.map(row=>row[0]*x0+row[1]*y0+row[2]*z0);
+  return T({gen:'mSolve3',type:'pick',prompt:`Solve x + y + z = ${rhs[0]}, y + z = ${rhs[1]}, z = ${rhs[2]}.`,
+    ans:`x = ${mn(x0)}, y = ${mn(y0)}, z = ${mn(z0)}`,
+    dist:[D(`x = ${mn(z0)}, y = ${mn(y0)}, z = ${mn(x0)}`,'Swapped x and z','Back-substitute from the last equation.'),
+          D(`x = ${mn(x0)}, y = ${mn(-y0)}, z = ${mn(z0)}`,'Wrong sign on y','Substitute into the second equation.'),
+          D(`x = ${mn(-x0)}, y = ${mn(y0)}, z = ${mn(z0)}`,'Wrong sign on x','Use the first equation.')],
+    explain:`Back-substitute: z = ${z0}, then y = ${y0}, then x = ${x0}.`});
+}
+
+// --- eigenvalues and diagonalization ---
+function eigenPair(){
+  const l1=pick([1,2,3,4]);
+  let l2; do{ l2=pick([-3,-2,-1,2,3,4]); }while(l2===l1||l2===-l1);
+  return {l1,l2,A:[[2*l1-l2,l2-l1],[2*l1-2*l2,2*l2-l1]]};
+}
+function mEigen(){
+  const {l1,l2,A}=eigenPair();
+  return T({gen:'mEigen',type:'pick',prompt:`Find the eigenvalues of A = [${A[0].join(', ')}; ${A[1].join(', ')}].`,
+    ans:`${mn(l1)}, ${mn(l2)}`,
+    dist:[D(`${mn(-l1)}, ${mn(-l2)}`,'Negated the eigenvalues','Solve det(A − λI) = 0.'),
+          D(`${mn(l1+l2)}, ${mn(l1*l2)}`,'Gave trace and determinant','Eigenvalues are not trace and determinant.'),
+          D(`${mn(l1*l2)}, ${mn(l1+l2)}`,'Swapped trace and determinant','Use the characteristic polynomial.')],
+    explain:`det(A − λI) = λ² − ${l1+l2}λ + ${l1*l2} = 0, so λ = ${l1} or λ = ${l2}.`});
+}
+function mEigenVec(){
+  const {l1,l2,A}=eigenPair();
+  const which=pick([l1,l2]), v=which===l1?'(1, 1)':'(1, 2)', other=which===l1?'(1, 2)':'(1, 1)';
+  return T({gen:'mEigenVec',type:'pick',prompt:`Which vector is an eigenvector of A = [${A[0].join(', ')}; ${A[1].join(', ')}] for λ = ${which}?`,
+    ans:v,
+    dist:[D(other,'Eigenvector for the other eigenvalue','Match the vector to the stated eigenvalue.'),
+          D('(2, 3)','Sum of the eigenvectors','Check A v = λ v.'),
+          D('(0, −1)','Not an eigenvector','Check A v = λ v.')],
+    explain:`A v = λ v for v = ${v} and λ = ${which}.`});
+}
+function mTraceDet(){
+  const {l1,l2,A}=eigenPair();
+  return T({gen:'mTraceDet',type:'pick',prompt:`For A = [${A[0].join(', ')}; ${A[1].join(', ')}], find the trace and determinant.`,
+    ans:`trace ${mn(l1+l2)}, det ${mn(l1*l2)}`,
+    dist:[D(`trace ${mn(l1*l2)}, det ${mn(l1+l2)}`,'Swapped them','Trace is the diagonal sum; determinant is ad − bc.'),
+          D(`trace ${mn(l1+l2)}, det ${mn(-l1*l2)}`,'Wrong determinant sign','Compute ad − bc.'),
+          D(`trace ${mn(l1+l2+1)}, det ${mn(l1*l2)}`,'Trace off by one','Add the diagonal entries only.')],
+    explain:`Trace = sum of the eigenvalues = ${l1+l2}; determinant = product of the eigenvalues = ${l1*l2}.`});
+}
+function mDiag(){
+  const {l1,l2,A}=eigenPair();
+  return T({gen:'mDiag',type:'pick',prompt:`If A = [${A[0].join(', ')}; ${A[1].join(', ')}] = P D P⁻¹ with P = [1, 1; 1, 2], which D works?`,
+    ans:`diag(${mn(l1)}, ${mn(l2)})`,
+    dist:[D(`diag(${mn(l2)}, ${mn(l1)})`,'Order does not match P','Match each column of P with its eigenvalue.'),
+          D(`diag(${mn(l1*l2)}, ${mn(l1+l2)})`,'Used determinant and trace','Diagonal entries are the eigenvalues.'),
+          D('P','Gave P instead of D','D is diagonal.')],
+    explain:`The diagonal entries are the eigenvalues in the order of the eigenvectors in P: ${l1}, ${l2}.`});
+}
+function mDiagable(){
+  const a=pick([2,3,-2]);
+  return T({gen:'mDiagable',type:'pick',prompt:`Is A = [${a}, 1; 0, ${a}] diagonalizable?`,
+    ans:'No — only one independent eigenvector',
+    dist:[D('Yes — two distinct eigenvalues','Wrong condition','The eigenvalue is repeated.'),
+          D('Yes — every matrix is diagonalizable','False','It needs a full set of eigenvectors.'),
+          D('No — its determinant is non-zero','Wrong reason','A non-zero determinant does not prevent diagonalization.')],
+    explain:`The only eigenvalue is ${a}, and (A − ${a}I)v = 0 gives just one independent eigenvector, so the matrix is not diagonalizable.`});
+}
+
+// --- differential calculus ---
+function dPower(){
+  const a=pick([2,3,4,5]),n=pick([2,3,4]);
+  return T({gen:'dPower',type:'pick',prompt:`Differentiate ${a}x${sup(n)}.`,
+    ans:`${a*n}x${n-1===1?'':sup(n-1)}`,
+    dist:[D(`${a*n}x${sup(n)}`,'Forgot to reduce the power','Power rule drops the exponent by one.'),
+          D(`${a}x${sup(n-1)}`,'Kept the original coefficient','Multiply by the exponent.'),
+          D(`${a*n}x${sup(n+1)}`,'Increased the power','The power decreases by one.')],
+    explain:`d/dx(axⁿ) = an xⁿ⁻¹, so the derivative is ${a*n}x${sup(n-1)}.`});
+}
+function dProduct(){
+  const a=pick([2,3,4]),b=pick([1,2,3]);
+  return T({gen:'dProduct',type:'pick',prompt:`Differentiate (x² + ${a})(x³ + ${b}).`,
+    ans:`5x⁴ + ${3*a}x² + ${2*b}x`,
+    dist:[D(`5x⁴ + ${3*a}x²`,'Dropped the linear term','The 2bx term survives.'),
+          D(`5x⁴ + ${3*a}x³ + ${2*b}x`,'Used x³ instead of x²','The derivative of x² is 2x.'),
+          D(`2x⁴ + ${3*a}x² + ${2*b}x`,'Wrong leading coefficient','2x·x³ + x²·3x² gives 5x⁴.')],
+    explain:`Product rule: 2x(x³ + ${b}) + (x² + ${a})(3x²) = 5x⁴ + ${3*a}x² + ${2*b}x.`});
+}
+function dQuotient(){
+  let a,b,c,k; do{ a=pick([2,3,4]); b=pick([1,2,3,4]); c=pick([1,2,3,4]); k=a*c-b; }while(k===0);
+  return T({gen:'dQuotient',type:'pick',prompt:`Differentiate (${a}x + ${b})/(x + ${c}).`,
+    ans:`${mn(k)}/(x + ${c})²`,
+    dist:[D(`${mn(a)}/(x + ${c})²`,'Forgot the constant term','Quotient rule: u′v − uv′.'),
+          D(`${mn(k)}/(x + ${c})`,'Forgot to square the denominator','The denominator is squared.'),
+          D(`${mn(a*c+b)}/(x + ${c})²`,'Sign slip','The numerator is ac − b.')],
+    explain:`Quotient rule gives (${a}(x + ${c}) − (${a}x + ${b}))/(x + ${c})² = ${mn(k)}/(x + ${c})².`});
+}
+function dChain(){
+  const a=pick([2,3,4]),n=pick([2,3,4]);
+  return T({gen:'dChain',type:'pick',prompt:`Differentiate (${a}x + 1)${sup(n)}.`,
+    ans:`${a*n}(${a}x + 1)${n-1===1?'':sup(n-1)}`,
+    dist:[D(`${n}(${a}x + 1)${sup(n-1)}`,'Forgot the inner derivative','Multiply by the derivative of ${a}x + 1.'),
+          D(`${a*n}(${a}x + 1)${sup(n)}`,'Forgot to reduce the power','The power drops by one.'),
+          D(`${a}(${a}x + 1)${sup(n-1)}`,'Used the inner derivative only','Bring down the power too.')],
+    explain:`Chain rule: n(${a}x + 1)${sup(n-1)} × ${a} = ${a*n}(${a}x + 1)${sup(n-1)}.`});
+}
+function dImplicit(){
+  const r=pick([2,3,4,5]);
+  return T({gen:'dImplicit',type:'pick',prompt:`For x² + y² = ${r*r}, find dy/dx.`,
+    ans:'−x/y',
+    dist:[D('x/y','Wrong sign','Differentiate: 2x + 2y dy/dx = 0.'),
+          D('−y/x','Swapped x and y','Solve for dy/dx.'),
+          D('y/x','Wrong sign and swap','Differentiate implicitly.')],
+    explain:`2x + 2y dy/dx = 0, so dy/dx = −x/y.`});
+}
+function dParam(){
+  const n=pick([3,4]);
+  return T({gen:'dParam',type:'pick',prompt:`A curve has x = t² and y = t${sup(n)}. Find dy/dx.`,
+    ans:`(${n}/2)t${n-2===1?'':sup(n-2)}`,
+    dist:[D(`(${n}/2)t${sup(n-1)}`,'Kept an extra power of t','Divide (n tⁿ⁻¹) by 2t.'),
+          D(`${2*n}t${sup(n-1)}`,'Multiplied instead of dividing','dy/dx = (dy/dt)/(dx/dt).'),
+          D(`(2/${n})t${sup(n-2)}`,'Inverted the fraction','The coefficient is n/2.')],
+    explain:`dy/dt = ${n}t${sup(n-1)} and dx/dt = 2t, so dy/dx = (${n}/2)t${sup(n-2)}.`});
+}
+function mvEval(){
+  const a=pick([1,2,3]),b=pick([1,2,3]),x0=pick([1,2,-1]),y0=pick([1,2,-1]);
+  const v=a*x0*x0+b*y0;
+  return T({gen:'mvEval',type:'pick',prompt:`For f(x, y) = ${a === 1 ? '' : a}x² + ${b}y, find f(${x0}, ${y0}).`,
+    ans:mn(v),
+    dist:[D(mn(a*x0+b*y0),'Forgot to square x','Substitute x = '+x0+'.'),
+          D(mn(v+b),'Doubled the y term','Substitute once.'),
+          D(mn(a*x0*x0-b*y0),'Wrong sign on y','Keep the sign of y.')],
+    explain:`f(${x0}, ${y0}) = ${a}(${x0})² + ${b}(${y0}) = ${v}.`});
+}
+function mvDomain(){
+  const r=pick([2,3]);
+  return T({gen:'mvDomain',type:'pick',prompt:`What is the domain of f(x, y) = √(${r*r} − x² − y²)?`,
+    ans:`x² + y² ≤ ${r*r}`,
+    dist:[D(`x² + y² < ${r*r}`,'Excluded the boundary','The square root allows zero.'),
+          D(`x² + y² ≥ ${r*r}`,'Reversed the inequality','The expression under the root must be ≥ 0.'),
+          D(`x + y ≤ ${r*r}`,'Wrong expression','Use x² + y².')],
+    explain:`${r*r} − x² − y² ≥ 0, so x² + y² ≤ ${r*r}.`});
+}
+function pFirst(){
+  const a=pick([2,3,4]),b=pick([2,3,4]);
+  return T({gen:'pFirst',type:'pick',prompt:`For f(x, y) = ${a}x²y + ${b}y², find ∂f/∂x.`,
+    ans:`${2*a}xy`,
+    dist:[D(`${a}x² + ${2*b}y`,'Differentiated in y','Hold y constant for ∂f/∂x.'),
+          D(`${a}x²y`,'Kept the y factor only','Differentiate x² to 2x.'),
+          D(`${2*a}x`,'Dropped y','y is a constant multiplier here.')],
+    explain:`Treat y as a constant: ∂/∂x (${a}x²y) = ${2*a}xy.`});
+}
+function pGrad(){
+  const a=pick([1,2,3]),b=pick([1,2,3]),x0=pick([1,2]),y0=pick([1,2]);
+  const gx=2*a*x0,gy=2*b*y0;
+  return T({gen:'pGrad',type:'pick',prompt:`Find ∇f at (${x0}, ${y0}) for f(x, y) = ${a}x² + ${b}y².`,
+    ans:`(${gx}, ${gy})`,
+    dist:[D(`(${2*a}, ${2*b})`,'Evaluated at (1, 1)','Substitute the given point.'),
+          D(`(${gx}, 0)`,'Missing the y partial','Compute both partials.'),
+          D(`(${gy}, ${gx})`,'Swapped the components','The gradient is (f_x, f_y).')],
+    explain:`∇f = (2ax, 2by); at (${x0}, ${y0}) it is (${gx}, ${gy}).`});
+}
+// ================= End outline extras =================
+
 const CL_LEVELS=[
-  {n:1,title:'Algebra foundations',ref:'Unit 1 · Expanding, indices, equations',gens:[aExpand,aFactor,aIndices,aLinear,aSimul],count:8},
-  {n:2,title:'Enter i',ref:'Unit 2 · Complex arithmetic',gens:[mClassify,mSum,mDiff,mProd,mSquare],count:8},
-  {n:3,title:'The complex plane',ref:'Unit 3 · Modulus, argument, polar form',gens:[mMod,mArg,mPolar,mRect,mArgProd,mPowMod],count:8},
-  {n:4,title:'Complex roots',ref:'Unit 3 · Quadratics and conjugate pairs',gens:[mRoots,mQuadForm,mPartner,mBuildQuad,mDisc],count:8},
-  {n:5,title:'Vector algebra',ref:'Unit 4 · Dot product and angles',gens:[mDot,mMag,mVecSum,mUnit,mAngle],count:8},
-  {n:6,title:'Vector products',ref:'Unit 5 · Cross and triple products',gens:[mCross,mTriple],count:8},
-  {n:7,title:'Lines and planes',ref:'Unit 6 · Equations in space',gens:[mLineVec,mDirVec,mSymLine,mPlane,mPlaneNormal],count:8},
-  {n:8,title:'Matrix algebra',ref:'Unit 7 · Determinants and inverses',gens:[mDet2,mDet3,mInv2,mRank,mRowOp,mSingular],count:8},
+  {n:1,title:'Operations on complex numbers',ref:'Unit 1 · Section 1.1',gens:[mClassify,mSum,mDiff,mProd,mSquare],count:8},
+  {n:2,title:'Cartesian and polar forms',ref:'Unit 1 · Section 1.2',gens:[mMod,mArg,mPolar,mRect,mArgProd,mPowMod],count:8},
+  {n:3,title:'Complex roots and powers',ref:'Unit 1 · Section 1.3',gens:[mRoots,mQuadForm,mPartner,mBuildQuad,mDisc],count:8},
+  {n:4,title:'Geometric representation',ref:'Unit 1 · Section 1.4',gens:[mLoci,mQuadrant],count:8},
+  {n:5,title:'Euler and De Moivre identities',ref:'Unit 1 · Section 1.5',gens:[mEuler,mMoivre,mMoivreZ,mZInv],count:8},
+  {n:6,title:'Vectors and forms',ref:'Unit 2 · Section 2.1',gens:[mVecSum,mVecScalar,mVecSub,mMag,mUnit],count:8},
+  {n:7,title:'Vector operations',ref:'Unit 2 · Section 2.2',gens:[mDot,mAngle,mCross,mTriple],count:8},
+  {n:8,title:'Equations of geometric constructs',ref:'Unit 2 · Section 2.3',gens:[mLineVec,mDirVec,mSymLine,mPlane,mPlaneNormal],count:8},
+  {n:9,title:'Applications to physical models',ref:'Unit 2 · Section 2.4',gens:[mWork,mMoment,mProj],count:8},
+  {n:10,title:'Determinants and inverses',ref:'Unit 3 · Section 3.1',gens:[mDet2,mDet3,mInv2,mSingular],count:8},
+  {n:11,title:'Matrix rank',ref:'Unit 3 · Section 3.2',gens:[mRank],count:8},
+  {n:12,title:'Elementary row operations',ref:'Unit 3 · Section 3.3',gens:[mRowOp],count:8},
+  {n:13,title:'Solving systems of equations',ref:'Unit 3 · Section 3.4',gens:[mSolve2,mSolve3],count:8},
+  {n:14,title:'Eigenvalues and eigenvectors',ref:'Unit 3 · Section 3.5',gens:[mEigen,mEigenVec,mTraceDet],count:8},
+  {n:15,title:'Diagonalization',ref:'Unit 3 · Section 3.6',gens:[mDiag,mDiagable],count:8},
+  {n:16,title:'Differentiation rules',ref:'Unit 4 · Section 4.1',gens:[dPower,dProduct,dQuotient,dChain],count:8},
+  {n:17,title:'Implicit and parametric differentiation',ref:'Unit 4 · Section 4.2',gens:[dImplicit,dParam],count:8},
+  {n:18,title:'Multivariable functions',ref:'Unit 4 · Section 4.3',gens:[mvEval,mvDomain],count:8},
+  {n:19,title:'Partial derivatives',ref:'Unit 4 · Section 4.4',gens:[pFirst,pGrad],count:8}
 ];
 const CL_NOTES={
-  1:['FOIL: (x + a)(x + b) = x² + (a + b)x + ab','Difference of squares: a² − b² = (a − b)(a + b)','xᵃxᵇ = xᵃ⁺ᵇ,  xᵃ ÷ xᵇ = xᵃ⁻ᵇ,  (xᵃ)ᵇ = xᵃᵇ','x⁻ⁿ = 1/xⁿ and x^(m/n) = ⁿ√(xᵐ)','Check every solution in the original equation'],
-  2:['i² = −1; powers of i repeat with period 4','Add and subtract real parts and imaginary parts separately','(a + bi)(c + di) = (ac − bd) + (ad + bc)i','A purely imaginary number has zero real part'],
-  3:['|z| = √(a² + b²); arg z is the angle from the positive real axis','Polar form: z = r(cos θ + i sin θ)','Arguments add under multiplication and subtract under division','|zⁿ| = |z|ⁿ; sketch the point before naming the argument'],
-  4:['A negative discriminant gives a complex conjugate pair','For real polynomials, non-real roots occur in conjugate pairs','Sum of roots = −b/a; product = c/a','Roots p ± qi give x² − 2px + (p² + q²) = 0'],
-  5:['a · b = a₁b₁ + a₂b₂ + a₃b₃','|a| = √(a₁² + a₂² + a₃²)','cos θ = a · b / (|a||b|)','A unit vector is a / |a|'],
-  6:['a × b is perpendicular to both a and b','|a × b| is the area of the parallelogram','a · (b × c) is the signed volume of the parallelepiped','A zero triple product means the vectors are coplanar'],
-  7:['Line: r = a + t d, with a a point and d a direction','Symmetric form: (x − a₁)/d₁ = (y − a₂)/d₂ = (z − a₃)/d₃','Plane: n · (r − a) = 0, or n · r = n · a','For ax + by + cz = d, a normal is (a, b, c)'],
-  8:['det[a b; c d] = ad − bc','A⁻¹ = (1/det A)[d −b; −c a], provided det ≠ 0','Rank = number of non-zero rows in echelon form','Elementary row operations: swap, scale, add a multiple','A matrix is singular exactly when its determinant is zero'],
-  9:['Mixed questions from all seven units','Re-read the toolkit for the unit you miss most','Check signs first: they cause most lost marks','Pass mark is 80% clean solves']
+  1:['i² = −1; powers of i repeat with period 4','Add and subtract real and imaginary parts separately','Multiply out, then replace i² with −1','Divide by multiplying top and bottom by the conjugate'],
+  2:['|a + bi| = √(a² + b²)','arg z is measured anticlockwise from the positive real axis','Polar form: z = r(cos θ + i sin θ)','Sketch the point before naming the argument'],
+  3:['Negative discriminant gives a complex conjugate pair','For real polynomials non-real roots occur in conjugate pairs','De Moivre: (cos θ + i sin θ)ⁿ = cos nθ + i sin nθ','Raise the modulus and multiply the argument'],
+  4:['|z − a| = r is a circle centred at a, radius r','|z − a| = |z − b| is a perpendicular bisector','arg(z − a) = θ is a ray from a','Real and imaginary signs fix the quadrant'],
+  5:['Euler: e^(iθ) = cos θ + i sin θ','De Moivre follows from Euler for integer powers','zⁿ + z⁻ⁿ = 2 cos nθ when |z| = 1','Read every identity as a statement about angles'],
+  6:['Add and subtract component by component','k(a) scales every component by k','|a| = √(a₁² + a₂² + a₃²)','The unit vector is a/|a|'],
+  7:['a · b = a₁b₁ + a₂b₂ + a₃b₃','cos θ = a · b / (|a||b|)','|a × b| is the parallelogram area','a · (b × c) is the signed volume'],
+  8:['Line: r = a + t d','Symmetric form: (x − a₁)/d₁ = (y − a₂)/d₂ = (z − a₃)/d₃','Plane: n · (r − a) = 0','For ax + by + cz = d, a normal is (a, b, c)'],
+  9:['Work W = F · d = |F||d| cos θ','Moment τ = r × F, magnitude |r||F| sin θ','Scalar component of F along d is (F · d)/|d|','Add force vectors before taking a magnitude'],
+  10:['det[a b; c d] = ad − bc','A⁻¹ = (1/det A)[d −b; −c a]','A matrix is singular when det = 0','Check the signs in the adjugate'],
+  11:['Rank = number of non-zero rows in echelon form','Row operations do not change the rank','Rank counts independent rows or columns','A full-rank square matrix is invertible'],
+  12:['Allowed: swap rows, scale a row, add a multiple of a row','Apply the operation to the stated row only','Row operations preserve the solution set','Keep other rows unchanged'],
+  13:['Eliminate one variable at a time','For three unknowns reduce to a 2×2 system','Back-substitute from the last equation','Check the solution in every original equation'],
+  14:['Eigenvalues solve det(A − λI) = 0','For 2×2: λ² − (tr A)λ + det A = 0','Eigenvectors solve (A − λI)v = 0','Triangular matrices have eigenvalues on the diagonal'],
+  15:['A = P D P⁻¹ with the eigenvector columns of P','Order of P and D must match','A needs a full set of independent eigenvectors','Repeated eigenvalues can still diagonalize if eigenvectors are independent'],
+  16:['d/dx(axⁿ) = an xⁿ⁻¹','(uv)′ = u′v + uv′','(u/v)′ = (u′v − uv′)/v²','Chain rule: multiply by the inner derivative'],
+  17:['Differentiate both sides for implicit curves','Every y-term carries a dy/dx factor','dy/dx = (dy/dt)/(dx/dt) for parametric curves','Never drop the chain-rule factor'],
+  18:['z = f(x, y) assigns one value to each pair','The domain is where the expression is defined','Level curves are slices f(x, y) = c','For x² + y² the level curves are circles'],
+  19:['∂f/∂x holds y constant','∂²f/∂x² and ∂²f/∂x∂y are second partials','Mixed partials are equal for smooth functions','∇f = (f_x, f_y) points uphill']
 };
-CL_LEVELS.push({n:9,title:'Final review',ref:'All seven units',gens:CL_LEVELS.flatMap(l=>l.gens).filter((g,i,a)=>a.indexOf(g)===i),count:12});
 
 const LEVELS=CL_LEVELS;
 const NOTES=CL_NOTES;
-const KEY='shootlearn_complex_linear_v1';
+const KEY='shootlearn_complex_linear_v2';
 const TOPIC=(typeof location!=='undefined'?new URLSearchParams(location.search).get('topic'):'')||'';
 const BACK=(typeof location!=='undefined'?new URLSearchParams(location.search).get('back'):'')||'/games/complex-numbers-linear-algebra.html';
 
